@@ -13,6 +13,7 @@ struct BigNatural //Натуральное длинное число
 	const int BASE = 10;
 	int size;		//Размер массива (номер старшей позиции)
 	short *coef;	//Массив коэффициентов
+
 };
 
 struct BigInteger	//Длинное целое число
