@@ -52,7 +52,7 @@ BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 	//Вычисление реального размера числа
 	i = first.size - 1;
 	while ((i>0) && (resCoef[i] == 0)) i--;
-	//resCoef = (short*)realloc(resCoef, sizeof(short) * (i + 1));
+	resCoef = (short*)realloc(resCoef, sizeof(short) * (i + 1));
 	
 
 	result.size = i + 1;
@@ -60,3 +60,6 @@ BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 
 	return result;
 }
+
+
+
