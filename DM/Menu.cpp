@@ -7,10 +7,10 @@
 enum Menu
 {
 	mainMenu,
-	criteriaMenu,
-	deleteMenu,
-	addMenu,
-	updateMenu,
+	naturalNumberMenu,
+	integerNumberMenu,
+	rationalFractionMenu,
+	polynomMenu,
 	outputMenu
 };
 
@@ -43,22 +43,26 @@ int getMenu(Menu menu, char* message)
 		"Перемножить 2 числа",
 		"Частное от деления 2 чисел",
 		"Остаток от деления 2 чисел",
-	},
-		*deleteMenuPuncts[] = {
-		"Удалить книгу по названию",
-		"Удалить все книги автора",
-		"Удалить все книги издательства",
 		"Назад"
 	},
-		*addMenuPuncts[] = {
-		"Добавить в начало",
-		"Добавить в конец",
+		*rationalFractionMenuPuncts[] = {
+		"Сократить дробь",
+		"Сложить 2 дроби",
+		"Вычесть 2 дроби",
+		"Умножить одну дробь на другую",
+		"Разделить одну дробь на другую",
 		"Назад"
 	},
-		*outputMenuPuncts[] = {
-		"Вывести в прямом порядке",
-		"Вывести в обратном порядке",
-		"Изменить кол-во книг на странице",
+		*polynomMenuPuncts[] = {
+		"Сложение многочленов",
+		"Вычитание многочленов",
+		"Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей",
+		"Умножение многочленов",
+		"Частное от деления многочлена на многочлен при делении с остатком",
+		"Остаток от деления многочлена на многочлен при делении с остатком",
+		"НОД многочленов",
+		"Производная многочлена",
+		"Преобразование многочлена — кратные корни в простые",
 		"Назад"
 	};
 
@@ -66,16 +70,14 @@ int getMenu(Menu menu, char* message)
 	{
 	case mainMenu:
 		return selectMenu(message, mainMenuPuncts, 6);
-	case criteriaMenu:
-		return selectMenu(message, criteriaMenuPuncts, 5);
-	case updateMenu:
-		return selectMenu(message, updateMenuPuncts, 4);
-	case deleteMenu:
-		return selectMenu(message, deleteMenuPuncts, 4);
-	case addMenu:
-		return selectMenu(message, addMenuPuncts, 3);
-	case outputMenu:
-		return selectMenu(message, outputMenuPuncts, 3);
+	case naturalNumberMenu:
+		return selectMenu(message, naturalNumberMenuPuncts, 7);
+	case integerNumberMenu:
+		return selectMenu(message, integerNumberMenuPuncts, 6);
+	case rationalFractionMenu:
+		return selectMenu(message, rationalFractionMenuPuncts, 6);
+	case polynomMenu:
+		return selectMenu(message, polynomMenuPuncts, 10);
 	}
 	return 0;
 }
