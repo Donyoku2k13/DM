@@ -8,11 +8,11 @@ int main(void)
 	BigNatural first;
 	BigNatural second;
 
-	short firstCoef[] = { 1,1,1,1,1,1,1,1,1,1,1,1 };
+	short firstCoef[] = { 7,3 };
 	short secondCoef[] = { 7,3 };
 
 	first.coef = firstCoef;
-	first.size = 12;
+	first.size = 2;
 
 	second.coef = secondCoef;
 	second.size = 2;
