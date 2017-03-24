@@ -61,6 +61,46 @@ BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 	return result;
 }
 
+//Проверка на ноль
+bool NZER_N_B(BigNatural number)
+{
+	if (number.coef[0] == 0 && number.size == 1) // Если первый разряд равен нулю и размер равен единице возвращаем false
+	{
+		return false;
+	}
+	return true; 
+}
+
+//Добавление единицы к длинному числу
+BigNatural ADD_1N_N(BigNatural number)
+{
+	int counter = 1;
+	BigNatural result;
+	result = number;
+	if (result.coef[0] != 9) // Если последняя цифра не равна девяти, прибавляем единицу
+	{
+		result.coef[0]++;
+	}
+	else
+	{
+		while (counter != result.size && result.coef[counter] == 9) // Если последняя цифра не равна 9, то ищем первую цифру не равную 9, прибавляем к ней единицу, и всем предыдущем присваиваем 0
+		{
+			result.coef[counter] = 0;
+			counter++;
+		}
+		if (counter == result.size) // Если все цифры равны 9, увеличиваем массив на единицу, первой цифре присваеваем 1
+		{
+			result.coef = (short*) realloc(result.coef, sizeof(short)* (result.size + 1));
+			result.size++;
+			result.coef[result.size-1] = 1;
+		}
+		else
+		{
+			result.coef[counter]++;
+		}
+	}
+	return result;
+}
 
 //Умножение натурального числа на 10^k 
 BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
