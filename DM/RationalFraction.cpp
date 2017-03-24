@@ -2,15 +2,20 @@
 
 //В этом файле должны быть ТОЛЬКО реализации методов для работы с рациональными числами
 
-RationalFraction ADD_QQ_Q(RationalFraction first, RationalFraction second);
-{
-	RationalFraction result; // 
-	BigInteger nokfirst, noksecond; // НОК, деленный на знаменатель(Тип верный?)
 
-	nokfirst = LCM_NN_N(first.denuminator, second.denuminator) / (first.denominator);
-	noksecond = LCM_NN_N(first.denuminator, second.denuminator) / (second.denominator);
-	result.numenator = ADD_ZZ_Z(MUL_ZZ_Z((nokfirst, first.numinator), MUL_ZZ_Z(noksecond, second.numenator)); // расчитываем числитель
-	result.denominator = LCM_NN_N(first.denuminator, second.denuminator);                                 // расчитываем общий знаменатель 
+
+RationalFraction ADD_QQ_Q(RationalFraction first, RationalFraction second)
+{
+	RationalFraction result; 
+	BigNatural nokfirst, noksecond; // НОК, деленный на знаменатель(Тип верный?) 
+	BigInteger nok1, nok2;//Ром, если придумаешь более красивый способ избежать несоответствие типов в расчете числителя расскажи потом)
+
+	nokfirst = DIV_NN_N(LCM_NN_N(first.denominator, second.denominator), (first.denominator));
+	noksecond = DIV_NN_N(LCM_NN_N(first.denominator, second.denominator), (second.denominator));
+	nok1.number = nokfirst;
+	nok2.number = noksecond;
+	result.numenator = ADD_ZZ_Z(MUL_ZZ_Z(nok1, first.numenator), MUL_ZZ_Z(nok2, second.numenator)); // расчитываем числитель
+	result.denominator = LCM_NN_N(first.denominator, second.denominator); // расчитываем общий знаменатель 
 	return result;
 }
 
