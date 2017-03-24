@@ -86,3 +86,26 @@ BigNatural SUB_NDN_N(BigNatural first, BigNatural second, int factor)
 {
 	return (SUB_NN_N(first, MUL_ND_N(second, factor)));
 }
+
+
+/*Умножение натурального числа на цифру*/
+BigNatural MUL_ND_N(BigNatural number, int factor)
+{
+	BigNatural result;
+	int r = 0;
+
+	short* resCoef = (short*)malloc(sizeof(short) * (number.size + 1));
+
+	for (int j = 0; j < number.size; j++)
+	{
+		resCoef[j] = (number.coef[number.size - 1 - j] * factor + r) % 10;
+		r = (number.coef[number.size - 1 - j] * factor + r) / 10;
+	}
+	result.size = number.size;
+	if (r) {
+		resCoef[result.size] = r;
+		result.size++;
+	}
+	result.coef = resCoef;
+	return result;
+}
