@@ -71,6 +71,7 @@ bool NZER_N_B(BigNatural number)
 	return true; 
 }
 
+
 //Добавление единицы к длинному числу
 BigNatural ADD_1N_N(BigNatural number)
 {
@@ -102,7 +103,26 @@ BigNatural ADD_1N_N(BigNatural number)
 	return result;
 }
 
-//Умножение натурального числа на 10^k 
+
+BigNatural GCF_NN_N(BigNatural first, BigNatural second)
+{
+	BigNatural result;
+	BigNatural ost;
+	while (NZER_N_B(second))
+	{
+		ost = MOD_NN_N(first, second);
+		first.coef = second.coef;
+		first.size = second.size;
+		second.coef = ost.coef;
+		second.size = ost.size;
+	}
+
+	result.size = first.size;
+	result.coef = first.coef;
+	return result;
+}
+
+	//Умножение натурального числа на 10^k 
 BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
 {
 	BigNatural result;
