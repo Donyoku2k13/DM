@@ -20,3 +20,6 @@ void printBigInteger(BigInteger);
 
 
 void printRationalFraction(RationalFraction number);
+
+
+void printPolynom(Polynom polynom)

@@ -47,11 +47,14 @@ void integerEnterMenu()
 		switch (getMenu(enterMenu, "Целые числа"))
 		{
 		case 0:
+
 			first = getBigInteger("Введите первое число", "Ошибка при вводе числа!");
 			second = getBigInteger("Введите второе число", "Ошибка при вводе числа!");
 			state = true;
 			break;
+
 		case 1:
+
 			if (state)
 			{
 				printf("Первое число:\n");
@@ -64,17 +67,15 @@ void integerEnterMenu()
 			else
 				infoView("Числа не введены");
 			break;
+
 		case 2:
 
-			if (first.number.size == 0)
-			{
-				first = getBigInteger("Введите первое число", "Ошибка при вводе числа!");
-				second = getBigInteger("Введите второе число", "Ошибка при вводе числа!");
-			}
-			integerMenu(first, second);
-			state = true;
-
+			if (state)
+				integerMenu(first, second);
+			else
+				infoView("Числа не введены");
 			break;
+
 		case 3:
 			return;
 		}
@@ -94,11 +95,14 @@ void naturalEnterMenu()
 		switch (getMenu(enterMenu, "Целые числа"))
 		{
 		case 0:
+
 			first = getBigNatural("Введите первое число", "Ошибка при вводе числа!");
 			second = getBigNatural("Введите второе число", "Ошибка при вводе числа!");
 			state = true;
 			break;
+
 		case 1:
+
 			if (state)
 			{
 				printf("Первое число:\n");
@@ -111,17 +115,15 @@ void naturalEnterMenu()
 			else
 				infoView("Числа не введены");
 			break;
+
 		case 2:
 
-			if (first.size == 0)
-			{
-				first = getBigNatural("Введите первое число", "Ошибка при вводе числа!");
-				second = getBigNatural("Введите второе число", "Ошибка при вводе числа!");
-			}
-			naturalMenu(first, second);
-			state = true;
-
+			if (state)
+				naturalMenu(first, second);
+			else 
+				infoView("Числа не введены");
 			break;
+
 		case 3:
 			return;
 		}
@@ -141,11 +143,14 @@ void rFractionEnterMenu()
 		switch (getMenu(enterMenu, "Рациональные числа"))
 		{
 		case 0:
+
 			first = getRationalFraction();
 			second = getRationalFraction();
 			state = true;
 			break;
+
 		case 1:
+
 			if (state)
 			{
 				printf("Первое число:\n");
@@ -158,15 +163,13 @@ void rFractionEnterMenu()
 			else
 				infoView("Числа не введены");
 			break;
+
 		case 2:
 
-			if (first.denominator.size == 0)
-			{
-				first = getRationalFraction();
-				second = getRationalFraction();
-			}
-			rFractionMenu(first, second);
-			state = true;
+			if (state)
+				rFractionMenu(first, second);
+			else
+				infoView("Числа не введены");
 
 			break;
 		case 3:
@@ -174,6 +177,101 @@ void rFractionEnterMenu()
 		}
 	}
 }
+
+//************************************************************************
+
+void polynomEnterMenu()
+{
+	Polynom first;
+	Polynom second;
+	bool state = false;
+
+	while (true)
+	{
+		switch (getMenu(enterMenu, "Многочлены"))
+		{
+		case 0:
+
+			first = getPolynom();
+			second = getPolynom();
+			state = true;
+			break;
+
+		case 1:
+
+			if (state)
+			{
+				printf("Первое число:\n");
+				printPolynom(first);
+
+				printf("Второе число:\n");
+				printPolynom(second);
+				system("pause");
+			}
+			else
+				infoView("Числа не введены");
+			break;
+
+		case 2:
+
+			if (state)
+				polynomEMenu(first, second);
+			else
+				infoView("Числа не введены");
+
+			break;
+		case 3:
+			return;
+		}
+	}
+}
+
+//************************************************************************
+
+void polynomEMenu(Polynom first, Polynom second)
+{
+	Polynom result;
+
+	while (true)
+	{
+		switch (getMenu(polynomMenu, "Выберите действие"))
+		{
+		case 0:
+			result = ADD_PP_P(first,second);
+			break;
+		case 1:
+			result = SUB_PP_P(first, second);
+			break;
+		case 2:
+			result = FAC_P_Q(first);
+			break;
+		case 3:
+			result = MUL_PP_P(first, second);
+			break;
+		case 4:
+			result = DIV_PP_P(first, second);
+			break;
+		case 5:
+			result = MOD_PP_P(first, second);
+			break;
+		case 6:
+			result = GCF_PP_P(first, second);
+			break;
+		case 7:
+			result = DER_P_P(first, second);
+			break;
+		case 8:
+			result = NMR_P_P(first);
+			break;
+		case 9:
+			return;
+		}
+		printf("Результат:\n");
+		printPolynom(result);
+		system("pause");
+	}
+}
+
 
 //************************************************************************
 
@@ -186,8 +284,7 @@ void rFractionMenu(RationalFraction first, RationalFraction second)
 		switch (getMenu(rationalFractionMenu, "Выберите действие"))
 		{
 		case 0:
-			//TODO
-
+			result = RED_Q_Q(first);
 			break;
 		case 1:
 			result = ADD_QQ_Q(first, second);
