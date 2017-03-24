@@ -18,7 +18,6 @@ BigNatural getBigNatural(char* message, char* errMessage)
 {
 	BigNatural result;
 
-	system("cls");
 	printf("%s\n", message);
 
 	char* string = getString();
@@ -41,7 +40,6 @@ BigInteger getBigInteger(char* message, char* errMessage)
 {
 	BigInteger result;
 
-	system("cls");
 	printf("%s\n", message);
 
 
@@ -67,6 +65,23 @@ RationalFraction getRationalFraction()
 
 	result.numenator = getBigInteger("¬ведите числитель" , "„ислитель введен не верно");
 	result.denominator = getBigNatural("¬ведите знамсенатель", "«наменатель введен не верно");
+
+	return result;
+}
+
+
+Polynom getPolynom()
+{
+	Polynom result;
+	printf("¬ведите степень многочлена\n");
+	scanf("%d",&result.degree);
+	result.coef = (RationalFraction*)malloc(sizeof(RationalFraction)*(result.degree + 1));
+
+	for (int i = 0; i <= result.degree; i++)
+	{
+		printf("x^%d:\n",result.degree - i);
+		result.coef[i] = getRationalFraction();
+	}
 
 	return result;
 }
