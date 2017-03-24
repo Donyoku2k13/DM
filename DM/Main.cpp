@@ -21,6 +21,7 @@ int main(void)
 			integerEnterMenu();
 			break;
 		case 2:
+			rFractionEnterMenu();
 			break;
 		case 3:
 			break;
@@ -129,6 +130,88 @@ void naturalEnterMenu()
 
 //************************************************************************
 
+void rFractionEnterMenu()
+{
+	RationalFraction first;
+	RationalFraction second;
+	bool state = false;
+
+	while (true)
+	{
+		switch (getMenu(enterMenu, "Рациональные числа"))
+		{
+		case 0:
+			first = getRationalFraction();
+			second = getRationalFraction();
+			state = true;
+			break;
+		case 1:
+			if (state)
+			{
+				printf("Первое число:\n");
+				printRationalFraction(first);
+
+				printf("Второе число:\n");
+				printRationalFraction(second);
+				system("pause");
+			}
+			else
+				infoView("Числа не введены");
+			break;
+		case 2:
+
+			if (first.denominator.size == 0)
+			{
+				first = getRationalFraction();
+				second = getRationalFraction();
+			}
+			rFractionMenu(first, second);
+			state = true;
+
+			break;
+		case 3:
+			return;
+		}
+	}
+}
+
+//************************************************************************
+
+void rFractionMenu(RationalFraction first, RationalFraction second)
+{
+	RationalFraction result;
+
+	while (true)
+	{
+		switch (getMenu(rationalFractionMenu, "Выберите действие"))
+		{
+		case 0:
+			//TODO
+
+			break;
+		case 1:
+			result = ADD_QQ_Q(first, second);
+			break;
+		case 2:
+			result = SUB_QQ_Q(first, second);
+			break;
+		case 3:
+			result = MUL_QQ_Q(first, second);
+			break;
+		case 4:
+			result = DIV_QQ_Q(first, second);
+			break;
+		case 5:
+			return;
+		}
+		printf("Результат:\n");
+		printRationalFraction(result);
+		system("pause");
+	}
+}
+
+
+//************************************************************************
 
 void naturalMenu(BigNatural first, BigNatural second)
 {
