@@ -62,4 +62,8 @@ BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 }
 
 
-
+/*Вычитание из натурального другого натурального, умноженного на цифру для случая с неотрицательным результатом*/
+BigNatural SUB_NDN_N(BigNatural first, BigNatural second, int factor)
+{
+	return (SUB_NN_N(first, MUL_ND_N(second, factor)));
+}
