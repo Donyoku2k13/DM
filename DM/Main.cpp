@@ -62,8 +62,9 @@ void integerEnterMenu()
 				printf("Первое число:\n");
 				printBigInteger(first);
 
-				printf("Второе число:\n");
+				printf("\nВторое число:\n");
 				printBigInteger(second);
+				printf("\n");
 				system("pause");
 			}
 			else
@@ -110,8 +111,9 @@ void naturalEnterMenu()
 				printf("Первое число:\n");
 				printBigNatural(first);
 
-				printf("Второе число:\n");
+				printf("\nВторое число:\n");
 				printBigNatural(second);
+				printf("\n");
 				system("pause");
 			}
 			else
@@ -145,8 +147,9 @@ void rFractionEnterMenu()
 		switch (getMenu(enterMenu, "Рациональные числа"))
 		{
 		case 0:
-
+			printf("Введите первое число:\n");
 			first = getRationalFraction();
+			printf("Введите второе число:\n");
 			second = getRationalFraction();
 			state = true;
 			break;
@@ -158,8 +161,9 @@ void rFractionEnterMenu()
 				printf("Первое число:\n");
 				printRationalFraction(first);
 
-				printf("Второе число:\n");
+				printf("\nВторое число:\n");
 				printRationalFraction(second);
+				printf("\n");
 				system("pause");
 			}
 			else
@@ -206,8 +210,9 @@ void polynomEnterMenu()
 				printf("Первый многочлен:\n");
 				printPolynom(first);
 
-				printf("Второй многочлен:\n");
+				printf("\nВторой многочлен:\n");
 				printPolynom(second);
+				printf("\n");
 				system("pause");
 			}
 			else

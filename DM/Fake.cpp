@@ -30,11 +30,7 @@ RationalFraction LED_P_Q(Polynom polynom)
 	return rf;
 }
 
-/*Степень многочлена*/
-int DEG_P_N(Polynom polynom)
-{
-	return 0;
-}
+
 
 /*Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей*/
 Polynom FAC_P_Q(Polynom polynom)
@@ -66,11 +62,6 @@ Polynom GCF_PP_P(Polynom first, Polynom second)
 	return first;
 }
 
-/*Производная многочлена*/
-Polynom DER_P_P(Polynom polynom)
-{
-	return polynom;
-}
 
 /*Преобразование многочлена — кратные корни в простые*/
 Polynom NMR_P_P(Polynom polynom)
@@ -94,13 +85,6 @@ int INT_Q_B(RationalFraction number)
 
 
 
-/*Преобразование дробного в целое
-(если знаменатель равен 1)*/
-BigInteger TRANS_Q_Z(RationalFraction number)
-{
-	BigInteger b;
-	return b;
-}
 
 /*Сложение дробей*/
 RationalFraction ADD_QQ_Q(RationalFraction first, RationalFraction second)
@@ -135,25 +119,8 @@ int POZ_Z_D(BigInteger number)
 	return 0;
 }
 
-/*Умножение целого на (-1)*/
-BigInteger MUL_ZM_Z(BigInteger number)
-{
-	return number;
-}
 
-/*Преобразование натурального в целое*/
-BigInteger TRANS_N_Z(BigNatural number)
-{
-	BigInteger b;
-	return b;
-}
 
-/*Преобразование целого неотрицательного в натуральное*/
-BigNatural TRANS_Z_N(BigInteger number)
-{
-	BigNatural b;
-	return b;
-}
 
 
 

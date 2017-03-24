@@ -56,7 +56,6 @@ void printBigNatural(BigNatural number)
 {
 	for (int i = number.size - 1; i >= 0; i--)
 		printf("%d", number.coef[i]);
-	printf("\n");
 	
 }
 
@@ -74,10 +73,8 @@ void printBigInteger(BigInteger number)
 
 void printRationalFraction(RationalFraction number)
 {
-	//system("cls");
-	printf("Числитель\n");
 	printBigInteger(number.numenator);
-	printf("Знаменатель\n");
+	printf("/");
 	printBigNatural(number.denominator);
 
 }
@@ -87,9 +84,9 @@ void printRationalFraction(RationalFraction number)
 
 void printPolynom(Polynom polynom)
 {
-	for (int i = polynom.degree; i >= 0; i--)
+	for (int i = 0; i <= polynom.degree; i++)
 	{
-		printf("x^%d", i);
 		printRationalFraction(polynom.coef[i]);
+		printf("x^%d%s", polynom.degree - i , i == polynom.degree ? " = 0": " + ");
 	}
 }

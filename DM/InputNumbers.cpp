@@ -63,8 +63,8 @@ RationalFraction getRationalFraction()
 {
 	RationalFraction result;
 
-	result.numenator = getBigInteger("Введите числитель" , "Числитель введен не верно");
-	result.denominator = getBigNatural("Введите знамсенатель", "Знаменатель введен не верно");
+	result.numenator = getBigInteger("" , "Числитель введен не верно");
+	result.denominator = getBigNatural("/", "Знаменатель введен не верно");
 
 	return result;
 }

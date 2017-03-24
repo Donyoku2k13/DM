@@ -20,6 +20,7 @@ Polynom DER_P_P(Polynom polynom)
 	for (int i = 0; i < polynom.degree; i++)
 	{
 		result.coef[i].numenator.number = MUL_ND_N(polynom.coef[i].numenator.number, polynom.degree - i);
+		result.coef[i].denominator = polynom.coef[i].denominator;
 	}
 
 	return result;
