@@ -12,4 +12,3 @@ RationalFraction TRANS_Z_Q(BigInteger number)
 	rezult.denominator.size = 1;
 	return rezult;
 }
-
