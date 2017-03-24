@@ -76,15 +76,6 @@ RationalFraction RED_Q_Q(RationalFraction number)
 	return number;
 }
 
-/*Проверка на целое, если рациональное число является целым,
-то «да», иначе «нет»*/
-bool INT_Q_B(RationalFraction number)
-{
-	return 0;
-}
-
-
-
 
 /*Умножение дробей*/
 RationalFraction MUL_QQ_Q(RationalFraction first, RationalFraction second)
