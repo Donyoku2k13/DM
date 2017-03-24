@@ -10,7 +10,7 @@ BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 		return SUB_NN_N(second, first);
 	BigNatural result;
 	int i;
-	short temp; 
+	short temp;
 	short carry = 0;
 
 	short* a = first.coef; //Уменьшаемое 
@@ -61,5 +61,33 @@ BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 	return result;
 }
 
+BigNatural DIV_NN_N(BigNatural first, BigNatural second)
+{
+  //Если второе меньше первого, то вызываем наоборот
+  if (COM_NN_D(first, second) == 1)
+    return DIV_NN_N(second, first);
 
+  BigNatural first_c;
+  BigNatural k = BigNatural();
+  if (!NZER_N_B)
+    printf("Делитель должен быть больше нуля!");
+  else
+  {
+    if(COM_NN_D(first, second)==2)
+    {
+      first_c = first;
+      do
+      {
+        first_c = SUB_NN_N(first, second);
+        k = ADD_1N_N(k);
+      } while (COM_NN_D(first_c, second) == 2 || COM_NN_D(first_c, second) == 0);
+        return k;
+    }
+    else
+    if (COM_NN_D(first, second) == 0)
+    {
+      k = ADD_1N_N(k);
+      return k;
+    }
 
+}
