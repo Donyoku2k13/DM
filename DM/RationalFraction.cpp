@@ -56,12 +56,3 @@ RationalFraction SUB_QQ_Q(RationalFraction first, RationalFraction second)
 
 	return result;
 }
-
-
-RationalFraction MUL_QQ_Q(RationalFraction first, RationalFraction second)
-{
-	RationalFraction res;
-	res.numenator = MUL_ZZ_Z(first.numenator, second.numenator);
-	res.denominator = MUL_NN_N(first.denominator, second.denominator);
-	return res;
-}
