@@ -114,3 +114,8 @@ BigInteger MUL_ZZ_Z(BigInteger first, BigInteger second)
 		result.sign = minus;
 	return result;
 }
+
+BigInteger MOD_ZZ_Z(BigInteger first, BigNatural second)
+{
+	return SUB_ZZ_Z(first, MUL_ZZ_Z(TRANS_N_Z(second), DIV_ZZ_Z(first, second)));
+}
