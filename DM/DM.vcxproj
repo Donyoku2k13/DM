@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="Header.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Output.h" />
     <ClInclude Include="ParserHeader.h" />
   </ItemGroup>

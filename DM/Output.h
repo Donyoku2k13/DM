@@ -1,5 +1,7 @@
 #pragma once
 #include "Header.h"
+#include "windows.h"
+#include "conio.h"
 
 
 void infoView(char* message);

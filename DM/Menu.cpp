@@ -1,21 +1,9 @@
-#include "conio.h"
-#include "windows.h"
 #include "Header.h"
+#include "Output.h"
+#include "Menu.h"
 
 
 
-enum Menu
-{
-	mainMenu,
-	naturalNumberMenu,
-	integerNumberMenu,
-	rationalFractionMenu,
-	polynomMenu,
-	outputMenu
-};
-
-
-//************************************************************************
 
 //Выбор меню
 int getMenu(Menu menu, char* message)
@@ -139,23 +127,4 @@ int menuMove(int current, int size, bool* exit)
 	return current;
 }
 
-//************************************************************************
 
-
-void gotoXY(short x, short y)
-{
-	static HANDLE outputHande = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	SetConsoleCursorPosition(outputHande, { x, y });
-}
-
-
-//************************************************************************
-
-
-void changeConsoleColor(int bg, int text)
-{
-	static HANDLE outputHande = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	SetConsoleTextAttribute(outputHande, bg << 4 | text);
-}
