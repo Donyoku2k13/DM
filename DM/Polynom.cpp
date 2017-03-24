@@ -11,13 +11,16 @@ int DEG_P_N(Polynom polynom)
 
 Polynom DER_P_P(Polynom polynom)
 {
-	Polynom first_numenator;
-	first_numenator.coef = (RationalFraction*)malloc(polynom.degree * sizeof(RationalFraction));
-	first_numenator.coef->numenator.number.coef = (short*)malloc(polynom.coef->numenator.number.size * sizeof(short));
-	for (int i = 0; i<polynom.coef->denominator.size; i++)
+	Polynom result;
+
+
+	result.degree = polynom.degree - 1;
+	result.coef = (RationalFraction*)malloc(polynom.degree * sizeof(RationalFraction));
+
+	for (int i = 0; i < polynom.degree; i++)
 	{
-		first_numenator.coef[i].numenator.number.coef[i] = polynom.coef[i].numenator.number.coef[i] * polynom.degree;
-		polynom.degree--;
+		result.coef[i].numenator.number = MUL_ND_N(polynom.coef[i].numenator.number, polynom.degree - i);
 	}
-	return first_numenator;
+
+	return result;
 }
