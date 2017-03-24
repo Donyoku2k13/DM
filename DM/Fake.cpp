@@ -89,29 +89,10 @@ RationalFraction DIV_QQ_Q(RationalFraction first, RationalFraction second)
 	return first;
 }
 
-/*Абсолютная величина числа, результат - натуральное*/
-BigNatural ABS_Z_N(BigInteger number);
-
 /*Определение положительности числа (2 - положительное, 0 — равное нулю, 1 - отрицательное)*/
 int POZ_Z_D(BigInteger number)
 {
 	return 0;
-}
-
-
-
-/*Частное от деления большего целого числа на меньшее
-или равное натуральное с остатком (делитель отличен от нуля)*/
-BigInteger DIV_ZZ_Z(BigInteger first, BigInteger second)
-{
-	return first;
-}
-
-/*Остаток от деления большего целого числа на меньшее или
-равное натуральное с остатком (делитель отличен от нуля)*/
-BigInteger MOD_ZZ_Z(BigInteger first, BigInteger second)
-{
-	return first;
 }
 
 
