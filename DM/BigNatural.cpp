@@ -61,5 +61,22 @@ BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 	return result;
 }
 
+BigNatural GCF_NN_N(BigNatural first, BigNatural second)
+{
+	BigNatural result;
+	BigNatural ost;
 
+	while (NZER_N_B(second))
+	{
+		ost = MOD_NN_N(first, second);
+		first.coef = second.coef;
+		first.size = second.size;
+		second.coef = ost.coef;
+		second.size = ost.size;
+	}
+
+	result.size = first.size;
+	result.coef = first.coef;
+	return result;
+}
 
