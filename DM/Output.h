@@ -22,4 +22,10 @@ void printBigInteger(BigInteger);
 void printRationalFraction(RationalFraction number);
 
 
-void printPolynom(Polynom polynom)
+void printPolynom(Polynom polynom);
+
+
+void polynomEMenu(Polynom first, Polynom second);
+
+
+void help();

@@ -24,7 +24,8 @@ int getMenu(Menu menu, char* message)
 		"Частное от деления 2 чисел",
 		"Остаток от деления 2 чисел",
 		"НОД 2 чисел",
-		"НОК 2 чисел"
+		"НОК 2 чисел",
+		"Назад"
 	},
 		*integerNumberMenuPuncts[] = {
 		"Сложить 2 числа",
@@ -71,7 +72,7 @@ int getMenu(Menu menu, char* message)
 	case mainMenu:
 		return selectMenu(message, mainMenuPuncts, 6);
 	case naturalNumberMenu:
-		return selectMenu(message, naturalNumberMenuPuncts, 7);
+		return selectMenu(message, naturalNumberMenuPuncts, 8);
 	case integerNumberMenu:
 		return selectMenu(message, integerNumberMenuPuncts, 6);
 	case rationalFractionMenu:

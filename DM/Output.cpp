@@ -74,10 +74,22 @@ void printBigInteger(BigInteger number)
 
 void printRationalFraction(RationalFraction number)
 {
-	system("cls");
+	//system("cls");
 	printf("Числитель\n");
 	printBigInteger(number.numenator);
 	printf("Знаменатель\n");
 	printBigNatural(number.denominator);
 
+}
+
+//************************************************************************
+
+
+void printPolynom(Polynom polynom)
+{
+	for (int i = polynom.degree; i >= 0; i--)
+	{
+		printf("x^%d", i);
+		printRationalFraction(polynom.coef[i]);
+	}
 }

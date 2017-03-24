@@ -203,10 +203,10 @@ void polynomEnterMenu()
 
 			if (state)
 			{
-				printf("Первое число:\n");
+				printf("Первый многочлен:\n");
 				printPolynom(first);
 
-				printf("Второе число:\n");
+				printf("Второй многочлен:\n");
 				printPolynom(second);
 				system("pause");
 			}
