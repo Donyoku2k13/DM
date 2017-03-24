@@ -1,5 +1,6 @@
 #include "Header.h"
 #include "ParserHeader.h"
+#include "Input.h"
 
 
 
@@ -10,7 +11,7 @@ int main(void)
 {
 
 	char string[] = "-5445362";
-	print(parseToBigInteger(string));
+	print(getBigInteger("¬ведите число","„исло введено не верно"));
 
 	system("pause");
 	return 0;
@@ -29,8 +30,9 @@ void print(BigNatural number)
 
 void print(BigInteger number)
 {
-	if (number.sign = minus)
+	if (number.sign == minus)
 		printf("-");
 	print(number.number);
 
 }
+

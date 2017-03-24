@@ -3,12 +3,15 @@
 #include "ParserHeader.h"
 
 
-BigNatural getBigNatural();
+BigNatural getBigNatural(char* message, char* errMessage);
 
 
-BigInteger getBigInteger();
+BigInteger getBigInteger(char* message, char* errMessage);
 
 
 RationalFraction getRationalFraction();
 
 Polynom getPolynom();
+
+
+char* getString();

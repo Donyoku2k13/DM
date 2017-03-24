@@ -68,7 +68,7 @@ BigInteger parseToBigInteger(char* string)
 {
 	BigInteger result;
 	BigNatural number;
-	if (string[0] = '-')
+	if (string[0] == '-')
 	{
 		result.sign = minus;
 		string = partArrayCopy(string, 1);
