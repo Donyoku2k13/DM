@@ -1,3 +1,6 @@
+#ifndef H_HEADER
+#define H_HEADER
+
 #include "stdio.h"
 #include "stdlib.h"
 
@@ -10,9 +13,10 @@ enum Sign //Знак целого числа
 
 struct BigNatural //Натуральное длинное число
 {
-	const int BASE = 10;
-	int size;		//Размер массива (номер старшей позиции)
+
 	short *coef;	//Массив коэффициентов
+	int size;		//Размер массива (номер старшей позиции)
+	int BASE = 10;
 
 };
 
@@ -190,3 +194,5 @@ Polynom DER_P_P(Polynom first, Polynom second);
 
 /*Преобразование многочлена — кратные корни в простые*/
 Polynom NMR_P_P(Polynom first, Polynom second);
+
+#endif

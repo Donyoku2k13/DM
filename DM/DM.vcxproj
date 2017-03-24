@@ -143,11 +143,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="Output.h" />
+    <ClInclude Include="ParserHeader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BigInteger.cpp" />
     <ClCompile Include="BigNatural.cpp" />
+    <ClCompile Include="InputNumbers.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Output.cpp" />
+    <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Polynom.cpp" />
     <ClCompile Include="RationalFraction.cpp" />
