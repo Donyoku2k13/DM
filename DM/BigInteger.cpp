@@ -51,3 +51,14 @@ BigInteger SUB_ZZ_Z(BigInteger first, BigInteger second)
 
 	return result;
 }
+
+
+BigInteger MUL_ZM_Z(BigInteger number)
+{
+	if (number.sign == plus && (number.number.coef[0] != 0 || number.number.size != 1))
+		number.sign = minus;
+	else
+		if (number.sign == minus)
+			number.sign = plus;
+	return number;
+}
