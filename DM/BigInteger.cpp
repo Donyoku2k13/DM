@@ -53,6 +53,19 @@ BigInteger SUB_ZZ_Z(BigInteger first, BigInteger second)
 }
 
 
+BigInteger TRANS_N_Z(BigNatural number)
+{
+	BigInteger temp;
+	temp.number.size = number.size;
+	temp.sign = plus;
+	temp.number.coef = (short*)malloc(number.size * sizeof(short));
+	for (int i = 0; i < temp.number.size; i++)
+		temp.number.coef[i] = number.coef[i];
+	return temp;
+}
+
+
+
 BigInteger MUL_ZM_Z(BigInteger number)
 {
 	if (number.sign == plus && (number.number.coef[0] != 0 || number.number.size != 1))
