@@ -41,7 +41,6 @@ BigInteger getBigInteger(char* message, char* errMessage)
 {
 	BigInteger result;
 
-	system("cls");
 	printf("%s\n", message);
 
 
