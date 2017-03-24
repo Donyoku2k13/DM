@@ -34,7 +34,7 @@ struct RationalFraction	//Рациональная дробь
 
 struct Polynom	//Многочлен
 {
-	BigNatural degree;			//Степень многочлена
+	int degree;			//Степень многочлена
 	RationalFraction* coef;		//Массив коэффициентов
 };
 
@@ -131,7 +131,7 @@ RationalFraction RED_Q_Q(RationalFraction number);
 
 /*Проверка на целое, если рациональное число является целым,
 то «да», иначе «нет»*/
-int INT_Q_B(RationalFraction number);
+bool INT_Q_B(RationalFraction number);
 
 /*Преобразование целого в дробное*/
 RationalFraction TRANS_Z_Q(BigInteger number);
@@ -172,7 +172,7 @@ Polynom MUL_Pxk_P(Polynom polynom, int xDegree);
 RationalFraction LED_P_Q(Polynom polynom);
 
 /*Степень многочлена*/
-BigNatural DEG_P_N(Polynom polynom);
+int DEG_P_N(Polynom polynom);
 
 /*Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей*/
 Polynom FAC_P_Q(Polynom polynom);
