@@ -34,7 +34,7 @@ struct RationalFraction	//Рациональная дробь
 
 struct Polynom	//Многочлен
 {
-	int degree;					//Степень многочлена
+	int degree;			//Степень многочлена
 	RationalFraction* coef;		//Массив коэффициентов
 };
 
@@ -115,11 +115,11 @@ BigInteger MUL_ZZ_Z(BigInteger first, BigInteger second);
 
 /*Частное от деления большего целого числа на меньшее
 или равное натуральное с остатком (делитель отличен от нуля)*/
-BigInteger DIV_ZZ_Z(BigInteger first, BigInteger second);
+BigInteger DIV_ZZ_Z(BigInteger first, BigNatural second);
 
 /*Остаток от деления большего целого числа на меньшее или 
 равное натуральное с остатком (делитель отличен от нуля)*/
-BigInteger MOD_ZZ_Z(BigInteger first, BigInteger second);
+BigInteger MOD_ZZ_Z(BigInteger first, BigNatural second);
 
 
 //***********************************************************************************************
@@ -131,7 +131,7 @@ RationalFraction RED_Q_Q(RationalFraction number);
 
 /*Проверка на целое, если рациональное число является целым,
 то «да», иначе «нет»*/
-int INT_Q_B(RationalFraction number);
+bool INT_Q_B(RationalFraction number);
 
 /*Преобразование целого в дробное*/
 RationalFraction TRANS_Z_Q(BigInteger number);
