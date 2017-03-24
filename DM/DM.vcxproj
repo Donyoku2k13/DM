@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="ParserHeader.h" />
   </ItemGroup>
   <ItemGroup>
