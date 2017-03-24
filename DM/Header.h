@@ -115,11 +115,11 @@ BigInteger MUL_ZZ_Z(BigInteger first, BigInteger second);
 
 /*Частное от деления большего целого числа на меньшее
 или равное натуральное с остатком (делитель отличен от нуля)*/
-BigInteger DIV_ZZ_Z(BigInteger first, BigInteger second);
+BigInteger DIV_ZZ_Z(BigInteger first, BigNatural second);
 
 /*Остаток от деления большего целого числа на меньшее или 
 равное натуральное с остатком (делитель отличен от нуля)*/
-BigInteger MOD_ZZ_Z(BigInteger first, BigInteger second);
+BigInteger MOD_ZZ_Z(BigInteger first, BigNatural second);
 
 
 //***********************************************************************************************
