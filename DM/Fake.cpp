@@ -78,25 +78,13 @@ RationalFraction RED_Q_Q(RationalFraction number)
 
 /*Проверка на целое, если рациональное число является целым,
 то «да», иначе «нет»*/
-int INT_Q_B(RationalFraction number)
+bool INT_Q_B(RationalFraction number)
 {
 	return 0;
 }
 
 
 
-
-/*Сложение дробей*/
-RationalFraction ADD_QQ_Q(RationalFraction first, RationalFraction second)
-{
-	return first;
-}
-
-/*Вычитание дробей*/
-RationalFraction SUB_QQ_Q(RationalFraction first, RationalFraction second)
-{
-	return first;
-}
 
 /*Умножение дробей*/
 RationalFraction MUL_QQ_Q(RationalFraction first, RationalFraction second)
@@ -121,17 +109,6 @@ int POZ_Z_D(BigInteger number)
 
 
 
-
-
-
-
-
-/*Умножение целых чисел*/
-BigInteger MUL_ZZ_Z(BigInteger first, BigInteger second)
-{
-	return first;
-}
-
 /*Частное от деления большего целого числа на меньшее
 или равное натуральное с остатком (делитель отличен от нуля)*/
 BigInteger DIV_ZZ_Z(BigInteger first, BigInteger second)
@@ -155,17 +132,7 @@ int COM_NN_D(BigNatural first, BigNatural second)
 	return 0;
 }
 
-/*Проверка на ноль: если число не равно нулю, то «да» иначе «нет»*/
-bool NZER_N_B(BigNatural number)
-{
-	return true;
-}
 
-/*Добавление 1 к натуральному числу*/
-BigNatural ADD_1N_N(BigNatural number)
-{
-	return number;
-}
 
 /*Сложение натуральных чисел*/
 BigNatural ADD_NN_N(BigNatural first, BigNatural second)
@@ -181,11 +148,7 @@ BigNatural MUL_ND_N(BigNatural number, int factor)
 }
 
 /*
-Умножение натурального числа на 10^k*/
-BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
-{
-	return number;
-}
+
 
 /*Умножение натуральных чисел*/
 BigNatural MUL_NN_N(BigNatural first, BigNatural second)
@@ -193,11 +156,7 @@ BigNatural MUL_NN_N(BigNatural first, BigNatural second)
 	return first;
 }
 
-/*Вычитание из натурального другого натурального, умноженного на цифру для случая с неотрицательным результатом*/
-BigNatural SUB_NDN_N(BigNatural first, BigNatural second, int factor)
-{
-	return first;
-}
+
 
 /*Вычисление первой цифры деления большего натурального на меньшее, домноженное на 10^k, где k - номер позиции этой цифры (номер считается с нуля)*/
 int DIV_NN_Dk(BigNatural first, BigNatural second, int tenDegree)
@@ -217,11 +176,7 @@ BigNatural MOD_NN_N(BigNatural first, BigNatural second)
 	return first;
 }
 
-/*НОД натуральных чисел*/
-BigNatural GCF_NN_N(BigNatural first, BigNatural second)
-{
-	return first;
-}
+
 
 /*НОК натуральных чисел*/
 BigNatural LCM_NN_N(BigNatural first, BigNatural second)

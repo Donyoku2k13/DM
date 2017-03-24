@@ -376,10 +376,10 @@ void integerMenu(BigInteger first, BigInteger second)
 			result = MUL_ZZ_Z(first, second);
 			break;
 		case 3:
-			result = DIV_ZZ_Z(first, second);
+			result = DIV_ZZ_Z(first, ABS_Z_N(second));
 			break;
 		case 4:
-			result = MOD_ZZ_Z(first, second);
+			result = MOD_ZZ_Z(first, ABS_Z_N(second));
 			break;
 		case 5:
 			return;

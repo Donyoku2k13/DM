@@ -122,7 +122,7 @@ BigNatural GCF_NN_N(BigNatural first, BigNatural second)
 	return result;
 }
 
-	//Умножение натурального числа на 10^k 
+//Умножение натурального числа на 10^k 
 BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
 {
 	BigNatural result;
