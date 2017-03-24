@@ -21,6 +21,8 @@ BigNatural getBigNatural(char* message, char* errMessage)
 		return getBigNatural(message, errMessage);
 	}
 
+	free(string);
+
 	return result;
 }
 
@@ -42,6 +44,8 @@ BigInteger getBigInteger(char* message, char* errMessage)
 		infoView(errMessage);
 		return getBigInteger(message, errMessage);
 	}
+
+	free(string);
 
 	return result;
 }
