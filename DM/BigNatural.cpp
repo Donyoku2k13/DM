@@ -6,8 +6,8 @@
 BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 {
 	//Если второе меньше первого, то вызываем наоборот
-	if (COM_NN_D(first, second) == 1)
-		return SUB_NN_N(second, first);
+	//if (COM_NN_D(first, second) == 1)
+	//	return SUB_NN_N(second, first);
 	BigNatural result;
 	int i;
 	short temp; 

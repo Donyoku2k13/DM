@@ -61,3 +61,38 @@ BigNatural parseToBigNatural(char* string)
 
 	return result;
 }
+
+
+
+BigInteger parseToBigInteger(char* string)
+{
+	BigInteger result;
+	BigNatural number;
+	if (string[0] = '-')
+	{
+		result.sign = minus;
+		string = partArrayCopy(string, 1);
+	}
+	else
+		result.sign = plus;
+
+	number = parseToBigNatural(string);
+
+	result.number = number;
+
+	return result;
+}
+
+
+
+char* partArrayCopy(char* string, int index)
+{
+	char* res = (char*)malloc((strlen(string) - index + 1)*sizeof(char));
+	for (int i = index; string[i] != '\0'; i++)
+	{
+		res[i - index] = string[i];
+	}
+
+	res[strlen(string) - index] = '\0';
+	return res;
+}

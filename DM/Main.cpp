@@ -1,11 +1,11 @@
-#include "Header.h"
+#include "ParserHeader.h"
 
 
 void print(BigNatural);
 
 int main(void)
 {
-	BigNatural first;
+	/*BigNatural first;
 	BigNatural second;
 
 	short firstCoef[] = { 7,3 };
@@ -18,7 +18,10 @@ int main(void)
 	second.size = 2;
 
 	print(SUB_NN_N(first, second));
+	*/
 
+	char string[] = "-5445362";
+	printf("%s", partArrayCopy(string, 2));
 
 	system("pause");
 	return 0;
