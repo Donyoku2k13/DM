@@ -6,7 +6,6 @@ BigNatural parseToBigNatural(char* string);
 
 BigInteger parseToBigInteger(char* string);
 
-
 char* partArrayCopy(char* string, int index);
 
 

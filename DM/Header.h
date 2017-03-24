@@ -1,3 +1,6 @@
+#ifndef H_HEADER
+#define H_HEADER
+
 #include "stdio.h"
 #include "stdlib.h"
 
@@ -191,3 +194,5 @@ Polynom DER_P_P(Polynom first, Polynom second);
 
 /*Преобразование многочлена — кратные корни в простые*/
 Polynom NMR_P_P(Polynom first, Polynom second);
+
+#endif

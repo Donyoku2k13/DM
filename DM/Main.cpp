@@ -1,27 +1,16 @@
+#include "Header.h"
 #include "ParserHeader.h"
 
 
+
 void print(BigNatural);
+void print(BigInteger);
 
 int main(void)
 {
-	/*BigNatural first;
-	BigNatural second;
-
-	short firstCoef[] = { 7,3 };
-	short secondCoef[] = { 7,3 };
-
-	first.coef = firstCoef;
-	first.size = 2;
-
-	second.coef = secondCoef;
-	second.size = 2;
-
-	print(SUB_NN_N(first, second));
-	*/
 
 	char string[] = "-5445362";
-	printf("%s", partArrayCopy(string, 2));
+	print(parseToBigInteger(string));
 
 	system("pause");
 	return 0;
@@ -36,4 +25,12 @@ void print(BigNatural number)
 
 		printf("%d", number.coef[i]);
 	}
+}
+
+void print(BigInteger number)
+{
+	if (number.sign = minus)
+		printf("-");
+	print(number.number);
+
 }
