@@ -75,3 +75,15 @@ BigInteger MUL_ZM_Z(BigInteger number)
 			number.sign = plus;
 	return number;
 }
+
+
+BigNatural TRANS_Z_N(BigInteger number)
+{
+	BigNatural temp;
+	temp.size = number.number.size;
+	temp.coef = (short*)malloc(temp.size * sizeof(short));
+	temp.coef = new short(temp.size);
+	for (int i = 0; i < temp.size; i++)
+		temp.coef[i] = number.number.coef[i];
+	return temp;
+}
