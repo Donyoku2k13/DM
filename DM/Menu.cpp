@@ -1,5 +1,6 @@
 #include "Header.h"
 #include "Output.h"
+#include "Input.h"
 #include "Menu.h"
 
 
@@ -52,6 +53,17 @@ int getMenu(Menu menu, char* message)
 		"Производная многочлена",
 		"Преобразование многочлена — кратные корни в простые",
 		"Назад"
+	},
+		*enterMenuPuncts[] = {
+		"Ввести 2 числа",
+		"Вывести числа",
+		"Действия над числами",
+		"Назад"
+	},
+		*replaceMenuPuncts[] = {
+		"Заменить первое число на результат",
+		"Заменить второе число на результат",
+		"Оставить исходные числа"
 	};
 
 	switch (menu)
@@ -66,6 +78,17 @@ int getMenu(Menu menu, char* message)
 		return selectMenu(message, rationalFractionMenuPuncts, 6);
 	case polynomMenu:
 		return selectMenu(message, polynomMenuPuncts, 10);
+	case enterMenu:
+		enterNaturalMenu:
+		enterRFractionMenu:
+		enterPolynomMenu:
+		return selectMenu(message, enterMenuPuncts, 4);
+	case repIntegerMenu:
+		repNaturalMenu:
+		repRFractionMenu:
+		repPolynomMenu:
+		return selectMenu(message, replaceMenuPuncts,3);
+
 	}
 	return 0;
 }
@@ -126,5 +149,8 @@ int menuMove(int current, int size, bool* exit)
 
 	return current;
 }
+
+
+
 
 
