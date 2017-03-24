@@ -3,7 +3,7 @@
 //В этом файле должны быть ТОЛЬКО реализации методов для работы с многочленами
 
 
-int DEG_P_N(Polynom polynom)
+BigNatural DEG_P_N(Polynom polynom)
 {
 	return polynom.degree;
 }
