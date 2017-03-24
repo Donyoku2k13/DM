@@ -24,8 +24,10 @@ int main(void)
 			rFractionEnterMenu();
 			break;
 		case 3:
+			polynomEnterMenu();
 			break;
 		case 4:
+			help();
 			break;
 		case 5:
 			return 0;
@@ -258,7 +260,7 @@ void polynomEMenu(Polynom first, Polynom second)
 			result = GCF_PP_P(first, second);
 			break;
 		case 7:
-			result = DER_P_P(first, second);
+			result = DER_P_P(first);
 			break;
 		case 8:
 			result = NMR_P_P(first);
@@ -384,3 +386,9 @@ void integerMenu(BigInteger first, BigInteger second)
 }
 
 //************************************************************************
+
+void help()
+{
+	printf("Справка!");
+	system("cls");
+}

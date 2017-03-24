@@ -2,68 +2,52 @@
 
 //¬ этом файле должны быть “ќЋ№ ќ реализации методов дл€ работы с целыми числами
 
-
-/*јбсолютна€ величина числа, результат - натуральное*/
-BigNatural ABS_Z_N(BigInteger number) {
-	BigNatural result;
-	return result;
-}
-
-/*ќпределение положительности числа (2 - положительное, 0 Ч равное нулю, 1 - отрицательное)*/
-int POZ_Z_D(BigInteger number) { return 0; }
-
-/*”множение целого на (-1)*/
-BigInteger MUL_ZM_Z(BigInteger number)
+BigNatural ABS_Z_N(BigInteger number)
 {
-
-	return number;
+	return number.number;
 }
 
-/*ѕреобразование натурального в целое*/
-BigInteger TRANS_N_Z(BigNatural number) {
-	BigInteger result;
-	return result;
-}
-
-/*ѕреобразование целого неотрицательного в натуральное*/
-BigNatural TRANS_Z_N(BigInteger number) {
-	BigNatural result;
-	return result;
-}
-
-/*—ложение целых чисел*/
 BigInteger ADD_ZZ_Z(BigInteger first, BigInteger second)
 {
-
-	return first;
+	BigInteger result;
+	result.sign = first.sign;
+	if (first.sign == second.sign)
+		result.number = ADD_NN_N(ABS_Z_N(first), ABS_Z_N(second));
+	else
+	{
+		if (COM_NN_D(ABS_Z_N(first), ABS_Z_N(second)) == 2)//абсолютна€ величина первого больше абсолютной величины второго
+			result.number = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
+		else
+		{
+			result.number = SUB_NN_N(ABS_Z_N(second), ABS_Z_N(first));
+			if (!NZER_N_B(result.number))
+				result.sign = plus; // беру ноль за положительное
+			else
+				result = MUL_ZM_Z(result);
+		}
+	}
+	return result;
 }
 
-/*¬ычитание целых чисел*/
 BigInteger SUB_ZZ_Z(BigInteger first, BigInteger second)
 {
+	BigInteger result;
+	result.sign = first.sign;
+	if (first.sign == second.sign)//оба числа одного знака
+	{
+		if (COM_NN_D(ABS_Z_N(first), ABS_Z_N(second)) == 2)////абсолютна€ величина первого больше абсолютной величины второго
+			result.number = SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second));
+		else
+		{
+			result.number = SUB_NN_N(ABS_Z_N(second), ABS_Z_N(first));
+			if (COM_NN_D(ABS_Z_N(first), ABS_Z_N(second)) == 0)//если числа равны
+				result.sign = plus;
+			else
+				result = MUL_ZM_Z(result);
+		}
+	}
+	else //числа разных знаков
+		result.number = ADD_NN_N(ABS_Z_N(first), ABS_Z_N(second));
 
-	return first;
-}
-
-/*”множение целых чисел*/
-BigInteger MUL_ZZ_Z(BigInteger first, BigInteger second)
-{
-
-	return first;
-}
-
-/*„астное от делени€ большего целого числа на меньшее
-или равное натуральное с остатком (делитель отличен от нул€)*/
-BigInteger DIV_ZZ_Z(BigInteger first, BigInteger second)
-{
-
-	return first;
-}
-
-/*ќстаток от делени€ большего целого числа на меньшее или
-равное натуральное с остатком (делитель отличен от нул€)*/
-BigInteger MOD_ZZ_Z(BigInteger first, BigInteger second)
-{
-
-	return first;
+	return result;
 }

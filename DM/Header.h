@@ -190,9 +190,9 @@ Polynom MOD_PP_P(Polynom first, Polynom second);
 Polynom GCF_PP_P(Polynom first, Polynom second);
 
 /*Производная многочлена*/
-Polynom DER_P_P(Polynom first, Polynom second);
+Polynom DER_P_P(Polynom polynom);
 
 /*Преобразование многочлена — кратные корни в простые*/
-Polynom NMR_P_P(Polynom first, Polynom second);
+Polynom NMR_P_P(Polynom polynom);
 
 #endif
