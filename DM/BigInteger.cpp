@@ -58,8 +58,7 @@ BigInteger TRANS_N_Z(BigNatural number)
 	BigInteger temp;
 	temp.number.size = number.size;
 	temp.sign = plus;
-	temp.number.BASE;
-	temp.number.coef = new short(temp.number.size);
+	temp.number.coef = (short*)malloc(number.size * sizeof(short));
 	for (int i = 0; i < temp.number.size; i++)
 		temp.number.coef[i] = number.coef[i];
 	return temp;
