@@ -9,15 +9,8 @@ enum Menu
 	polynomMenu,
 	outputMenu,
 	enterMenu,
-	enterIntegerMenu,
-	enterNaturalMenu,
-	enterRFractionMenu,
 	enterPolynomMenu,
-	repIntegerMenu,
-	repNaturalMenu,
-	repRFractionMenu,
-	repPolynomMenu,
-	firstLevelSubMenu
+	repMenu,
 };
 
 void printMenu(char**, int, int);	//Вывод меню

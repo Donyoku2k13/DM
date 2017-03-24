@@ -65,6 +65,12 @@ int getMenu(Menu menu, char* message)
 		"Заменить первое число на результат",
 		"Заменить второе число на результат",
 		"Оставить исходные числа"
+	},
+		*enterPolynomMenuPuncts[] = {
+		"Ввести 2 многочлена",
+		"Вывести многочлены",
+		"Действия над многочленами",
+		"Назад"
 	};
 
 	switch (menu)
@@ -80,14 +86,10 @@ int getMenu(Menu menu, char* message)
 	case polynomMenu:
 		return selectMenu(message, polynomMenuPuncts, 10);
 	case enterMenu:
-		enterNaturalMenu:
-		enterRFractionMenu:
-		enterPolynomMenu:
 		return selectMenu(message, enterMenuPuncts, 4);
-	case repIntegerMenu:
-		repNaturalMenu:
-		repRFractionMenu:
-		repPolynomMenu:
+	case enterPolynomMenu:
+		return selectMenu(message, enterPolynomMenuPuncts, 4);
+	case repMenu:
 		return selectMenu(message, replaceMenuPuncts,3);
 
 	}

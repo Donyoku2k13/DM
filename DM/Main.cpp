@@ -190,7 +190,7 @@ void polynomEnterMenu()
 
 	while (true)
 	{
-		switch (getMenu(enterMenu, "Многочлены"))
+		switch (getMenu(enterPolynomMenu, "Многочлены"))
 		{
 		case 0:
 
