@@ -88,6 +88,21 @@ BigNatural TRANS_Z_N(BigInteger number)
 }
 
 
+BigInteger DIV_ZZ_Z(BigInteger first, BigNatural second)
+{
+	BigInteger res;
+	if (second.coef[0] != 0 || second.size != 1) //Если знаментель не ноль, то делим
+	{
+		res.sign = first.sign; //Частное наследует знак делимого
+		res.number = DIV_NN_N(ABS_Z_N(first), second); //Натуральные части делятся
+		if (POZ_Z_D(first) == 1)
+			res.number = ADD_1N_N(res.number); //Для того, чтобы остаток был положительным
+		return(res);
+	}
+	else
+		printf("Знаменатель должен быть отличен от нуля");
+}
+
 
 BigInteger MUL_ZZ_Z(BigInteger first, BigInteger second)
 {
