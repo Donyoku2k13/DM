@@ -94,15 +94,17 @@ BigNatural MUL_ND_N(BigNatural number, int factor)
 	BigNatural result;
 	int r = 0;
 
-	short* resCoef = (short*)malloc(sizeof(short) * (number.size + 1));
+	short* resCoef = (short*)malloc(sizeof(short) * (number.size));
 
 	for (int j = 0; j < number.size; j++)
 	{
-		resCoef[j] = (number.coef[number.size - 1 - j] * factor + r) % 10;
-		r = (number.coef[number.size - 1 - j] * factor + r) / 10;
+		resCoef[j] = (number.coef[j] * factor + r) % 10;
+		r = (number.coef[j] * factor + r) / 10;
 	}
 	result.size = number.size;
-	if (r) {
+	if (r) 
+	{
+		resCoef = (short*)realloc(resCoef, sizeof(short) * (number.size + 1));
 		resCoef[result.size] = r;
 		result.size++;
 	}
