@@ -15,3 +15,6 @@ void printBigNatural(BigNatural);
 
 
 void printBigInteger(BigInteger);
+
+
+void printRationalFraction(RationalFraction number);

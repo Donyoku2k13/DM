@@ -4,6 +4,16 @@
 
 
 
+BigNatural getBigNatural()
+{
+	return getBigNatural("¬ведите натуральное число", "ќшибка!");
+}
+
+BigInteger getBigInteger()
+{
+	return getBigInteger("¬ведите целое число", "ќшибка!");
+}
+
 BigNatural getBigNatural(char* message, char* errMessage)
 {
 	BigNatural result;

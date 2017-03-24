@@ -57,6 +57,7 @@ void printBigNatural(BigNatural number)
 {
 	for (int i = number.size - 1; i >= 0; i--)
 		printf("%d", number.coef[i]);
+	printf("\n");
 	
 }
 
@@ -67,5 +68,17 @@ void printBigInteger(BigInteger number)
 	if (number.sign == minus)
 		printf("-");
 	printBigNatural(number.number);
+
+}
+
+//************************************************************************
+
+void printRationalFraction(RationalFraction number)
+{
+	system("cls");
+	printf("Числитель\n");
+	printBigInteger(number.numenator);
+	printf("Знаменатель\n");
+	printBigNatural(number.denominator);
 
 }
