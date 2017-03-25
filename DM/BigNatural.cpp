@@ -323,7 +323,17 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 
 BigNatural MOD_NN_N(BigNatural first, BigNatural second)
 {
-	return SUB_NN_N(first, MUL_NN_N(DIV_NN_N(first,second), second));
+	BigNatural res;
+	BigNatural first_c;
+
+	first_c = first;
+	if (COM_NN_D(first, second) == 1)
+		return first;
+	else
+	{
+		res = SUB_NN_N(first, (MUL_NN_N((DIV_NN_N(first, second)), second)));
+		return res;
+	}
 }
 
 
