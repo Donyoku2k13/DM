@@ -25,3 +25,8 @@ Polynom DER_P_P(Polynom polynom)
 
 	return result;
 }
+
+RationalFraction LED_P_Q(Polynom polynom)
+{
+	return polynom.coef[0];
+}
