@@ -112,7 +112,7 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
   }
 }
 //Остаток от деления
-BigNatural DIV_NN_N(BigNatural first, BigNatural second)
+BigNatural MOD_NN_N(BigNatural first, BigNatural second)
 {
   int k;
   int kM;
