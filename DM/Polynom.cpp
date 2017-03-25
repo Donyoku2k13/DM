@@ -19,10 +19,11 @@ Polynom DER_P_P(Polynom polynom)
 
 	for (int i = 0; i < polynom.degree; i++)
 	{
-		result.coef[i] = polynom.coef[i];
+		//Для того, чтобы не было проблем с памятью
+		result.coef[i].denominator = TRANS_N_Z(polynom.coef[i].denominator).number;
 
 		result.coef[i].numenator.number = MUL_ND_N(polynom.coef[i].numenator.number, polynom.degree - i);
-		result.coef[i] = RED_Q_Q(result.coef[i]);
+		//result.coef[i] = RED_Q_Q(result.coef[i]);
 	}
 
 	return result;
