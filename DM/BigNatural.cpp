@@ -69,7 +69,7 @@ BigNatural LCM_NN_N(BigNatural first, BigNatural second)
 	BigNatural result;
 	BigNatural prois;
 	BigNatural NOD;
-	int a, b, i, k = 10;
+
 	NOD = GCF_NN_N(first, second);
 	prois = MUL_NN_N(first, second);
 	result = DIV_NN_N(prois, NOD);
