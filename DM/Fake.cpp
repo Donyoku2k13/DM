@@ -23,14 +23,6 @@ Polynom MUL_Pxk_P(Polynom polynom, int xDegree)
 	return polynom;
 }
 
-/*Старший коэффициент многочлена*/
-RationalFraction LED_P_Q(Polynom polynom)
-{
-	RationalFraction rf;
-	return rf;
-}
-
-
 
 /*Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей*/
 Polynom FAC_P_Q(Polynom polynom)
