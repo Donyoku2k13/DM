@@ -24,10 +24,12 @@ BigNatural getBigNatural(char* message, char* errMessage)
 
 	result = parseToBigNatural(string);
 
-	if (result.size == -1)
+	while  (result.size == -1)
 	{
-		infoView(errMessage);
-		return getBigNatural(message, errMessage);
+		printf("%s\n",errMessage);
+		char* string = getString();
+
+		result = parseToBigNatural(string);
 	}
 
 	free(string);
@@ -47,10 +49,12 @@ BigInteger getBigInteger(char* message, char* errMessage)
 
 	result = parseToBigInteger(string);
 
-	if (result.number.size == -1)
+	while (result.number.size == -1)
 	{
-		infoView(errMessage);
-		return getBigInteger(message, errMessage);
+		printf("%s\n", errMessage);
+		char* string = getString();
+
+		result = parseToBigInteger(string);
 	}
 
 	free(string);
@@ -65,7 +69,11 @@ RationalFraction getRationalFraction()
 
 	result.numenator = getBigInteger("" , "Числитель введен не верно");
 	result.denominator = getBigNatural("/", "Знаменатель введен не верно");
-
+	while (!NZER_N_B(result.denominator))
+	{
+		printf("Знаменатель не может быть равен нулю!!");
+		result.denominator = getBigNatural("", "Знаменатель введен не верно");
+	}
 	return result;
 }
 
@@ -74,7 +82,14 @@ Polynom getPolynom()
 {
 	Polynom result;
 	printf("Введите степень многочлена\n");
-	scanf("%d",&result.degree);
+
+	scanf("%d", &result.degree);
+
+	while (result.degree < 1)
+	{
+		printf("Степень многочлена не может быть меньше 1!!");
+		scanf("%d", &result.degree);
+	}
 	result.coef = (RationalFraction*)malloc(sizeof(RationalFraction)*(result.degree + 1));
 
 	for (int i = 0; i <= result.degree; i++)

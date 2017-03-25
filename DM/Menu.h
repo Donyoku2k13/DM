@@ -11,6 +11,7 @@ enum Menu
 	enterMenu,
 	enterPolynomMenu,
 	repMenu,
+	oneOrTwoMenu
 };
 
 void printMenu(char**, int, int);	//Вывод меню

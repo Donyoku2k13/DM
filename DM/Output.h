@@ -13,16 +13,14 @@ void gotoXY(short x, short y);
 void changeConsoleColor(int, int);
 
 
-void printBigNatural(BigNatural);
 
+char* bigNaturalToString(BigNatural number);
 
-void printBigInteger(BigInteger);
+char* bigIntegerToString(BigInteger number);
 
+char* rationalFractionToString(RationalFraction number);
 
-void printRationalFraction(RationalFraction number);
-
-
-void printPolynom(Polynom polynom);
+char* polynomToString(Polynom polynom);
 
 
 void polynomEMenu(Polynom first, Polynom second);

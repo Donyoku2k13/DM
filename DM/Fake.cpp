@@ -77,17 +77,7 @@ RationalFraction RED_Q_Q(RationalFraction number)
 }
 
 
-/*”множение дробей*/
-RationalFraction MUL_QQ_Q(RationalFraction first, RationalFraction second)
-{
-	return first;
-}
 
-/*ƒеление дробей (делитель отличен от нул€)*/
-RationalFraction DIV_QQ_Q(RationalFraction first, RationalFraction second)
-{
-	return first;
-}
 
 /*ќпределение положительности числа (2 - положительное, 0 Ч равное нулю, 1 - отрицательное)*/
 int POZ_Z_D(BigInteger number)
@@ -105,19 +95,6 @@ int COM_NN_D(BigNatural first, BigNatural second)
 }
 
 
-
-/*—ложение натуральных чисел*/
-BigNatural ADD_NN_N(BigNatural first, BigNatural second)
-{
-	return first;
-}
-
-
-/*”множение натурального числа на цифру*/
-BigNatural MUL_ND_N(BigNatural number, int factor)
-{
-	return number;
-}
 
 /*
 

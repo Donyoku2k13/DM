@@ -71,6 +71,10 @@ int getMenu(Menu menu, char* message)
 		"Вывести многочлены",
 		"Действия над многочленами",
 		"Назад"
+	},
+		*oneOrTwoMenuPuncts[] = {
+		"1.",
+		"2."
 	};
 
 	switch (menu)
@@ -91,6 +95,8 @@ int getMenu(Menu menu, char* message)
 		return selectMenu(message, enterPolynomMenuPuncts, 4);
 	case repMenu:
 		return selectMenu(message, replaceMenuPuncts,3);
+	case oneOrTwoMenu:
+		return selectMenu(message, oneOrTwoMenuPuncts, 2);
 
 	}
 	return 0;
@@ -129,7 +135,7 @@ void printMenu(char** menu, int size, int current)
 
 	for (int i = 0; i < size; i++)
 	{
-		gotoXY(0, i + 3);
+		gotoXY(0, i + 4);
 		changeConsoleColor(0, current == i ? 14 : 7);
 		printf("%-6s%s%s", current == i ? "  -->  " : "", menu[i], current == i ? "  <--" : "        ");
 	}
