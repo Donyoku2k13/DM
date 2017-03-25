@@ -65,95 +65,73 @@ BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 //Деление с остатком
 BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 {
-  int k;
-  int kM;
-  BigNatural n; //Делимое
-  BigNatural m; //Делитель
-  BigNatural res;//Результат
-  int a; //Первая цифра деления
+	int k = 0;
+	int kM = 0;
+	BigNatural res;//Результат
+	int a; //Первая цифра деления
+	short* coefReverse = nullptr;
+	int current = 0;
 
-  n = first;
-  m = second;
-  res.coef[0] = 0;
-  if (!NZER_N_B)                                       //Если делитель равен нулю
-    printf("Делитель должен быть больше нуля!");
-  else
-  {
-    if (COM_NN_D(first, second) == 0)                    //Если первое равно второму
-    {
-      res.coef = (short*)malloc(sizeof(short));
-      res.coef[0] = 1;
-      res.size = 1;
-      return res;                                       //Возвращаем единицу
-    }
-    else
-      if (COM_NN_D(first, second) == 1)                 //Если второе больше первого
-      {
-        res.coef = (short*)malloc(sizeof(short));
-        res.coef[0] = 0;
-        res.size = 0;
-        return res;                                     //Возвращаем нуль
-      }
-    else
-    if (COM_NN_D(first, second) == 2)
-    {
-      kM = first.size - second.size;
-      k = kM;
-      for (k; k >= 0; k--)
-      {
-        a = DIV_NN_Dk(n, m, k);
-        m = MUL_Nk_N(m, 1);
-        n = SUB_NDN_N(n, m, a);
-        res.coef[kM - k + 1] = res.coef[kM - k];
-        res.coef[kM - k] = a;
-      }
-    }
-    return res;
-  }
+
+	if (!NZER_N_B)                                       //Если делитель равен нулю
+		printf("Делитель должен быть больше нуля!");
+	else
+	{
+		if (COM_NN_D(first, second) == 0)                    //Если первое равно второму
+		{
+			res.coef = (short*)malloc(sizeof(short));
+			res.coef[0] = 1;
+			res.size = 0;
+			return res;                                       //Возвращаем единицу
+		}
+		else
+			if (COM_NN_D(first, second) == 1)                 //Если второе больше первого
+			{
+				return first;                                     //Возвращаем нуль
+			}
+			else
+				while (COM_NN_D(first, second) == 2)
+				{
+					coefReverse = (short*)realloc(coefReverse, sizeof(short) * (current + 1));
+					k = first.size - second.size - kM;
+					a = DIV_NN_Dk(first, second, k);
+					if (a == 0)
+						kM = 1;
+					else
+						kM = 0;
+					coefReverse[current] = a;
+					first = SUB_NDN_N(first, MUL_Nk_N(second, k), a);
+					current++;
+
+				}
+	}
+	res.size = current;
+	res.coef = (short*)malloc(sizeof(short)*current);
+	for (int i = 0; i < current; i++)
+	{
+		res.coef[i] = coefReverse[current - i - 1];
+	}
+
+	return res;
 }
-//Остаток от деления
-BigNatural MOD_NN_N(BigNatural first, BigNatural second)
-{
-  int k;
-  int kM;
-  BigNatural n; //Делимое
-  BigNatural m; //Делитель
-  BigNatural res;//Результат
-  int a; //Первая цифра деления
 
-  n = first;
-  m = second;
-  res.coef[0] = 0;
-  if (!NZER_N_B)                                       //Если делитель равен нулю
-    printf("Делитель должен быть больше нуля!");
-  else
-  {
-    if (COM_NN_D(first, second) == 0)                    //Если первое равно второму
-    {
-      res.coef = (short*)malloc(sizeof(short));
-      res.coef[0] = 0;
-      res.size = 0;
-      return res;                                       //Возвращаем единицу
-    }
-    else
-      if (COM_NN_D(first, second) == 1)                 //Если второе больше первого
-      {
-        return first;                                     //Возвращаем нуль
-      }
-      else
-        if (COM_NN_D(first, second) == 2)
-        {
-          kM = first.size - second.size;
-          k = kM;
-          for (k; k >= 0; k--)
-          {
-            a = DIV_NN_Dk(n, m, k);
-            m = MUL_Nk_N(m, 1);
-            n = SUB_NDN_N(n, m, a);
-            res.coef[kM - k + 1] = res.coef[kM - k];
-            res.coef[kM - k] = a;
-          }
-        }
-    return n;
-  }
+
+/*Сравнение натуральных чисел: 2 - если первое больше второго, 0, если равно, 1 иначе.*/
+int COM_NN_D(BigNatural first, BigNatural second)
+{
+	if (first.size > second.size)
+		return 2;
+	else if (second.size > first.size)
+		return 1;
+	else
+	{
+		for (int i = first.size - 1; i >= 0; i--)
+		{
+			if (first.coef[i] > second.coef[i])
+				return 2;
+			else if (second.coef[i] > first.coef[i])
+				return 1;
+		}
+	}
+	return 0;
 }
