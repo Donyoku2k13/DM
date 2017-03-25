@@ -51,6 +51,8 @@ void integerEnterMenu()
 		switch (getMenu(enterMenu, "Целые числа"))
 		{
 		case 0:
+			freeBigInteger(first);
+			freeBigInteger(second);
 
 			first = getBigInteger("Введите первое число", "Ошибка при вводе числа!");
 			second = getBigInteger("Введите второе число", "Ошибка при вводе числа!");
@@ -91,6 +93,10 @@ void integerEnterMenu()
 				free(firstNum);
 			if (secondNum)
 				free(secondNum);
+
+			freeBigInteger(first);
+			freeBigInteger(second);
+
 			return;
 		}
 	}
@@ -111,6 +117,8 @@ void naturalEnterMenu()
 		switch (getMenu(enterMenu, "Целые числа"))
 		{
 		case 0:
+			freeBigNatural(first);
+			freeBigNatural(second);
 
 			first = getBigNatural("Введите первое число", "Ошибка при вводе числа!");
 			second = getBigNatural("Введите второе число", "Ошибка при вводе числа!");
@@ -151,6 +159,10 @@ void naturalEnterMenu()
 				free(firstNum);
 			if (secondNum)
 				free(secondNum);
+
+			freeBigNatural(first);
+			freeBigNatural(second);
+
 			return;
 		}
 	}
@@ -171,6 +183,9 @@ void rFractionEnterMenu()
 		switch (getMenu(enterMenu, "Рациональные числа"))
 		{
 		case 0:
+			freeRFraction(first);
+			freeRFraction(second);
+
 			printf("Введите первое число:\n");
 			first = getRationalFraction();
 			printf("Введите второе число:\n");
@@ -212,6 +227,10 @@ void rFractionEnterMenu()
 				free(firstNum);
 			if (secondNum)
 				free(secondNum);
+
+			freeRFraction(first);
+			freeRFraction(second);
+
 			return;
 		}
 	}
@@ -232,6 +251,8 @@ void polynomEnterMenu()
 		switch (getMenu(enterPolynomMenu, "Многочлены"))
 		{
 		case 0:
+			freePolynom(first);
+			freePolynom(second);
 
 			first = getPolynom();
 			second = getPolynom();
@@ -268,6 +289,10 @@ void polynomEnterMenu()
 
 			break;
 		case 3:
+
+			freePolynom(first);
+			freePolynom(second);
+
 			if (firstPol)
 				free(firstPol);
 			if (secondPol)

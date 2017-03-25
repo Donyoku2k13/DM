@@ -14,7 +14,7 @@ enum Sign //Знак целого числа
 struct BigNatural //Натуральное длинное число
 {
 
-	short *coef;	//Массив коэффициентов
+	short *coef = nullptr;	//Массив коэффициентов
 	int size;		//Размер массива (номер старшей позиции)
 	int BASE = 10;
 
@@ -35,7 +35,7 @@ struct RationalFraction	//Рациональная дробь
 struct Polynom	//Многочлен
 {
 	int degree;			//Степень многочлена
-	RationalFraction* coef;		//Массив коэффициентов
+	RationalFraction* coef = nullptr;		//Массив коэффициентов
 };
 
 //***********************************************************************************************
@@ -194,5 +194,16 @@ Polynom DER_P_P(Polynom polynom);
 
 /*Преобразование многочлена — кратные корни в простые*/
 Polynom NMR_P_P(Polynom polynom);
+
+
+//***********************************************************************************************
+
+void freePolynom(Polynom polynom);
+
+void freeRFraction(RationalFraction number);
+
+void freeBigInteger(BigInteger number);
+
+void freeBigNatural(BigNatural number);
 
 #endif
