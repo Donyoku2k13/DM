@@ -17,11 +17,6 @@ Polynom MUL_PQ_P(Polynom polynom, RationalFraction factor)
 	return polynom;
 }
 
-/*Умножение многочлена на x^k*/
-Polynom MUL_Pxk_P(Polynom polynom, int xDegree)
-{
-	return polynom;
-}
 
 
 /*Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей*/
@@ -83,12 +78,4 @@ BigNatural MUL_NN_N(BigNatural first, BigNatural second)
 	return first;
 }
 
-
-
-
-/*Остаток от деления большего натурального числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)*/
-BigNatural MOD_NN_N(BigNatural first, BigNatural second)
-{
-	return first;
-}
 

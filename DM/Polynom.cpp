@@ -33,3 +33,43 @@ RationalFraction LED_P_Q(Polynom polynom)
 {
 	return polynom.coef[0];
 }
+
+Polynom MUL_Pxk_P(Polynom polynom, int xDegree)
+{
+	Polynom result;
+	int i, j;
+	result.coef = (RationalFraction*)malloc((polynom.degree + xDegree + 1) * sizeof(RationalFraction));
+
+	for (i = 0; i <= polynom.degree + xDegree; ++i)
+	{
+		if (i > polynom.degree)
+		{
+			result.coef[i].numenator.number.size = 1;
+			result.coef[i].numenator.sign = plus;
+			result.coef[i].denominator.size = 1;
+			result.coef[i].numenator.number.coef = (short*)malloc(sizeof(short));
+			result.coef[i].denominator.coef = (short*)malloc(sizeof(short));
+
+			result.coef[i].numenator.number.coef[0] = 0;
+			result.coef[i].denominator.coef[0] = 1;
+
+
+		}
+		else
+		{
+			result.coef[i].numenator.number.size = polynom.coef[i].numenator.number.size;
+			result.coef[i].numenator.sign = polynom.coef[i].numenator.sign;
+			result.coef[i].denominator.size = polynom.coef[i].denominator.size;
+
+
+			result.coef[i].numenator.number = TRANS_Z_N(polynom.coef[i].numenator);
+			result.coef[i].denominator = TRANS_N_Z(polynom.coef[i].denominator).number;
+
+
+		}
+	}
+
+	result.degree = polynom.degree + xDegree;
+
+	return result;
+}
