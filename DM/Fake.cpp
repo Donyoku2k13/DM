@@ -62,13 +62,6 @@ Polynom NMR_P_P(Polynom polynom)
 }
 
 
-/*—окращение дроби*/
-RationalFraction RED_Q_Q(RationalFraction number)
-{
-	return number;
-}
-
-
 
 
 /*ќпределение положительности числа (2 - положительное, 0 Ч равное нулю, 1 - отрицательное)*/
