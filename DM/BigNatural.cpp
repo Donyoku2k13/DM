@@ -321,6 +321,12 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 }
 
 
+BigNatural MOD_NN_N(BigNatural first, BigNatural second)
+{
+	return SUB_NN_N(first, MUL_NN_N(DIV_NN_N(first,second), second));
+}
+
+
 /*Сравнение натуральных чисел: 2 - если первое больше второго, 0, если равно, 1 иначе.*/
 int COM_NN_D(BigNatural first, BigNatural second)
 {
