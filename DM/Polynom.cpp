@@ -21,6 +21,7 @@ Polynom DER_P_P(Polynom polynom)
 	{
 		result.coef[i].numenator.number = MUL_ND_N(polynom.coef[i].numenator.number, polynom.degree - i);
 		result.coef[i].denominator = polynom.coef[i].denominator;
+		result.coef[i] = RED_Q_Q(result.coef[i]);
 	}
 
 	return result;
