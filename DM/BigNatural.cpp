@@ -134,10 +134,10 @@ BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
 
 	short* resCoef = (short*)malloc(sizeof(short) * (size));
 
-	for (int i = number.size - 1; i >= 0; i--)
-		resCoef[i + tenDegree] = number.coef[i];
 	for (int i = 0; i < tenDegree; i++)
 		resCoef[i] = 0;
+	for (int i = tenDegree; i < size; i++)
+		resCoef[i] = number.coef[i - tenDegree];
 	result.size = size;
 	result.coef = resCoef;
 	return result;
@@ -208,5 +208,39 @@ BigNatural MUL_ND_N(BigNatural number, int factor)
 		result.size++;
 	}
 	result.coef = resCoef;
+	return result;
+}
+
+
+int DIV_NN_Dk(BigNatural first, BigNatural second, int tenDegree)
+{
+	int i = 0;
+	second = MUL_Nk_N(second, tenDegree);
+	if (COM_NN_D(first, second) == 1)
+		return 0;
+
+	if (COM_NN_D(first, second) == 0)
+		return 1;
+
+	do
+	{
+		first = SUB_NN_N(first, second);
+		i++;
+	}
+	while (COM_NN_D(first, second) == 2);
+
+	return i-1;
+}
+
+
+BigNatural LCM_NN_N(BigNatural first, BigNatural second)
+{
+	BigNatural result;
+	BigNatural prois;
+	BigNatural NOD;
+
+	NOD = GCF_NN_N(first, second);
+	prois = MUL_NN_N(first, second);
+	result = DIV_NN_N(prois, NOD);
 	return result;
 }
