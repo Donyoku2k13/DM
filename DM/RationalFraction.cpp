@@ -56,3 +56,13 @@ RationalFraction SUB_QQ_Q(RationalFraction first, RationalFraction second)
 
 	return result;
 }
+
+
+bool INT_Q_B(RationalFraction number)
+{
+	number = RED_Q_Q(number); //Сокращаем дробь
+	if (number.denominator.coef[0] == 1 && number.denominator.size == 1) //Проверяем знаменатель на равенство единице
+		return true;
+	else
+		return false;
+}
