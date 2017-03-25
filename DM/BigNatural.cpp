@@ -62,8 +62,8 @@ BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 }
 
 
-//Умножение натурального числа на 10^k 
-BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
+//Умножение натурального числа на 10^k
+BigNatural MUL_NK_N(BigNatural number, int tenDegree)
 {
 	BigNatural result;
 	int r = 0;
@@ -71,10 +71,10 @@ BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
 
 	short* resCoef = (short*)malloc(sizeof(short) * (size));
 
-	for (int i = number.size - 1; i >= 0; i--)
-		resCoef[i + tenDegree] = number.coef[i];
 	for (int i = 0; i < tenDegree; i++)
 		resCoef[i] = 0;
+	for (int i = tenDegree; i < size; i++)
+		resCoef[i] = number.coef[i - tenDegree];
 	result.size = size;
 	result.coef = resCoef;
 	return result;
