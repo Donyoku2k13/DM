@@ -71,13 +71,6 @@ int POZ_Z_D(BigInteger number)
 }
 
 
-//Методы для работы с натуральными числами
-
-/*Сравнение натуральных чисел: 2 - если первое больше второго, 0, если равно, 1 иначе.*/
-int COM_NN_D(BigNatural first, BigNatural second)
-{
-	return 0;
-}
 
 
 
@@ -92,12 +85,6 @@ BigNatural MUL_NN_N(BigNatural first, BigNatural second)
 
 
 
-
-/*Частное от деления большего натурального числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)*/
-BigNatural DIV_NN_N(BigNatural first, BigNatural second)
-{
-	return first;
-}
 
 /*Остаток от деления большего натурального числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)*/
 BigNatural MOD_NN_N(BigNatural first, BigNatural second)

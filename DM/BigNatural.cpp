@@ -227,9 +227,9 @@ int DIV_NN_Dk(BigNatural first, BigNatural second, int tenDegree)
 		first = SUB_NN_N(first, second);
 		i++;
 	}
-	while (COM_NN_D(first, second) == 2);
+	while (COM_NN_D(first, second) != 1);
 
-	return i-1;
+	return i;
 }
 
 
@@ -251,6 +251,7 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 {
 	int k = 0;
 	int kM = 0;
+	int k2 = 0;
 	BigNatural res;//Результат
 	int a; //Первая цифра деления
 	short* coefReverse = nullptr;
@@ -265,7 +266,7 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 		{
 			res.coef = (short*)malloc(sizeof(short));
 			res.coef[0] = 1;
-			res.size = 0;
+			res.size = 1;
 			return res;                                       //Возвращаем единицу
 		}
 		else
@@ -274,18 +275,38 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 				return first;                                     //Возвращаем нуль
 			}
 			else
-				while (COM_NN_D(first, second) == 2)
+				while (COM_NN_D(first, second) != 1)
 				{
-					coefReverse = (short*)realloc(coefReverse, sizeof(short) * (current + 1));
+
 					k = first.size - second.size - kM;
 					a = DIV_NN_Dk(first, second, k);
+
 					if (a == 0)
+					{
 						kM = 1;
+
+					}
 					else
+					{
+						coefReverse = (short*)realloc(coefReverse, sizeof(short) * (current + 1));
+						coefReverse[current] = a;
+						current++;
 						kM = 0;
-					coefReverse[current] = a;
+					}
+
 					first = SUB_NDN_N(first, MUL_Nk_N(second, k), a);
-					current++;
+
+					k2 = (k + second.size - first.size) / second.size;
+					
+
+					for (int i = 0; i < k2; i++)
+					{
+						coefReverse = (short*)realloc(coefReverse, sizeof(short) * (current + 1));
+						coefReverse[current] = 0;
+						current++;
+					}
+					
+
 
 				}
 	}
