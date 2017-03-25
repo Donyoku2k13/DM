@@ -92,11 +92,6 @@ BigNatural MUL_NN_N(BigNatural first, BigNatural second)
 
 
 
-/*Вычисление первой цифры деления большего натурального на меньшее, домноженное на 10^k, где k - номер позиции этой цифры (номер считается с нуля)*/
-int DIV_NN_Dk(BigNatural first, BigNatural second, int tenDegree)
-{
-	return 1;
-}
 
 /*Частное от деления большего натурального числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)*/
 BigNatural DIV_NN_N(BigNatural first, BigNatural second)
@@ -110,10 +105,3 @@ BigNatural MOD_NN_N(BigNatural first, BigNatural second)
 	return first;
 }
 
-
-
-/*НОК натуральных чисел*/
-BigNatural LCM_NN_N(BigNatural first, BigNatural second)
-{
-	return first;
-}
