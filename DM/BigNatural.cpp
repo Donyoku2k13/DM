@@ -207,3 +207,24 @@ BigNatural MUL_ND_N(BigNatural number, int factor)
 	result.coef = resCoef;
 	return result;
 }
+
+
+int DIV_NN_Dk(BigNatural first, BigNatural second, int tenDegree)
+{
+	int i = 0;
+	second = MUL_Nk_N(second, tenDegree);
+	if (COM_NN_D(first, second) == 1)
+		return 0;
+
+	if (COM_NN_D(first, second) == 0)
+		return 1;
+
+	do
+	{
+		first = SUB_NN_N(first, second);
+		i++;
+	}
+	while (COM_NN_D(first, second) == 2);
+
+	return i-1;
+}
