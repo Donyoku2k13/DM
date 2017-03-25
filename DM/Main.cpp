@@ -311,6 +311,7 @@ void polynomEMenu(Polynom first, Polynom second)
 	bool isFirst = true; //Какой многочлен будет при одиночном действии
 	char* firstPol = polynomToString(first);
 	char* secondPol = polynomToString(second);
+	char* resultPol = nullptr;
 
 	while (true)
 	{
@@ -327,44 +328,109 @@ void polynomEMenu(Polynom first, Polynom second)
 		switch (currentCase)
 		{
 		case 0:
+			freePolynom(result);
+
 			result = ADD_PP_P(first,second);
-			printf("%s + %s = %s\n", firstPol, secondPol, polynomToString(result));
+
+			if (resultPol)
+				free(resultPol);
+			resultPol = polynomToString(result);
+
+			printf("%s + %s = %s\n", firstPol, secondPol, resultPol);
 			break;
 		case 1:
+			freePolynom(result);
+
 			result = SUB_PP_P(first, second);
-			printf("%s - %s = %s\n", firstPol, secondPol, polynomToString(result));
+
+			if (resultPol)
+				free(resultPol);
+			resultPol = polynomToString(result);
+
+			printf("%s - %s = %s\n", firstPol, secondPol, resultPol);
 			break;
 		case 2:
+			freePolynom(result);
+
 			result = FAC_P_Q(isFirst ? first : second);
-			printf("%s ==> %s\n", isFirst ? firstPol : secondPol, polynomToString(result));
+
+			if (resultPol)
+				free(resultPol);
+			resultPol = polynomToString(result);
+
+			printf("%s ==> %s\n", isFirst ? firstPol : secondPol, resultPol);
 			break;
 		case 3:
+			freePolynom(result);
+
 			result = MUL_PP_P(first, second);
-			printf("%s * %s = %s\n", firstPol, secondPol, polynomToString(result));
+
+			if (resultPol)
+				free(resultPol);
+			resultPol = polynomToString(result);
+
+			printf("%s * %s = %s\n", firstPol, secondPol, resultPol);
 			break;
 		case 4:
+			freePolynom(result);
+
 			result = DIV_PP_P(first, second);
-			printf("%s / %s = %s\n", firstPol, secondPol, polynomToString(result));
+
+			if (resultPol)
+				free(resultPol);
+			resultPol = polynomToString(result);
+
+			printf("%s / %s = %s\n", firstPol, secondPol, resultPol);
 			break;
 		case 5:
+			freePolynom(result);
+
 			result = MOD_PP_P(first, second);
-			printf("%s % %s = %s\n", firstPol, secondPol, polynomToString(result));
+
+			if (resultPol)
+				free(resultPol);
+			resultPol = polynomToString(result);
+
+			printf("%s % %s = %s\n", firstPol, secondPol, resultPol);
 			break;
 		case 6:
+			freePolynom(result);
+
 			result = GCF_PP_P(first, second);
-			printf("НОД( %s , %s ) = %s\n", firstPol, secondPol, polynomToString(result));
+
+			if (resultPol)
+				free(resultPol);
+			resultPol = polynomToString(result);
+
+			printf("НОД( %s , %s ) = %s\n", firstPol, secondPol, resultPol);
 			break;
 		case 7:
+			freePolynom(result);
+
 			result = DER_P_P(isFirst ? first : second);
-			printf("( %s )' = %s\n", isFirst ? firstPol : secondPol, polynomToString(result));
+
+			if (resultPol)
+				free(resultPol);
+			resultPol = polynomToString(result);
+
+			printf("( %s )' = %s\n", isFirst ? firstPol : secondPol, resultPol);
 			break;
 		case 8:
+			freePolynom(result);
+
 			result = NMR_P_P(isFirst ? first : second);
-			printf("%s ==> %s\n", isFirst ? firstPol : secondPol, polynomToString(result));
+
+			if (resultPol)
+				free(resultPol);
+			resultPol = polynomToString(result);
+
+			printf("%s ==> %s\n", isFirst ? firstPol : secondPol, resultPol);
 			break;
 		case 9:
 			free(firstPol);
 			free(secondPol);
+			if (resultPol)
+				free(resultPol);
 
 			return;
 		}
@@ -378,47 +444,81 @@ void polynomEMenu(Polynom first, Polynom second)
 void rFractionMenu(RationalFraction first, RationalFraction second)
 {
 	RationalFraction result;
-	int currentCase;
-	char string[1000];
 	bool isFirst = true;
-	
-	string[0] = 0;
+	char* firstStr = rationalFractionToString(first);
+	char* secondStr = rationalFractionToString(second);
+	char* resultStr = nullptr;
 
 
 
 	while (true)
 	{
-		currentCase = getMenu(rationalFractionMenu, "Выберите действие");
-		switch (currentCase)
+		switch (getMenu(rationalFractionMenu, "Выберите действие"))
 		{
 		case 0:
-			sprintf(string, "Для какого числа выполнить действие ? \n1)\t%s\n2)\t%s", rationalFractionToString(second), rationalFractionToString(first));
-			isFirst = !getMenu(oneOrTwoMenu, string);
-		}
+			isFirst = !getMenu(oneOrTwoMenu, "Для какого числа выполнить действие ?");
+			freeRFraction(result);
 
-		switch (currentCase)
-		{
-		case 0:
 			result = RED_Q_Q(isFirst ? first : second);
-			printf("%s = %s\n", rationalFractionToString(isFirst ? first : second), rationalFractionToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = rationalFractionToString(result);
+
+			printf("%s = %s\n", isFirst ? firstStr : secondStr, resultStr);
 			break;
 		case 1:
+			freeRFraction(result);
+
 			result = ADD_QQ_Q(first, second);
-			printf("%s + %s = %s\n", rationalFractionToString(first), rationalFractionToString(second), rationalFractionToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = rationalFractionToString(result);
+
+			printf("%s + %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 2:
+			freeRFraction(result);
+
 			result = SUB_QQ_Q(first, second);
-			printf("%s - %s = %s\n", rationalFractionToString(first), rationalFractionToString(second), rationalFractionToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = rationalFractionToString(result);
+
+			printf("%s - %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 3:
+			freeRFraction(result);
+
 			result = MUL_QQ_Q(first, second);
-			printf("%s * %s = %s\n", rationalFractionToString(first), rationalFractionToString(second), rationalFractionToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = rationalFractionToString(result);
+
+			printf("%s * %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 4:
+			freeRFraction(result);
+
 			result = DIV_QQ_Q(first, second);
-			printf("%s / %s = %s\n", rationalFractionToString(first), rationalFractionToString(second), rationalFractionToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = rationalFractionToString(result);
+
+			printf("%s / %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 5:
+
+			freeRFraction(result);
+			free(firstStr);
+			free(secondStr);
+			if (resultStr)
+				free(resultStr);
+
 			return;
 		}
 		system("pause");
@@ -431,40 +531,98 @@ void rFractionMenu(RationalFraction first, RationalFraction second)
 void naturalMenu(BigNatural first, BigNatural second)
 {
 	BigNatural result;
+	char* firstStr = bigNaturalToString(first);
+	char* secondStr = bigNaturalToString(second);
+	char* resultStr = nullptr;
 
 	while (true)
 	{
 		switch (getMenu(naturalNumberMenu, "Выберите действие"))
 		{
 		case 0:
+			freeBigNatural(result);
+
 			result = ADD_NN_N(first, second);
-			printf("%s + %s = %s\n", bigNaturalToString(first), bigNaturalToString(second), bigNaturalToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = bigNaturalToString(result);
+
+			printf("%s + %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 1:
+			freeBigNatural(result);
+
 			result = SUB_NN_N(first, second);
-			printf("|%s - %s| = %s\n", bigNaturalToString(first), bigNaturalToString(second), bigNaturalToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = bigNaturalToString(result);
+
+			printf("|%s - %s| = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 2:
+			freeBigNatural(result);
+
 			result = MUL_NN_N(first, second);
-			printf("%s * %s = %s\n", bigNaturalToString(first), bigNaturalToString(second), bigNaturalToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = bigNaturalToString(result);
+
+			printf("%s * %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 3:
+			freeBigNatural(result);
+
 			result = DIV_NN_N(first, second);
-			printf("%s / %s = %s\n", bigNaturalToString(first), bigNaturalToString(second), bigNaturalToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = bigNaturalToString(result);
+
+			printf("%s / %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 4:
+			freeBigNatural(result);
+
 			result = MOD_NN_N(first, second);
-			printf("%s % %s = %s\n", bigNaturalToString(first), bigNaturalToString(second), bigNaturalToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = bigNaturalToString(result);
+
+			printf("%s % %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 5:
+			freeBigNatural(result);
+
 			result = GCF_NN_N(first, second);
-			printf("НОД( %s , %s ) = %s\n", bigNaturalToString(first), bigNaturalToString(second), bigNaturalToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = bigNaturalToString(result);
+
+			printf("НОД( %s , %s ) = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 6:
+			freeBigNatural(result);
+
 			result = LCM_NN_N(first, second);
-			printf("НОК( %s , %s ) = %s\n", bigNaturalToString(first), bigNaturalToString(second), bigNaturalToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = bigNaturalToString(result);
+
+			printf("НОК( %s , %s ) = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 7:
+
+			freeBigNatural(result);
+			free(firstStr);
+			free(secondStr);
+			if (resultStr)
+				free(resultStr);
 			return;
 		}
 		system("pause");
@@ -477,32 +635,76 @@ void naturalMenu(BigNatural first, BigNatural second)
 void integerMenu(BigInteger first, BigInteger second)
 {
 	BigInteger result;
+	char* firstStr = bigIntegerToString(first);
+	char* secondStr = bigIntegerToString(second);
+	char* resultStr = nullptr;
 
 	while (true)
 	{
 		switch (getMenu(integerNumberMenu, "Выберите действие"))
 		{
 		case 0:
+			freeBigInteger(result);
+
 			result = ADD_ZZ_Z(first, second);
-			printf("%s + %s = %s\n", bigIntegerToString(first), bigIntegerToString(second), bigIntegerToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = bigIntegerToString(result);
+
+			printf("%s + %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 1:
+			freeBigInteger(result);
+
 			result = SUB_ZZ_Z(first, second);
-			printf("%s - %s = %s\n", bigIntegerToString(first), bigIntegerToString(second), bigIntegerToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = bigIntegerToString(result);
+
+			printf("%s - %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 2:
+			freeBigInteger(result);
+
 			result = MUL_ZZ_Z(first, second);
-			printf("%s * %s = %s\n", bigIntegerToString(first), bigIntegerToString(second), bigIntegerToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = bigIntegerToString(result);
+
+			printf("%s * %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 3:
+			freeBigInteger(result);
+
 			result = DIV_ZZ_Z(first, ABS_Z_N(second));
-			printf("%s / %s = %s\n", bigIntegerToString(first), bigNaturalToString(ABS_Z_N(second)), bigIntegerToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = bigIntegerToString(result);
+
+			printf("%s / %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 4:
+			freeBigInteger(result);
+
 			result = MOD_ZZ_Z(first, ABS_Z_N(second));
-			printf("%s % %s = %s\n", bigIntegerToString(first), bigNaturalToString(ABS_Z_N(second)), bigIntegerToString(result));
+
+			if (resultStr)
+				free(resultStr);
+			resultStr = bigIntegerToString(result);
+
+			printf("%s % %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 5:
+			freeBigInteger(result);
+			free(firstStr);
+			free(secondStr);
+			if (resultStr)
+				free(resultStr);
+
 			return;
 		}
 		system("pause");
@@ -514,5 +716,5 @@ void integerMenu(BigInteger first, BigInteger second)
 void help()
 {
 	printf("Справка!");
-	system("cls");
+	system("pause");
 }

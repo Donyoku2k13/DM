@@ -113,7 +113,7 @@ char* getString()
 	if (buffer[0] == 10)
 		return getString();
 
-	string = new char[strlen(buffer) + 1];
+	string = (char*)malloc((strlen(buffer) + 1) * sizeof(char));
 	memcpy(string, buffer, strlen(buffer) + 1);
 	string[strlen(string) - 1] = '\0';
 	return string;
