@@ -8,6 +8,12 @@ BigNatural parseToBigNatural(char* string)
 	short currentNumber;
 	char current;
 
+	if (strlen(string) == 0)
+	{
+		result.size = -1;
+		return result;
+	}
+
 	size = strlen(string);
 
 	short* coef = (short*)malloc(size * sizeof(coef));

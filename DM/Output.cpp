@@ -1,6 +1,5 @@
 #include "Output.h"
-#include "windows.h"
-#include "conio.h"
+
 
 //************************************************************************
 
@@ -53,32 +52,55 @@ void infoView(char* message)
 
 //************************************************************************
 
-void printBigNatural(BigNatural number)
+char* bigNaturalToString(BigNatural number)
 {
+	char* result = (char*)malloc((number.size + 1) * sizeof(char));
+	result[0] = '\0';
 	for (int i = number.size - 1; i >= 0; i--)
-		printf("%d", number.coef[i]);
-	printf("\n");
-	
+		sprintf(result ,"%s%d",result , number.coef[i]);
+	return result;
 }
 
 //************************************************************************
 
-void printBigInteger(BigInteger number)
+char* bigIntegerToString(BigInteger number)
 {
+	char* result = (char*)malloc((number.number.size + 2) * sizeof(char));
+	result[0] = '\0';
 	if (number.sign == minus)
-		printf("-");
-	printBigNatural(number.number);
+	{
+		result = (char*)malloc((number.number.size + 2) * sizeof(char));
+		result[0] = '-';
+		result[1] = '\0';
+	}
+	sprintf(result, "%s%s", result, bigNaturalToString(number.number));
 
+	return result;
 }
 
 //************************************************************************
 
-void printRationalFraction(RationalFraction number)
+char* rationalFractionToString(RationalFraction number)
 {
-	system("cls");
-	printf("Числитель\n");
-	printBigInteger(number.numenator);
-	printf("Знаменатель\n");
-	printBigNatural(number.denominator);
+	char* result = (char*)malloc(1000 * sizeof(char));
+	result[0] = '\0';
+	char* numenator = bigIntegerToString(number.numenator);
+	char* denominator = bigNaturalToString(number.denominator);
 
+	sprintf(result,"%s / %s",numenator, denominator);
+
+	return result;
+}
+
+//************************************************************************
+
+
+char* polynomToString(Polynom polynom)
+{
+	char* result = (char*)malloc(1000 * sizeof(char));
+	result[0] = '\0';
+	for (int i = 0; i <= polynom.degree; i++)
+		sprintf(result,"%s%s * x^%d%s", result, rationalFractionToString(polynom.coef[i]) , polynom.degree - i , i == polynom.degree ? "": " + ");
+
+	return result;
 }
