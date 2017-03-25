@@ -5,14 +5,9 @@ BigInteger TRANS_Q_Z(RationalFraction number)
 {
 	BigInteger result;
 
-	if (number.denominator.size == 1 && number.denominator.coef[0]==1)
-	{
-		result = number.numenator;
-		result.sign = number.numenator.sign;
-	}
-
-	else
-		printf("Число не может быть представлено в виде целого");
+	result = number.numenator;
+	result.sign = number.numenator.sign;
+	
 	return result;
 }
 
