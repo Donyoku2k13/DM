@@ -118,7 +118,10 @@ BigNatural GCF_NN_N(BigNatural first, BigNatural second)
 	}
 
 	result.size = first.size;
-	result.coef = first.coef;
+
+	result.coef = (short*)malloc(first.size*sizeof(short));
+	memcpy(result.coef, first.coef, first.size * sizeof(short));
+
 	return result;
 }
 
