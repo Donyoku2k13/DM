@@ -146,3 +146,64 @@ BigNatural SUB_NDN_N(BigNatural first, BigNatural second, int factor)
 {
 	return (SUB_NN_N(first, MUL_ND_N(second, factor)));
 }
+
+/*Сложение натуральных чисел*/
+BigNatural ADD_NN_N(BigNatural first, BigNatural second)
+{
+	BigNatural result;
+	int i;
+	int r = 0;
+
+	if (COM_NN_D(first, second) == 1)
+		return ADD_NN_N(second, first);
+
+	short* resCoef = (short*)malloc(sizeof(short) * (first.size));
+
+	for (i = 0; i < second.size; i++)
+	{
+		resCoef[i] = (first.coef[i] + second.coef[i] + r) % 10;
+		r = (first.coef[i] + second.coef[i] + r) / 10;
+	}
+
+	for (i = second.size; i<first.size; i++)
+	{
+		resCoef[i] = (first.coef[i] + r) % 10;
+		r = (first.coef[i] + r) / 10;
+	}
+
+	if (r)
+	{
+		resCoef = (short*)realloc(resCoef, sizeof(short) * (first.size + 1));
+		result.size = first.size + 1;
+		resCoef[first.size] = r;
+	}
+	else
+		result.size = first.size;
+	result.coef = resCoef;
+	return result;
+}
+
+
+/*Умножение натурального числа на цифру*/
+BigNatural MUL_ND_N(BigNatural number, int factor)
+{
+	BigNatural result;
+	int r = 0;
+
+	short* resCoef = (short*)malloc(sizeof(short) * (number.size));
+
+	for (int j = 0; j < number.size; j++)
+	{
+		resCoef[j] = (number.coef[j] * factor + r) % 10;
+		r = (number.coef[j] * factor + r) / 10;
+	}
+	result.size = number.size;
+	if (r) 
+	{
+		resCoef = (short*)realloc(resCoef, sizeof(short) * (number.size + 1));
+		resCoef[result.size] = r;
+		result.size++;
+	}
+	result.coef = resCoef;
+	return result;
+}

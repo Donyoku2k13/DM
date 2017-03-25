@@ -66,3 +66,23 @@ bool INT_Q_B(RationalFraction number)
 	else
 		return false;
 }
+
+
+RationalFraction MUL_QQ_Q(RationalFraction first, RationalFraction second)
+{
+	RationalFraction res;
+	res.numenator = MUL_ZZ_Z(first.numenator, second.numenator);
+	res.denominator = MUL_NN_N(first.denominator, second.denominator);
+	return res;
+}
+
+
+
+RationalFraction DIV_QQ_Q(RationalFraction first, RationalFraction second)
+{
+	RationalFraction res;
+	res.numenator = MUL_ZZ_Z(first.numenator, TRANS_N_Z(second.denominator));
+	res.denominator = MUL_NN_N(first.denominator, TRANS_Z_N(second.numenator));
+	res.numenator.sign = (first.numenator.sign == second.numenator.sign) ? plus : minus;
+	return res;
+}
