@@ -284,25 +284,26 @@ Polynom MOD_PP_P(Polynom polynom1, Polynom polynom2)
 	return result;
 }
 
-
+//Это должно работать, но не работает, проблему найти не могу
 Polynom NMR_P_P(Polynom polynom)
 {
 	Polynom result;
-	result = DER_P_P(polynom);
-	result = GCF_PP_P(result, polynom);
-	result = DIV_PP_P(polynom, result);
+	Polynom nod;
+	Polynom der = DER_P_P(polynom);
+
+	nod = GCF_PP_P(der, polynom);
+	printf("НОД %s\n", polynomToString(nod));
+	result = DIV_PP_P(polynom, nod);
 	return result;
 }
 
 Polynom GCF_PP_P(Polynom first, Polynom second)
 {
-	if (second.degree > first.degree)
-		return GCF_PP_P(second, first);
-
 	Polynom ost;
 	while (DEG_P_N(second) != 0 || NZER_N_B(TRANS_Z_N(second.coef[0].numenator)))
 	{
 		ost = MOD_PP_P(first, second);
+		printf("Остаток\n", polynomToString(ost));
 		first = second;
 		second = ost;
 	}
