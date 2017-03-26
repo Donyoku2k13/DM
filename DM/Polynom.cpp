@@ -292,7 +292,6 @@ Polynom NMR_P_P(Polynom polynom)
 	Polynom der = DER_P_P(polynom);
 
 	nod = GCF_PP_P(der, polynom);
-	printf("НОД %s\n", polynomToString(nod));
 	result = DIV_PP_P(polynom, nod);
 	return result;
 }
@@ -300,10 +299,11 @@ Polynom NMR_P_P(Polynom polynom)
 Polynom GCF_PP_P(Polynom first, Polynom second)
 {
 	Polynom ost;
+
+
 	while (DEG_P_N(second) != 0 || NZER_N_B(TRANS_Z_N(second.coef[0].numenator)))
 	{
 		ost = MOD_PP_P(first, second);
-		printf("Остаток\n", polynomToString(ost));
 		first = second;
 		second = ost;
 	}
