@@ -11,7 +11,7 @@ BigNatural parseToBigNatural(char* string)
 
 	if (strlen(string) == 0)
 	{
-		result.size = -1;
+		result.size = 0;
 		return result;
 	}
 
@@ -56,11 +56,11 @@ BigNatural parseToBigNatural(char* string)
 			currentNumber = 9;
 			break;
 		default:
-			result.size = -1;
+			result.size = 0;
 			return result;
 		}
 
-		if (j == 0 && currentNumber == 0)
+		if (j == 0 && currentNumber == 0 && size > 1)
 			size--;
 		else
 		{

@@ -116,8 +116,11 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 		result.coef = (RationalFraction*)malloc((first.degree + 1) * sizeof(RationalFraction));
 		result.degree = first.degree;
 		deg = first.degree - second.degree;
-		for (i = 0; i<deg; ++i) result.coef[i] = first.coef[i];
-		for (i = deg; i <= first.degree; ++i) result.coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i]);
+		for (i = 0; i<deg; ++i)
+			result.coef[i] = first.coef[i];
+
+		for (i = deg; i <= first.degree; i++) 
+			result.coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i]);
 
 	}
 	else

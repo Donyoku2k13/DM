@@ -222,6 +222,7 @@ void polynomEnterMenu()
 		case 0:
 
 			first = getPolynom();
+			system("cls");
 			second = getPolynom();
 			state = true;
 			break;
@@ -294,7 +295,7 @@ void polynomEMenu(Polynom first, Polynom second)
 				free(resultPol);
 			resultPol = polynomToString(result);
 
-			printf("%s + %s = %s\n", firstPol, secondPol, resultPol);
+			printf("%s\n+\n%s\n=\n%s\n", firstPol, secondPol, resultPol);
 			break;
 		case 1:
 
@@ -304,7 +305,7 @@ void polynomEMenu(Polynom first, Polynom second)
 				free(resultPol);
 			resultPol = polynomToString(result);
 
-			printf("%s - %s = %s\n", firstPol, secondPol, resultPol);
+			printf("%s\n-\n%s\n=\n%s\n", firstPol, secondPol, resultPol);
 			break;
 		case 2:
 
@@ -344,7 +345,7 @@ void polynomEMenu(Polynom first, Polynom second)
 				free(resultPol);
 			resultPol = polynomToString(result);
 
-			printf("%s % %s = %s\n", firstPol, secondPol, resultPol);
+			printf("%s %% %s = %s\n", firstPol, secondPol, resultPol);
 			break;
 		case 6:
 
@@ -532,7 +533,7 @@ void naturalMenu(BigNatural first, BigNatural second)
 				free(resultStr);
 			resultStr = bigNaturalToString(result);
 
-			printf("%s % %s = %s\n", firstStr, secondStr, resultStr);
+			printf("%s %% %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 5:
 
@@ -627,7 +628,7 @@ void integerMenu(BigInteger first, BigInteger second)
 				free(resultStr);
 			resultStr = bigIntegerToString(result);
 
-			printf("%s % %s = %s\n", firstStr, secondStr, resultStr);
+			printf("%s %% %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 5:
 			free(firstStr);

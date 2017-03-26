@@ -108,10 +108,15 @@ RationalFraction MUL_QQ_Q(RationalFraction first, RationalFraction second)
 RationalFraction DIV_QQ_Q(RationalFraction first, RationalFraction second)
 {
 	RationalFraction res;
+
+	if (!NZER_N_B(second.numenator.number))
+	{
+		printf("На ноль делить нельзя!!\n");
+		return res;
+	}
 	res.numenator = MUL_ZZ_Z(first.numenator, TRANS_N_Z(second.denominator));
 	res.denominator = MUL_NN_N(first.denominator, TRANS_Z_N(second.numenator));
 	res.numenator.sign = (first.numenator.sign == second.numenator.sign) ? plus : minus;
-
 
 	res = RED_Q_Q(res);
 

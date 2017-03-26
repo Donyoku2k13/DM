@@ -24,7 +24,7 @@ BigNatural getBigNatural(char* message, char* errMessage)
 
 	result = parseToBigNatural(string);
 
-	while  (result.size == -1)
+	while  (result.size == 0)
 	{
 		printf("%s\n",errMessage);
 		char* string = getString();
@@ -49,7 +49,7 @@ BigInteger getBigInteger(char* message, char* errMessage)
 
 	result = parseToBigInteger(string);
 
-	while (result.number.size == -1)
+	while (result.number.size == 0)
 	{
 		printf("%s\n", errMessage);
 		char* string = getString();
@@ -81,6 +81,7 @@ RationalFraction getRationalFraction()
 Polynom getPolynom()
 {
 	Polynom result;
+	RationalFraction current;
 	printf("Введите степень многочлена\n");
 
 	scanf("%d", &result.degree);
@@ -95,16 +96,16 @@ Polynom getPolynom()
 	for (int i = 0; i <= result.degree; i++)
 	{
 		printf("x^%d:\n",result.degree - i);
-		result.coef[i] = getRationalFraction();
+		current = getRationalFraction();
 		if (i == 0)
 		{
-			printf(bigIntegerToString(result.coef[i].numenator));
-			while (!NZER_N_B(result.coef[i].numenator.number))
+			while (!NZER_N_B(current.numenator.number))
 			{
-				printf("Старшая степень не может быть равна 0");
-				result.coef[i] = getRationalFraction();
+				printf("Старшая степень не может быть равна 0\n");
+				current = getRationalFraction();
 			}
 		}
+		result.coef[i] = current;
 	}
 
 	return result;

@@ -92,15 +92,7 @@ char* rationalFractionToString(RationalFraction number)
 	char* numenator = bigIntegerToString(number.numenator);
 	char* denominator = bigNaturalToString(number.denominator);
 
-
-
-	if (NZER_N_B(number.numenator.number))
-		sprintf(result, "%s / %s", numenator, denominator);
-	else
-	{
-		result[0] = '0';
-		result[1] = '\0';
-	}
+	sprintf(result, "%s / %s", numenator, denominator);
 
 	return result;
 }
