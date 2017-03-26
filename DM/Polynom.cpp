@@ -218,7 +218,7 @@ Polynom MOD_PP_P(Polynom polynom1, Polynom polynom2)
 	Polynom result;
 	result = DIV_PP_P(polynom1, polynom2);
 	result = MUL_PP_P(result, polynom2);
-	result = SUB_PP_P(polynom1, result);
+	result = SUB_PP_P(result, polynom1);
 	return result;
 }
 
