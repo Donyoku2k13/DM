@@ -106,3 +106,32 @@ Polynom MUL_Pxk_P(Polynom polynom, int xDegree)
 
 	return result;
 }
+
+
+Polynom SUB_PP_P(Polynom first, Polynom second)
+{
+	int i, deg;
+	Polynom result;
+	if (first.degree >= second.degree)
+	{
+		result.coef = (RationalFraction*)malloc((first.degree + 1) * sizeof(RationalFraction));
+		result.degree = first.degree;
+		deg = first.degree - second.degree;
+		for (i = 0; i<deg; ++i) result.coef[i] = first.coef[i];
+		for (i = deg; i <= first.degree; ++i) result.coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i]);
+
+	}
+	else
+	{
+		result.coef = (RationalFraction*)malloc((second.degree + 1) * sizeof(RationalFraction));
+		deg = second.degree - first.degree;
+		for (i = 0; i<deg; ++i)
+		{
+			result.coef[i] = second.coef[i];
+			result.coef[i].numenator = MUL_ZM_Z(result.coef[i].numenator);
+		}
+
+		for (i = deg; i <= first.degree; ++i) result.coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i]);
+	}
+	return result;
+}

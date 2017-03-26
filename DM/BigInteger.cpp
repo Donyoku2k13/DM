@@ -81,9 +81,8 @@ BigInteger SUB_ZZ_Z(BigInteger first, BigInteger second)
 BigInteger TRANS_N_Z(BigNatural number)
 {
 	BigInteger temp;
-	temp.number.coef = (short*) malloc (sizeof(short)*number.size);
-	memcpy(temp.number.coef, number.coef, number.size*sizeof(short));
-	temp.number.size = number.size;
+
+	temp.number = number;
 	temp.sign = plus;
 
 	return temp;
@@ -104,13 +103,7 @@ BigInteger MUL_ZM_Z(BigInteger number)
 
 BigNatural TRANS_Z_N(BigInteger number)
 {
-	BigNatural res;
-
-	res.size = number.number.size;
-	res.coef = (short*)malloc(sizeof(short) * res.size);
-	memcpy(res.coef,number.number.coef, sizeof(short)* res.size);
-
-	return res;
+	return number.number;
 }
 
 

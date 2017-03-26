@@ -5,11 +5,6 @@ Polynom ADD_PP_P(Polynom first, Polynom second) {
 	return first;
 }
 
-/*Вычитание многочленов*/
-Polynom SUB_PP_P(Polynom first, Polynom second)
-{
-	return first;
-}
 
 /*Умножение многочлена на рациональное число*/
 Polynom MUL_PQ_P(Polynom polynom, RationalFraction factor)

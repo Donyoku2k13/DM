@@ -285,8 +285,7 @@ BigNatural LCM_NN_N(BigNatural first, BigNatural second)
 BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 {
 	int k = 0;
-	int kM = 0;
-	int k2 = 0;
+
 	BigNatural res;//Результат
 	int a; //Первая цифра деления
 	short* coefReverse = nullptr;
@@ -330,6 +329,13 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 	{
 		res.coef[i] = coefReverse[current - i - 1];
 	}
+
+	k = res.size - 1;
+	while ((k>0) && (res.coef[k] == 0)) k--;
+	res.coef = (short*)realloc(res.coef, sizeof(short) * (k + 1));
+
+
+	res.size = k + 1;
 
 	return res;
 }

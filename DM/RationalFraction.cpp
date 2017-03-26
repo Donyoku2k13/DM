@@ -31,13 +31,8 @@ RationalFraction RationalFraction::operator=(RationalFraction & rF)
 
 BigInteger TRANS_Q_Z(RationalFraction number)
 {
-	BigInteger result;
-	result.sign = number.numenator.sign;
-	result.number.size = number.numenator.number.size;
-	result.number.coef = (short*)malloc(sizeof(short) * result.number.size);
-	memcpy(result.number.coef, number.numenator.number.coef, result.number.size * sizeof(short));
 	
-	return result;
+	return number.numenator;
 }
 
 
@@ -48,9 +43,6 @@ RationalFraction TRANS_Z_Q(BigInteger number)
 	rezult.numenator.sign = number.sign;
 	rezult.numenator.number = TRANS_Z_N(number);
 
-	rezult.denominator.coef =  (short*)malloc(sizeof(short) * (1));
-	rezult.denominator.coef[0] = 1;
-	rezult.denominator.size = 1;
 	return rezult;
 }
 
