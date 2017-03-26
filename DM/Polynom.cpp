@@ -193,3 +193,22 @@ Polynom DIV_PP_P(Polynom polynom1, Polynom polynom2)
 	}
 	return result;
 }
+
+Polynom MOD_PP_P(Polynom polynom1, Polynom polynom2)
+{
+	Polynom result;
+	result = DIV_PP_P(polynom1, polynom2);
+	result = MUL_PP_P(result, polynom2);
+	result = SUB_PP_P(polynom1, result);
+	return result;
+}
+
+
+Polynom NMR_P_P(Polynom polynom)
+{
+	Polynom result;
+	result = DER_P_P(polynom);
+	result = GCF_PP_P(polynom, result);
+	result = DIV_PP_P(polynom, result);
+	return result;
+}

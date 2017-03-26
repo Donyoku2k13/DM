@@ -18,11 +18,7 @@ Polynom MUL_PP_P(Polynom first, Polynom second)
 }
 
 
-/*Остаток от деления многочлена на многочлен при делении с остатком*/
-Polynom MOD_PP_P(Polynom first, Polynom second)
-{
-	return first;
-}
+
 
 /*НОД многочленов*/
 Polynom GCF_PP_P(Polynom first, Polynom second)
@@ -30,11 +26,7 @@ Polynom GCF_PP_P(Polynom first, Polynom second)
 	return first;
 }
 
-/*Преобразование многочлена — кратные корни в простые*/
-Polynom NMR_P_P(Polynom polynom)
-{
-	return polynom;
-}
+
 
 
 

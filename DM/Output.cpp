@@ -86,8 +86,14 @@ char* rationalFractionToString(RationalFraction number)
 	char* result = (char*)malloc(1000 * sizeof(char));
 	result[0] = '\0';
 
+	if (INT_Q_B(number))
+		return bigIntegerToString(TRANS_Q_Z(RED_Q_Q(number)));
+
 	char* numenator = bigIntegerToString(number.numenator);
 	char* denominator = bigNaturalToString(number.denominator);
+
+
+
 	if (NZER_N_B(number.numenator.number))
 		sprintf(result, "%s / %s", numenator, denominator);
 	else
