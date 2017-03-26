@@ -13,7 +13,6 @@ Polynom MUL_PQ_P(Polynom polynom, RationalFraction factor)
 }
 
 
-
 /*Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей*/
 Polynom FAC_P_Q(Polynom polynom)
 {
@@ -44,28 +43,11 @@ Polynom GCF_PP_P(Polynom first, Polynom second)
 	return first;
 }
 
-
 /*Преобразование многочлена — кратные корни в простые*/
 Polynom NMR_P_P(Polynom polynom)
 {
 	return polynom;
 }
-
-
-
-
-/*Определение положительности числа (2 - положительное, 0 — равное нулю, 1 - отрицательное)*/
-int POZ_Z_D(BigInteger number)
-{
-	return 0;
-}
-
-
-
-
-
-/*
-
 
 /*Умножение натуральных чисел*/
 BigNatural MUL_NN_N(BigNatural first, BigNatural second)

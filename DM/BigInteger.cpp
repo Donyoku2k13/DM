@@ -141,3 +141,17 @@ BigInteger MOD_ZZ_Z(BigInteger first, BigNatural second)
 {
 	return SUB_ZZ_Z(first, MUL_ZZ_Z(TRANS_N_Z(second), DIV_ZZ_Z(first, second)));
 }
+
+/*Определение положительности числа (2 - положительное, 0 — равное нулю, 1 - отрицательное)*/
+int POZ_Z_D(BigInteger number)
+{
+	if (NZER_N_B(number.number))
+	{
+		if (number.sign == plus)
+			return 2;
+		else
+			return 1;
+	}
+	else 
+		return 0;
+}
