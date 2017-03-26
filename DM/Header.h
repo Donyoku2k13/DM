@@ -18,7 +18,10 @@ struct BigNatural //Натуральное длинное число
 	short *coef = nullptr;	//Массив коэффициентов
 	int size;		//Размер массива (номер старшей позиции)
 	int BASE = 10;
-
+	BigNatural();
+	~BigNatural();
+	BigNatural operator=(BigNatural & bN);
+	BigNatural(const BigNatural &bN);
 };
 
 struct BigInteger	//Длинное целое число

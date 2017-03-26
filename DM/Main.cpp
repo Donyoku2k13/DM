@@ -117,8 +117,6 @@ void naturalEnterMenu()
 		switch (getMenu(enterMenu, "Целые числа"))
 		{
 		case 0:
-			freeBigNatural(first);
-			freeBigNatural(second);
 
 			first = getBigNatural("Введите первое число", "Ошибка при вводе числа!");
 			second = getBigNatural("Введите второе число", "Ошибка при вводе числа!");
@@ -127,7 +125,7 @@ void naturalEnterMenu()
 
 		case 1:
 
-			if (state)
+			if (true)
 			{
 				if (firstNum)
 					free(firstNum);
@@ -148,7 +146,7 @@ void naturalEnterMenu()
 
 		case 2:
 
-			if (state)
+			if (true)
 				naturalMenu(first, second);
 			else 
 				infoView("Числа не введены");
@@ -160,8 +158,8 @@ void naturalEnterMenu()
 			if (secondNum)
 				free(secondNum);
 
-			freeBigNatural(first);
-			freeBigNatural(second);
+			//freeBigNatural(first);
+			//freeBigNatural(second);
 
 			return;
 		}
@@ -541,7 +539,6 @@ void naturalMenu(BigNatural first, BigNatural second)
 		switch (getMenu(naturalNumberMenu, "Выберите действие"))
 		{
 		case 0:
-			freeBigNatural(result);
 
 			result = ADD_NN_N(first, second);
 
@@ -552,7 +549,6 @@ void naturalMenu(BigNatural first, BigNatural second)
 			printf("%s + %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 1:
-			freeBigNatural(result);
 
 			result = SUB_NN_N(first, second);
 
@@ -563,7 +559,6 @@ void naturalMenu(BigNatural first, BigNatural second)
 			printf("|%s - %s| = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 2:
-			freeBigNatural(result);
 
 			result = MUL_NN_N(first, second);
 
@@ -574,7 +569,6 @@ void naturalMenu(BigNatural first, BigNatural second)
 			printf("%s * %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 3:
-			freeBigNatural(result);
 
 			result = DIV_NN_N(first, second);
 
@@ -585,7 +579,6 @@ void naturalMenu(BigNatural first, BigNatural second)
 			printf("%s / %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 4:
-			freeBigNatural(result);
 
 			result = MOD_NN_N(first, second);
 
@@ -596,7 +589,6 @@ void naturalMenu(BigNatural first, BigNatural second)
 			printf("%s % %s = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 5:
-			freeBigNatural(result);
 
 			result = GCF_NN_N(first, second);
 
@@ -607,7 +599,6 @@ void naturalMenu(BigNatural first, BigNatural second)
 			printf("НОД( %s , %s ) = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 6:
-			freeBigNatural(result);
 
 			result = LCM_NN_N(first, second);
 
@@ -618,8 +609,6 @@ void naturalMenu(BigNatural first, BigNatural second)
 			printf("НОК( %s , %s ) = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 7:
-
-			freeBigNatural(result);
 			free(firstStr);
 			free(secondStr);
 			if (resultStr)

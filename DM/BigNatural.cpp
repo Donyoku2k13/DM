@@ -1,6 +1,40 @@
 #include "Header.h"
-
+#include "Output.h"
 //В этом файле должны быть ТОЛЬКО реализации методов для работы с натуральными числами
+
+//Конструктор - начальное значение - 0
+BigNatural::BigNatural()
+{
+	size = 1;
+	coef = (short*)malloc(sizeof(short));
+	coef[0] = 0;
+
+}
+
+
+BigNatural::BigNatural(const BigNatural & bN)
+{
+	size = bN.size;
+	coef = (short*)malloc(sizeof(short) * size);
+	memcpy(coef, bN.coef, size * sizeof(short));
+
+}
+
+BigNatural::~BigNatural()
+{
+
+	free(coef);
+
+}
+
+BigNatural BigNatural::operator=(BigNatural & bN)
+{
+	size = bN.size;
+	coef = (short*)malloc(sizeof(short) * size);
+	memcpy(coef, bN.coef, size * sizeof(short));
+
+	return *this;
+}
 
 
 BigNatural SUB_NN_N(BigNatural first, BigNatural second)
@@ -147,7 +181,10 @@ BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
 /*Вычитание из натурального другого натурального, умноженного на цифру для случая с неотрицательным результатом*/
 BigNatural SUB_NDN_N(BigNatural first, BigNatural second, int factor)
 {
-	return (SUB_NN_N(first, MUL_ND_N(second, factor)));
+	if (COM_NN_D(first, second) == 1)
+		return first;
+	else
+		return (SUB_NN_N(first, MUL_ND_N(second, factor)));
 }
 
 /*Сложение натуральных чисел*/
@@ -256,7 +293,7 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 	int a; //Первая цифра деления
 	short* coefReverse = nullptr;
 	int current = 0;
-
+	k = first.size - second.size + 1;
 
 	if (!NZER_N_B)                                       //Если делитель равен нулю
 		printf("Делитель должен быть больше нуля!");
@@ -275,38 +312,17 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 				return first;                                     //Возвращаем нуль
 			}
 			else
-				while (COM_NN_D(first, second) != 1)
+				while (k > 0)
 				{
 
-					k = first.size - second.size - kM;
+					k--;
 					a = DIV_NN_Dk(first, second, k);
 
-					if (a == 0)
-					{
-						kM = 1;
-
-					}
-					else
-					{
-						coefReverse = (short*)realloc(coefReverse, sizeof(short) * (current + 1));
-						coefReverse[current] = a;
-						current++;
-						kM = 0;
-					}
+					coefReverse = (short*)realloc(coefReverse, sizeof(short) * (current + 1));
+					coefReverse[current] = a;
+					current++;
 
 					first = SUB_NDN_N(first, MUL_Nk_N(second, k), a);
-
-					k2 = (k + second.size - first.size) / second.size;
-					
-
-					for (int i = 0; i < k2; i++)
-					{
-						coefReverse = (short*)realloc(coefReverse, sizeof(short) * (current + 1));
-						coefReverse[current] = 0;
-						current++;
-					}
-					
-
 
 				}
 	}
