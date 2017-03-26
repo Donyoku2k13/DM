@@ -52,11 +52,10 @@ Polynom DER_P_P(Polynom polynom)
 
 	for (int i = 0; i < polynom.degree; i++)
 	{
-		//Для того, чтобы не было проблем с памятью
 		result.coef[i].denominator = TRANS_N_Z(polynom.coef[i].denominator).number;
 
 		result.coef[i].numenator.number = MUL_ND_N(polynom.coef[i].numenator.number, polynom.degree - i);
-		//result.coef[i] = RED_Q_Q(result.coef[i]);
+		result.coef[i] = RED_Q_Q(result.coef[i]);
 	}
 
 	return result;
@@ -135,7 +134,7 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 	}
 
 	i = 0;
-	while (!NZER_N_B(result.coef[i].numenator.number)) i++;
+	while (result.degree != 0 && !NZER_N_B(result.coef[i].numenator.number)) i++;
 
 
 	if (i != 0)

@@ -138,23 +138,15 @@ BigNatural ADD_1N_N(BigNatural number)
 
 BigNatural GCF_NN_N(BigNatural first, BigNatural second)
 {
-	BigNatural result;
 	BigNatural ost;
 	while (NZER_N_B(second))
 	{
 		ost = MOD_NN_N(first, second);
-		first.coef = second.coef;
-		first.size = second.size;
-		second.coef = ost.coef;
-		second.size = ost.size;
+		first = second;
+		second = ost;
 	}
 
-	result.size = first.size;
-
-	result.coef = (short*)malloc(first.size*sizeof(short));
-	memcpy(result.coef, first.coef, first.size * sizeof(short));
-
-	return result;
+	return first;
 }
 
 //Умножение натурального числа на 10^k 
@@ -375,4 +367,20 @@ int COM_NN_D(BigNatural first, BigNatural second)
 		}
 	}
 	return 0;
+}
+
+/*Умножение натуральных чисел*/
+BigNatural MUL_NN_N(BigNatural first, BigNatural second)
+{
+	BigNatural res;
+
+	if (COM_NN_D(first, second) == 1)
+		return MUL_NN_N(second, first);
+
+	for (int i = 0; i < second.size; i++)
+	{
+		res = ADD_NN_N(res, MUL_Nk_N(MUL_ND_N(first, second.coef[i]), i));
+	}
+
+	return res;
 }

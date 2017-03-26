@@ -17,11 +17,6 @@ Polynom MUL_PP_P(Polynom first, Polynom second)
 	return first;
 }
 
-/*Частное от деления многочлена на многочлен при делении с остатком*/
-Polynom DIV_PP_P(Polynom first, Polynom second)
-{
-	return first;
-}
 
 /*Остаток от деления многочлена на многочлен при делении с остатком*/
 Polynom MOD_PP_P(Polynom first, Polynom second)
@@ -41,10 +36,6 @@ Polynom NMR_P_P(Polynom polynom)
 	return polynom;
 }
 
-/*Умножение натуральных чисел*/
-BigNatural MUL_NN_N(BigNatural first, BigNatural second)
-{
-	return first;
-}
+
 
 

@@ -96,6 +96,15 @@ Polynom getPolynom()
 	{
 		printf("x^%d:\n",result.degree - i);
 		result.coef[i] = getRationalFraction();
+		if (i == 0)
+		{
+			printf(bigIntegerToString(result.coef[i].numenator));
+			while (!NZER_N_B(result.coef[i].numenator.number))
+			{
+				printf("Старшая степень не может быть равна 0");
+				result.coef[i] = getRationalFraction();
+			}
+		}
 	}
 
 	return result;
