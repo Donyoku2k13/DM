@@ -75,30 +75,10 @@ Polynom MUL_Pxk_P(Polynom polynom, int xDegree)
 	for (i = 0; i <= polynom.degree + xDegree; ++i)
 	{
 		if (i > polynom.degree)
-		{
-			result.coef[i].numenator.number.size = 1;
-			result.coef[i].numenator.sign = plus;
-			result.coef[i].denominator.size = 1;
-			result.coef[i].numenator.number.coef = (short*)malloc(sizeof(short));
-			result.coef[i].denominator.coef = (short*)malloc(sizeof(short));
+			result.coef[i] = RationalFraction();
 
-			result.coef[i].numenator.number.coef[0] = 0;
-			result.coef[i].denominator.coef[0] = 1;
-
-
-		}
 		else
-		{
-			result.coef[i].numenator.number.size = polynom.coef[i].numenator.number.size;
-			result.coef[i].numenator.sign = polynom.coef[i].numenator.sign;
-			result.coef[i].denominator.size = polynom.coef[i].denominator.size;
-
-
-			result.coef[i].numenator.number = TRANS_Z_N(polynom.coef[i].numenator);
-			result.coef[i].denominator = TRANS_N_Z(polynom.coef[i].denominator).number;
-
-
-		}
+			result.coef[i] = polynom.coef[i];
 	}
 
 	result.degree = polynom.degree + xDegree;
@@ -148,7 +128,7 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 	}
 
 	i = 0;
-	while (i < result.degree && !NZER_N_B(result.coef[i].numenator.number))
+	while (i < result.degree  && !NZER_N_B(result.coef[i].numenator.number))
 	{
 		i++;
 	}
@@ -161,6 +141,7 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 		}
 
 		result.coef = (RationalFraction*)realloc(result.coef, (result.degree + 1 - i) * sizeof(RationalFraction));
+		result.degree -= i;
 	}
 
 	return result;
@@ -197,10 +178,10 @@ Polynom DIV_PP_P(Polynom polynom1, Polynom polynom2)
 	else
 	{
 		result.degree = polynom1.degree - polynom2.degree;
-		result.coef = (RationalFraction*)malloc(result.degree * sizeof(RationalFraction));
+		result.coef = (RationalFraction*)malloc((result.degree  + 1)* sizeof(RationalFraction));
 		while (polynom1.degree >= polynom2.degree)
 		{
-			result.coef[i] = DIV_QQ_Q(polynom1.coef[i], polynom2.coef[0]);
+			result.coef[i] = DIV_QQ_Q(LED_P_Q(polynom1), LED_P_Q(polynom2));
 			prom = MUL_PQ_P(polynom2, result.coef[i]);
 			prom = MUL_Pxk_P(prom, polynom1.degree - polynom2.degree);
 			polynom1 = SUB_PP_P(polynom1, prom);
