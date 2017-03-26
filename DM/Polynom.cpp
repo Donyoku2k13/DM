@@ -1,5 +1,5 @@
 #include "Header.h"
-
+#include "Output.h"
 //В этом файле должны быть ТОЛЬКО реализации методов для работы с многочленами
 
 Polynom::Polynom()
@@ -350,5 +350,20 @@ Polynom MUL_PP_P(Polynom first, Polynom second)
 /*Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей*/
 Polynom FAC_P_Q(Polynom polynom)
 {
-	return polynom;
+	BigNatural NOD;
+	BigNatural NOK;
+	RationalFraction NN;
+
+	NOD = TRANS_Z_N(polynom.coef[0].numenator);
+	NOK = polynom.coef[0].denominator;
+
+	for (int i = 0; i <= polynom.degree; i++)
+	{
+		NOD = GCF_NN_N(NOD, TRANS_Z_N(polynom.coef[i].numenator));
+		NOK = LCM_NN_N(NOK, polynom.coef[i].denominator);
+	}
+	NN.numenator = TRANS_N_Z(NOK);
+	NN.denominator = NOD;
+
+	return MUL_PQ_P(polynom, NN);
 }
