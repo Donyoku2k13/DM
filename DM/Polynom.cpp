@@ -150,3 +150,17 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 
 	return result;
 }
+
+
+Polynom MUL_PQ_P(Polynom polynom, RationalFraction factor)
+{
+	int i, j;
+	Polynom result;
+	result.coef = (RationalFraction*)malloc((polynom.degree + 1) * sizeof(RationalFraction));
+	for (i = polynom.degree; i >= 0; --i)
+	{
+		result.coef[i] = MUL_QQ_Q(polynom.coef[i], factor);
+	}
+	result.degree = polynom.degree;
+	return result;
+}

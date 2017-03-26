@@ -5,14 +5,6 @@ Polynom ADD_PP_P(Polynom first, Polynom second) {
 	return first;
 }
 
-
-/*Умножение многочлена на рациональное число*/
-Polynom MUL_PQ_P(Polynom polynom, RationalFraction factor)
-{
-	return polynom;
-}
-
-
 /*Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей*/
 Polynom FAC_P_Q(Polynom polynom)
 {
