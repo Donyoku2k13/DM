@@ -35,7 +35,9 @@ BigNatural BigNatural::operator=(BigNatural & bN)
 	return *this;
 }
 
-
+//***************************************************************************************
+//Вычитание из первого большего натурального числа второго меньшего или равного
+//Васин А.М. 6307
 BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 {
 	//Если второе меньше первого, то вызываем наоборот
@@ -94,7 +96,10 @@ BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 	return result;
 }
 
+
+//***************************************************************************************
 //Проверка на ноль
+//Зимаков Н.С. 6307
 bool NZER_N_B(BigNatural number)
 {
 	if (number.coef[0] == 0 && number.size == 1) // Если первый разряд равен нулю и размер равен единице возвращаем false
@@ -105,7 +110,9 @@ bool NZER_N_B(BigNatural number)
 }
 
 
+//***************************************************************************************
 //Добавление единицы к длинному числу
+//Зимаков Н.С. 6307
 BigNatural ADD_1N_N(BigNatural number)
 {
 	int counter = 1;
@@ -137,6 +144,9 @@ BigNatural ADD_1N_N(BigNatural number)
 }
 
 
+//Зимаков Н.С. 6307
+//НОД натуральных чисел
+//Инкина В.А. 6307
 BigNatural GCF_NN_N(BigNatural first, BigNatural second)
 {
 	BigNatural ost;
@@ -150,7 +160,10 @@ BigNatural GCF_NN_N(BigNatural first, BigNatural second)
 	return first;
 }
 
+
+//***************************************************************************************
 //Умножение натурального числа на 10^k 
+//Баруткина К.И. 6307
 BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
 {
 	BigNatural result;
@@ -169,7 +182,9 @@ BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
 }
 
 
+//***************************************************************************************
 /*Вычитание из натурального другого натурального, умноженного на цифру для случая с неотрицательным результатом*/
+//Пякшина 6307
 BigNatural SUB_NDN_N(BigNatural first, BigNatural second, int factor)
 {
 	if (COM_NN_D(first, second) == 1)
@@ -178,7 +193,10 @@ BigNatural SUB_NDN_N(BigNatural first, BigNatural second, int factor)
 		return (SUB_NN_N(first, MUL_ND_N(second, factor)));
 }
 
+
+//***************************************************************************************
 /*Сложение натуральных чисел*/
+//Пякшина 6307
 BigNatural ADD_NN_N(BigNatural first, BigNatural second)
 {
 	BigNatural result;
@@ -215,7 +233,9 @@ BigNatural ADD_NN_N(BigNatural first, BigNatural second)
 }
 
 
+//***************************************************************************************
 /*Умножение натурального числа на цифру*/
+//Пякшина 6307
 BigNatural MUL_ND_N(BigNatural number, int factor)
 {
 	BigNatural result;
@@ -240,6 +260,10 @@ BigNatural MUL_ND_N(BigNatural number, int factor)
 }
 
 
+//***************************************************************************************
+/*Вычисление первой цифры деления большего натурального на меньшее,
+домноженное на 10 ^ k, где k - номер позиции этой цифры(номер считается с нуля)*/
+//Медведев Е.Р. 6307
 int DIV_NN_Dk(BigNatural first, BigNatural second, int tenDegree)
 {
 	int i = 0;
@@ -261,6 +285,9 @@ int DIV_NN_Dk(BigNatural first, BigNatural second, int tenDegree)
 }
 
 
+//***************************************************************************************
+//НОК натуральных чисел
+//Инкина 6307
 BigNatural LCM_NN_N(BigNatural first, BigNatural second)
 {
 	BigNatural result;
@@ -274,7 +301,9 @@ BigNatural LCM_NN_N(BigNatural first, BigNatural second)
 }
 
 
+//***************************************************************************************
 //Деление с остатком
+//Парфенов Д.Д. 6307
 BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 {
 	int k = 0;
@@ -330,6 +359,10 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 }
 
 
+
+//***************************************************************************************
+//Остаток от деления
+//Парфенов Д.Д. 6307
 BigNatural MOD_NN_N(BigNatural first, BigNatural second)
 {
 	BigNatural res;
@@ -346,7 +379,9 @@ BigNatural MOD_NN_N(BigNatural first, BigNatural second)
 }
 
 
+//***************************************************************************************
 /*Сравнение натуральных чисел: 2 - если первое больше второго, 0, если равно, 1 иначе.*/
+//Лошаченко 6307
 int COM_NN_D(BigNatural first, BigNatural second)
 {
 	if (first.size > second.size)
@@ -366,7 +401,10 @@ int COM_NN_D(BigNatural first, BigNatural second)
 	return 0;
 }
 
+
+//***************************************************************************************
 /*Умножение натуральных чисел*/
+//Баруткина 6307
 BigNatural MUL_NN_N(BigNatural first, BigNatural second)
 {
 	BigNatural res;

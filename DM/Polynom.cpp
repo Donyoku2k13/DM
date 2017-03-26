@@ -43,6 +43,9 @@ int DEG_P_N(Polynom polynom)
 }
 
 
+//***************************************************************************************
+//Производная многочлена
+//Жмойда 6307
 Polynom DER_P_P(Polynom polynom)
 {
 	Polynom result;
@@ -62,11 +65,19 @@ Polynom DER_P_P(Polynom polynom)
 	return result;
 }
 
+
+//***************************************************************************************
+//Старший коэффициент многочлена
+//Жмойда 6307
 RationalFraction LED_P_Q(Polynom polynom)
 {
 	return polynom.coef[0];
 }
 
+
+//***************************************************************************************
+//Умножение многочлена на x^k
+//Тихов 6307
 Polynom MUL_Pxk_P(Polynom polynom, int xDegree)
 {
 	Polynom result;
@@ -88,6 +99,9 @@ Polynom MUL_Pxk_P(Polynom polynom, int xDegree)
 }
 
 
+//***************************************************************************************
+//Вычитание многочленов
+//Тихов 6307
 Polynom SUB_PP_P(Polynom first, Polynom second)
 {
 	int i, deg;
@@ -149,6 +163,9 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 }
 
 
+//***************************************************************************************
+//Сложение многочленов
+//Жмойда 6307
 Polynom ADD_PP_P(Polynom first, Polynom second)
 {
 	int i, deg;
@@ -210,6 +227,9 @@ Polynom ADD_PP_P(Polynom first, Polynom second)
 }
 
 
+//***************************************************************************************
+//Умножение многочлена на рациональное число
+//Тихов 6307
 Polynom MUL_PQ_P(Polynom polynom, RationalFraction factor)
 {
 	int i, j;
@@ -224,6 +244,9 @@ Polynom MUL_PQ_P(Polynom polynom, RationalFraction factor)
 }
 
 
+//***************************************************************************************
+//Частное от деления многочлена на многочлен при делении с остатком
+//Васин 6307
 Polynom DIV_PP_P(Polynom polynom1, Polynom polynom2)
 {
 	Polynom
@@ -275,6 +298,10 @@ Polynom DIV_PP_P(Polynom polynom1, Polynom polynom2)
 	return result;
 }
 
+
+//***************************************************************************************
+//Остаток от деления многочлена на многочлен при делении с остатком
+//Васин 6307
 Polynom MOD_PP_P(Polynom polynom1, Polynom polynom2)
 {
 	Polynom result;
@@ -284,7 +311,10 @@ Polynom MOD_PP_P(Polynom polynom1, Polynom polynom2)
 	return result;
 }
 
-//Это должно работать, но не работает, проблему найти не могу
+
+//***************************************************************************************
+//Преобразование многочлена — кратные корни в простые
+//Васин 6307
 Polynom NMR_P_P(Polynom polynom)
 {
 	Polynom result;
@@ -296,6 +326,10 @@ Polynom NMR_P_P(Polynom polynom)
 	return result;
 }
 
+
+//***************************************************************************************
+//НОД многочленов
+//Инкина 6307
 Polynom GCF_PP_P(Polynom first, Polynom second)
 {
 	Polynom ost;
@@ -312,7 +346,9 @@ Polynom GCF_PP_P(Polynom first, Polynom second)
 }
 
 
-/*Умножение многочленов*/
+//***************************************************************************************
+//Умножение многочленов
+//Тихов 6307
 Polynom MUL_PP_P(Polynom first, Polynom second)
 {
 	int k;
@@ -348,7 +384,9 @@ Polynom MUL_PP_P(Polynom first, Polynom second)
 }
 
 
-/*Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей*/
+//***************************************************************************************
+//Вынесение из многочлена НОК знаменателей коэффициентов и НОД числителей
+//Васин 6307
 Polynom FAC_P_Q(Polynom polynom)
 {
 	BigNatural NOD;

@@ -27,11 +27,18 @@ BigInteger::~BigInteger()
 }
 
 
+//***************************************************************************************
+//Абсолютная величина числа, результат - натуральное
+//Лапонина 6307
 BigNatural ABS_Z_N(BigInteger number)
 {
 	return number.number;
 }
 
+
+//***************************************************************************************
+//Сложение целых чисел
+//Лапонина 6307
 BigInteger ADD_ZZ_Z(BigInteger first, BigInteger second)
 {
 	BigInteger result;
@@ -54,6 +61,10 @@ BigInteger ADD_ZZ_Z(BigInteger first, BigInteger second)
 	return result;
 }
 
+
+//***************************************************************************************
+//Вычитание целых чисел
+//Лапонина 6307
 BigInteger SUB_ZZ_Z(BigInteger first, BigInteger second)
 {
 	BigInteger result;
@@ -78,6 +89,9 @@ BigInteger SUB_ZZ_Z(BigInteger first, BigInteger second)
 }
 
 
+//***************************************************************************************
+//Преобразование натурального в целое
+//Лазарев С. 6307
 BigInteger TRANS_N_Z(BigNatural number)
 {
 	BigInteger temp;
@@ -89,7 +103,9 @@ BigInteger TRANS_N_Z(BigNatural number)
 }
 
 
-
+//***************************************************************************************
+//Умножение целого на (-1)
+//Лазарев С. 6307
 BigInteger MUL_ZM_Z(BigInteger number)
 {
 	if (number.sign == plus && (number.number.coef[0] != 0 || number.number.size != 1))
@@ -101,12 +117,18 @@ BigInteger MUL_ZM_Z(BigInteger number)
 }
 
 
+//***************************************************************************************
+//Преобразование целого неотрицательного в натуральное
+//Лазарев С. 6307
 BigNatural TRANS_Z_N(BigInteger number)
 {
 	return number.number;
 }
 
 
+//***************************************************************************************
+//Частное от деления целого на натуральное
+//Медведев 6307
 BigInteger DIV_ZZ_Z(BigInteger first, BigNatural second)
 {
 	BigInteger res;
@@ -126,6 +148,9 @@ BigInteger DIV_ZZ_Z(BigInteger first, BigNatural second)
 }
 
 
+//***************************************************************************************
+//Умножение целых чисел
+//Лапонина 6307
 BigInteger MUL_ZZ_Z(BigInteger first, BigInteger second)
 {
 	BigInteger result;
@@ -137,12 +162,19 @@ BigInteger MUL_ZZ_Z(BigInteger first, BigInteger second)
 	return result;
 }
 
+
+//***************************************************************************************
+//Остаток от деления целого на натуральное
+//Медведев 6307
 BigInteger MOD_ZZ_Z(BigInteger first, BigNatural second)
 {
 	return SUB_ZZ_Z(first, MUL_ZZ_Z(TRANS_N_Z(second), DIV_ZZ_Z(first, second)));
 }
 
+
+//***************************************************************************************
 /*Определение положительности числа (2 - положительное, 0 — равное нулю, 1 - отрицательное)*/
+//Лошаченко 6307
 int POZ_Z_D(BigInteger number)
 {
 	if (NZER_N_B(number.number))

@@ -28,14 +28,18 @@ RationalFraction RationalFraction::operator=(RationalFraction & rF)
 }
 
 
-
+//***************************************************************************************
+//Преобразование дробного в целое (если знаменатель равен 1)
+//Кичерова 6307
 BigInteger TRANS_Q_Z(RationalFraction number)
 {
-	
 	return number.numenator;
 }
 
 
+//***************************************************************************************
+//Преобразование целого в дробное
+//Кичерова 6307
 RationalFraction TRANS_Z_Q(BigInteger number)
 {
 	RationalFraction rezult;
@@ -46,6 +50,10 @@ RationalFraction TRANS_Z_Q(BigInteger number)
 	return rezult;
 }
 
+
+//***************************************************************************************
+//Сложение дробей
+//Кичерова 6307
 RationalFraction ADD_QQ_Q(RationalFraction first, RationalFraction second)
 {
 	RationalFraction result; 
@@ -64,7 +72,9 @@ RationalFraction ADD_QQ_Q(RationalFraction first, RationalFraction second)
 }
 
 
-
+//***************************************************************************************
+//Вычитание дробей
+//Кичерова 6307
 RationalFraction SUB_QQ_Q(RationalFraction first, RationalFraction second)
 {
 	RationalFraction result;
@@ -82,6 +92,9 @@ RationalFraction SUB_QQ_Q(RationalFraction first, RationalFraction second)
 }
 
 
+//***************************************************************************************
+//Проверка на целое, если рациональное число является целым, то «да», иначе «нет»
+//Медведев 6307
 bool INT_Q_B(RationalFraction number)
 {
 	number = RED_Q_Q(number); //Сокращаем дробь
@@ -92,6 +105,9 @@ bool INT_Q_B(RationalFraction number)
 }
 
 
+//***************************************************************************************
+//Умножение дробей
+//Медведев 6307
 RationalFraction MUL_QQ_Q(RationalFraction first, RationalFraction second)
 {
 	RationalFraction res;
@@ -104,7 +120,9 @@ RationalFraction MUL_QQ_Q(RationalFraction first, RationalFraction second)
 }
 
 
-
+//***************************************************************************************
+//Деление дробей (делитель отличен от нуля)
+//Медведев 6307
 RationalFraction DIV_QQ_Q(RationalFraction first, RationalFraction second)
 {
 	RationalFraction res;
@@ -124,6 +142,9 @@ RationalFraction DIV_QQ_Q(RationalFraction first, RationalFraction second)
 }
 
 
+//***************************************************************************************
+//Сокращение дроби
+//Кичерова 6307
 RationalFraction RED_Q_Q(RationalFraction number)
 {
 	RationalFraction result;
