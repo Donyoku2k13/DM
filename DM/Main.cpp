@@ -59,31 +59,25 @@ void integerEnterMenu()
 
 		case 1:
 
-			if (state)
-			{
-				if (firstNum)
-					free(firstNum);
-				if (secondNum)
-					free(secondNum);
+			if (firstNum)
+				free(firstNum);
+			if (secondNum)
+				free(secondNum);
 
-				firstNum = bigIntegerToString(first);
-				secondNum = bigIntegerToString(second);
+			firstNum = bigIntegerToString(first);
+			secondNum = bigIntegerToString(second);
 
-				printf("Первое число:\n%s\n", firstNum);
-				printf("Второе число:\n%s\n", secondNum);
+			printf("Первое число:\n%s\n", firstNum);
+			printf("Второе число:\n%s\n", secondNum);
 
-				system("pause");
-			}
-			else
-				infoView("Числа не введены");
+			system("pause");
+			
 			break;
 
 		case 2:
 
-			if (state)
-				integerMenu(first, second);
-			else
-				infoView("Числа не введены");
+			integerMenu(first, second);
+
 			break;
 
 		case 3:
@@ -120,31 +114,26 @@ void naturalEnterMenu()
 
 		case 1:
 
-			if (true)
-			{
-				if (firstNum)
-					free(firstNum);
-				if (secondNum)
-					free(secondNum);
 
-				firstNum = bigNaturalToString(first);
-				secondNum = bigNaturalToString(second);
+			if (firstNum)
+				free(firstNum);
+			if (secondNum)
+				free(secondNum);
 
-				printf("Первое число:\n%s\n", firstNum);
-				printf("Второе число:\n%s\n", secondNum);
+			firstNum = bigNaturalToString(first);
+			secondNum = bigNaturalToString(second);
 
-				system("pause");
-			}
-			else
-				infoView("Числа не введены");
+			printf("Первое число:\n%s\n", firstNum);
+			printf("Второе число:\n%s\n", secondNum);
+
+			system("pause");
+
 			break;
 
 		case 2:
 
-			if (true)
-				naturalMenu(first, second);
-			else 
-				infoView("Числа не введены");
+			naturalMenu(first, second);
+
 			break;
 
 		case 3:
@@ -183,31 +172,26 @@ void rFractionEnterMenu()
 
 		case 1:
 
-			if (state)
-			{
-				if (firstNum)
-					free(firstNum);
-				if (secondNum)
-					free(secondNum);
+			if (firstNum)
+				free(firstNum);
+			if (secondNum)
+				free(secondNum);
 
-				firstNum = rationalFractionToString(first);
-				secondNum = rationalFractionToString(second);
+			firstNum = rationalFractionToString(first);
+			secondNum = rationalFractionToString(second);
 
-				printf("Первое число:\n%s\n", firstNum);
-				printf("Второе число:\n%s\n", secondNum);
+			printf("Первое число:\n%s\n", firstNum);
+			printf("Второе число:\n%s\n", secondNum);
 
-				system("pause");
-			}
-			else
-				infoView("Числа не введены");
+			system("pause");
+			
+
 			break;
 
 		case 2:
 
-			if (state)
-				rFractionMenu(first, second);
-			else
-				infoView("Числа не введены");
+			rFractionMenu(first, second);
+	
 
 			break;
 		case 3:
@@ -244,31 +228,26 @@ void polynomEnterMenu()
 
 		case 1:
 
-			if (state)
-			{
-				if (firstPol)
-					free(firstPol);
-				if (secondPol)
-					free(secondPol);
+			if (firstPol)
+				free(firstPol);
+			if (secondPol)
+				free(secondPol);
 
-				firstPol = polynomToString(first);
-				secondPol = polynomToString(second);
+			firstPol = polynomToString(first);
+			secondPol = polynomToString(second);
 				
-				printf("Первый многочлен:\n%s\n", firstPol);
-				printf("Второй многочлен:\n%s\n", secondPol);
+			printf("Первый многочлен:\n%s\n", firstPol);
+			printf("Второй многочлен:\n%s\n", secondPol);
 
-				system("pause");
-			}
-			else
-				infoView("Числа не введены");
+			system("pause");
+			
 			break;
 
 		case 2:
 
-			if (state)
-				polynomEMenu(first, second);
-			else
-				infoView("Числа не введены");
+
+			polynomEMenu(first, second);
+
 
 			break;
 		case 3:
