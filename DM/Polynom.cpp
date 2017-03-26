@@ -164,3 +164,33 @@ Polynom MUL_PQ_P(Polynom polynom, RationalFraction factor)
 	result.degree = polynom.degree;
 	return result;
 }
+
+
+Polynom DIV_PP_P(Polynom polynom1, Polynom polynom2)
+{
+	Polynom
+		prom,
+		result;
+	int i = 0;
+
+	if (polynom1.degree < polynom2.degree)
+	{
+		result.degree = 0;
+		return result;
+	}
+
+	else
+	{
+		result.degree = polynom1.degree - polynom2.degree;
+		result.coef = (RationalFraction*)malloc(result.degree * sizeof(RationalFraction));
+		while (polynom1.degree >= polynom2.degree)
+		{
+			result.coef[i] = DIV_QQ_Q(polynom1.coef[i], polynom2.coef[0]);
+			prom = MUL_PQ_P(polynom2, result.coef[i]);
+			prom = MUL_Pxk_P(prom, polynom1.degree - polynom2.degree);
+			polynom1 = SUB_PP_P(polynom1, prom);
+			i++;
+		}
+	}
+	return result;
+}
