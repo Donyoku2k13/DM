@@ -2,6 +2,31 @@
 
 //В этом файле должны быть ТОЛЬКО реализации методов для работы с целыми числами
 
+BigInteger::BigInteger()
+{
+	sign = plus;
+	number = BigNatural();
+}
+
+BigInteger::BigInteger(const BigInteger & bI)
+{
+	sign = bI.sign;
+	number = BigNatural(bI.number);
+}
+
+BigInteger BigInteger::operator=(BigInteger & bI)
+{
+	sign = bI.sign;
+	number = BigNatural(bI.number);
+	return *this;
+}
+
+BigInteger::~BigInteger()
+{
+
+}
+
+
 BigNatural ABS_Z_N(BigInteger number)
 {
 	return number.number;

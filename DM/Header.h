@@ -18,28 +18,46 @@ struct BigNatural //Натуральное длинное число
 	short *coef = nullptr;	//Массив коэффициентов
 	int size;		//Размер массива (номер старшей позиции)
 	int BASE = 10;
+
 	BigNatural();
 	~BigNatural();
 	BigNatural operator=(BigNatural & bN);
-	BigNatural(const BigNatural &bN);
+	BigNatural(const BigNatural & bN);
 };
 
 struct BigInteger	//Длинное целое число
 {
 	Sign sign;			//Знак числа
 	BigNatural number;	//Число 
+
+	BigInteger();
+	~BigInteger();
+	BigInteger(const BigInteger & bI);
+	BigInteger operator=(BigInteger & bI);
 };
 
 struct RationalFraction	//Рациональная дробь
 {
 	BigInteger numenator;	//Числитель
 	BigNatural denominator;	//Знаменатель
+
+	RationalFraction();
+	~RationalFraction();
+	RationalFraction(const RationalFraction & rF);
+	RationalFraction operator=(RationalFraction & rF);
+
 };
 
 struct Polynom	//Многочлен
 {
 	int degree;			//Степень многочлена
 	RationalFraction* coef = nullptr;		//Массив коэффициентов
+
+	Polynom();
+	~Polynom();
+	Polynom(const Polynom & polynom);
+	Polynom operator=(Polynom & polynom);
+
 };
 
 //***********************************************************************************************
@@ -199,15 +217,5 @@ Polynom DER_P_P(Polynom polynom);
 /*Преобразование многочлена — кратные корни в простые*/
 Polynom NMR_P_P(Polynom polynom);
 
-
-//***********************************************************************************************
-
-void freePolynom(Polynom polynom);
-
-void freeRFraction(RationalFraction number);
-
-void freeBigInteger(BigInteger number);
-
-void freeBigNatural(BigNatural number);
 
 #endif

@@ -2,6 +2,39 @@
 
 //В этом файле должны быть ТОЛЬКО реализации методов для работы с многочленами
 
+Polynom::Polynom()
+{
+	coef = (RationalFraction*)malloc(sizeof(RationalFraction));
+	degree = 0;
+}
+
+Polynom::~Polynom()
+{
+	free(coef);
+}
+
+Polynom::Polynom(const Polynom & polynom)
+{
+	degree = polynom.degree;
+	coef = (RationalFraction*)malloc(sizeof(RationalFraction)*(degree + 1));
+	for (int i = 0; i <= degree; i++)
+	{
+		coef[i] = RationalFraction(polynom.coef[i]);
+	}
+
+}
+
+Polynom Polynom::operator=(Polynom & polynom)
+{
+	degree = polynom.degree;
+	coef = (RationalFraction*)malloc(sizeof(RationalFraction)*(degree + 1));
+	for (int i = 0; i <= degree; i++)
+	{
+		coef[i] = RationalFraction(polynom.coef[i]);
+	}
+
+	return *this;
+}
 
 int DEG_P_N(Polynom polynom)
 {

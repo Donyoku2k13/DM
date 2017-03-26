@@ -1,6 +1,34 @@
 #include "Header.h"
 
 //В этом файле должны быть ТОЛЬКО реализации методов для работы с рациональными числами
+
+RationalFraction::RationalFraction()
+{
+	numenator = BigInteger();
+	denominator = BigNatural();
+	denominator.coef[0] = 1;
+}
+
+RationalFraction::~RationalFraction()
+{
+
+}
+
+RationalFraction::RationalFraction(const RationalFraction & rF)
+{
+	numenator = BigInteger(rF.numenator);
+	denominator = BigNatural(rF.denominator);
+}
+
+RationalFraction RationalFraction::operator=(RationalFraction & rF)
+{
+	numenator = BigInteger(rF.numenator);
+	denominator = BigNatural(rF.denominator);
+	return *this;
+}
+
+
+
 BigInteger TRANS_Q_Z(RationalFraction number)
 {
 	BigInteger result;

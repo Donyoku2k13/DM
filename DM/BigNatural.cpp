@@ -22,9 +22,7 @@ BigNatural::BigNatural(const BigNatural & bN)
 
 BigNatural::~BigNatural()
 {
-
 	free(coef);
-
 }
 
 BigNatural BigNatural::operator=(BigNatural & bN)
