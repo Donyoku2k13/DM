@@ -82,12 +82,25 @@ char* bigIntegerToString(BigInteger number)
 
 char* rationalFractionToString(RationalFraction number)
 {
+	bool isZero = false;
 	char* result = (char*)malloc(1000 * sizeof(char));
 	result[0] = '\0';
+
+	if (INT_Q_B(number))
+		return bigIntegerToString(TRANS_Q_Z(RED_Q_Q(number)));
+
 	char* numenator = bigIntegerToString(number.numenator);
 	char* denominator = bigNaturalToString(number.denominator);
 
-	sprintf(result,"%s / %s",numenator, denominator);
+
+
+	if (NZER_N_B(number.numenator.number))
+		sprintf(result, "%s / %s", numenator, denominator);
+	else
+	{
+		result[0] = '0';
+		result[1] = '\0';
+	}
 
 	return result;
 }
@@ -100,7 +113,12 @@ char* polynomToString(Polynom polynom)
 	char* result = (char*)malloc(1000 * sizeof(char));
 	result[0] = '\0';
 	for (int i = 0; i <= polynom.degree; i++)
-		sprintf(result,"%s%s * x^%d%s", result, rationalFractionToString(polynom.coef[i]) , polynom.degree - i , i == polynom.degree ? "": " + ");
+	{
+		if (i == polynom.degree)
+			sprintf(result, "%s%s", result, rationalFractionToString(polynom.coef[i]));
+		else if (NZER_N_B(polynom.coef[i].numenator.number))
+			sprintf(result, "%s%s * x^%d%s", result, rationalFractionToString(polynom.coef[i]), polynom.degree - i, i == polynom.degree ? "" : " + ");
+	}
 
 	return result;
 }

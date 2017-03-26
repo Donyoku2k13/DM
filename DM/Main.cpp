@@ -455,7 +455,7 @@ void rFractionMenu(RationalFraction first, RationalFraction second)
 				free(resultStr);
 			resultStr = rationalFractionToString(result);
 
-			printf("%s / %s = %s\n", firstStr, secondStr, resultStr);
+			printf("( %s ) / ( %s ) = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 5:
 

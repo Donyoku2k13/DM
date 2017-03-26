@@ -7,6 +7,7 @@ BigNatural parseToBigNatural(char* string)
 	int size;
 	short currentNumber;
 	char current;
+	int j = 0;
 
 	if (strlen(string) == 0)
 	{
@@ -59,9 +60,16 @@ BigNatural parseToBigNatural(char* string)
 			return result;
 		}
 
-		coef[size - i - 1] = currentNumber;
+		if (j == 0 && currentNumber == 0)
+			size--;
+		else
+		{
+			coef[size - j - 1] = currentNumber;
+			j++;
+		}
 	}
 
+	coef = (short*)realloc(coef, size * sizeof(coef));
 	result.size = size;
 	result.coef = coef;
 

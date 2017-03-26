@@ -56,6 +56,10 @@ RationalFraction ADD_QQ_Q(RationalFraction first, RationalFraction second)
 
 	result.numenator = ADD_ZZ_Z(MUL_ZZ_Z(nok1, first.numenator), MUL_ZZ_Z(nok2, second.numenator)); // расчитываем числитель
 	result.denominator = LCM_NN_N(first.denominator, second.denominator); // расчитываем общий знаменатель 
+
+
+	result = RED_Q_Q(result);
+
 	return result;
 }
 
@@ -71,6 +75,8 @@ RationalFraction SUB_QQ_Q(RationalFraction first, RationalFraction second)
 
 	result.numenator =  SUB_ZZ_Z(MUL_ZZ_Z(nok1, first.numenator), MUL_ZZ_Z(nok2, second.numenator));
 	result.denominator = LCM_NN_N(first.denominator, second.denominator); 
+
+	result = RED_Q_Q(result);
 
 	return result;
 }
@@ -91,6 +97,9 @@ RationalFraction MUL_QQ_Q(RationalFraction first, RationalFraction second)
 	RationalFraction res;
 	res.numenator = MUL_ZZ_Z(first.numenator, second.numenator);
 	res.denominator = MUL_NN_N(first.denominator, second.denominator);
+
+	res = RED_Q_Q(res);
+
 	return res;
 }
 
@@ -102,6 +111,10 @@ RationalFraction DIV_QQ_Q(RationalFraction first, RationalFraction second)
 	res.numenator = MUL_ZZ_Z(first.numenator, TRANS_N_Z(second.denominator));
 	res.denominator = MUL_NN_N(first.denominator, TRANS_Z_N(second.numenator));
 	res.numenator.sign = (first.numenator.sign == second.numenator.sign) ? plus : minus;
+
+
+	res = RED_Q_Q(res);
+
 	return res;
 }
 
@@ -109,7 +122,9 @@ RationalFraction DIV_QQ_Q(RationalFraction first, RationalFraction second)
 RationalFraction RED_Q_Q(RationalFraction number)
 {
 	RationalFraction result;
-	result.numenator = DIV_ZZ_Z(number.numenator, GCF_NN_N(TRANS_Z_N(number.numenator), number.denominator));
+
+	result.numenator = TRANS_N_Z(DIV_NN_N(TRANS_Z_N(number.numenator), GCF_NN_N(TRANS_Z_N(number.numenator), number.denominator)));
 	result.denominator = DIV_NN_N(number.denominator, GCF_NN_N(TRANS_Z_N(number.numenator), number.denominator));
+	result.numenator.sign = number.numenator.sign;
 	return result;
 }
