@@ -133,5 +133,20 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 
 		for (i = deg; i <= first.degree; ++i) result.coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i]);
 	}
+
+	i = 0;
+	while (!NZER_N_B(result.coef[i].numenator.number)) i++;
+
+
+	if (i != 0)
+	{
+		for (int j = 0; j <= result.degree - i; j++)
+		{
+			result.coef[j] = result.coef[j + i];
+		}
+
+		result.coef = (RationalFraction*)realloc(result.coef, (result.degree + 1 - i) * sizeof(RationalFraction));
+	}
+
 	return result;
 }
