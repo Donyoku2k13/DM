@@ -5,7 +5,7 @@
 //Конструктор - начальное значение - 0
 BigNatural::BigNatural()
 {
-	BASE = 10;
+
 	size = 1;
 	coef = (short*)malloc(sizeof(short));
 	coef[0] = 0;
@@ -15,7 +15,6 @@ BigNatural::BigNatural()
 
 BigNatural::BigNatural(const BigNatural & bN)
 {
-	BASE = 10;
 	size = bN.size;
 	coef = (short*)malloc(sizeof(short) * size);
 	memcpy(coef, bN.coef, size * sizeof(short));
@@ -281,10 +280,9 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 	int k = 0;
 
 	BigNatural res;//Результат
-	int a; //Первая цифра деления
 	short* coefReverse = nullptr;
 	int current = 0;
-	k = first.size - second.size + 1;
+
 
 	if (!NZER_N_B)                                       //Если делитель равен нулю
 		printf("Делитель должен быть больше нуля!");
@@ -303,17 +301,14 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 				return res;                                     //Возвращаем нуль
 			}
 			else
-				while (k > 0)
+				for (k = first.size - second.size; k >= 0; k--)
 				{
-
-					k--;
-					a = DIV_NN_Dk(first, second, k);
-
 					coefReverse = (short*)realloc(coefReverse, sizeof(short) * (current + 1));
-					coefReverse[current] = a;
+					coefReverse[current] = DIV_NN_Dk(first, second, k);
+
 					current++;
 
-					first = SUB_NDN_N(first, MUL_Nk_N(second, k), a);
+					first = SUB_NDN_N(first, MUL_Nk_N(second, k), coefReverse[current - 1]);
 
 				}
 	}

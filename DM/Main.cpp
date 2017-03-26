@@ -325,7 +325,7 @@ void polynomEMenu(Polynom first, Polynom second)
 				free(resultPol);
 			resultPol = polynomToString(result);
 
-			printf("%s * %s = %s\n", firstPol, secondPol, resultPol);
+			printf("%s\n*\n%s\n=\n%s\n", firstPol, secondPol, resultPol);
 			break;
 		case 4:
 
@@ -335,7 +335,7 @@ void polynomEMenu(Polynom first, Polynom second)
 				free(resultPol);
 			resultPol = polynomToString(result);
 
-			printf("%s / %s = %s\n", firstPol, secondPol, resultPol);
+			printf("%s\n/\n%s\n=\n%s\n", firstPol, secondPol, resultPol);
 			break;
 		case 5:
 
@@ -345,7 +345,7 @@ void polynomEMenu(Polynom first, Polynom second)
 				free(resultPol);
 			resultPol = polynomToString(result);
 
-			printf("%s %% %s = %s\n", firstPol, secondPol, resultPol);
+			printf("%s\n%%\n%s\n=\n%s\n", firstPol, secondPol, resultPol);
 			break;
 		case 6:
 
