@@ -298,7 +298,7 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 		else
 			if (COM_NN_D(first, second) == 1)                 //Если второе больше первого
 			{
-				return first;                                     //Возвращаем нуль
+				return res;                                     //Возвращаем нуль
 			}
 			else
 				while (k > 0)
