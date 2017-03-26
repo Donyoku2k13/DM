@@ -5,6 +5,7 @@
 //Конструктор - начальное значение - 0
 BigNatural::BigNatural()
 {
+	BASE = 10;
 	size = 1;
 	coef = (short*)malloc(sizeof(short));
 	coef[0] = 0;
@@ -14,6 +15,7 @@ BigNatural::BigNatural()
 
 BigNatural::BigNatural(const BigNatural & bN)
 {
+	BASE = 10;
 	size = bN.size;
 	coef = (short*)malloc(sizeof(short) * size);
 	memcpy(coef, bN.coef, size * sizeof(short));

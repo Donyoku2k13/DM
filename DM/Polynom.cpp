@@ -111,21 +111,31 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 {
 	int i, deg;
 	Polynom result;
+	RationalFraction current;
 	if (first.degree >= second.degree)
 	{
 		result.coef = (RationalFraction*)malloc((first.degree + 1) * sizeof(RationalFraction));
+		for (i = 0; i <= first.degree; i++)
+			result.coef[i] = RationalFraction();
+
 		result.degree = first.degree;
+
 		deg = first.degree - second.degree;
 		for (i = 0; i<deg; ++i)
 			result.coef[i] = first.coef[i];
 
 		for (i = deg; i <= first.degree; i++) 
-			result.coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i]);
+			result.coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i - deg]);
 
 	}
 	else
 	{
 		result.coef = (RationalFraction*)malloc((second.degree + 1) * sizeof(RationalFraction));
+		for (i = 0; i <= second.degree; i++)
+			result.coef[i] = RationalFraction();
+
+		result.degree = second.degree;
+
 		deg = second.degree - first.degree;
 		for (i = 0; i<deg; ++i)
 		{
@@ -133,12 +143,15 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 			result.coef[i].numenator = MUL_ZM_Z(result.coef[i].numenator);
 		}
 
-		for (i = deg; i <= first.degree; ++i) result.coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i]);
+		for (i = deg; i <= first.degree; ++i)
+			result.coef[i] = SUB_QQ_Q(first.coef[i - deg], second.coef[i]);
 	}
 
 	i = 0;
-	while (result.degree != 0 && !NZER_N_B(result.coef[i].numenator.number)) i++;
-
+	while (i < result.degree && !NZER_N_B(result.coef[i].numenator.number))
+	{
+		i++;
+	}
 
 	if (i != 0)
 	{
