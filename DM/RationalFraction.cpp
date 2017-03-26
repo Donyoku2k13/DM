@@ -122,8 +122,9 @@ RationalFraction DIV_QQ_Q(RationalFraction first, RationalFraction second)
 RationalFraction RED_Q_Q(RationalFraction number)
 {
 	RationalFraction result;
-	result.numenator.sign = number.numenator.sign;
-	result.numenator = DIV_ZZ_Z(number.numenator, GCF_NN_N(TRANS_Z_N(number.numenator), number.denominator));
+
+	result.numenator = TRANS_N_Z(DIV_NN_N(TRANS_Z_N(number.numenator), GCF_NN_N(TRANS_Z_N(number.numenator), number.denominator)));
 	result.denominator = DIV_NN_N(number.denominator, GCF_NN_N(TRANS_Z_N(number.numenator), number.denominator));
+	result.numenator.sign = number.numenator.sign;
 	return result;
 }
