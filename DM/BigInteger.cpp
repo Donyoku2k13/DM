@@ -26,6 +26,19 @@ BigInteger::~BigInteger()
 
 }
 
+BigInteger::BigInteger(int number)
+{
+	if (number < 0)
+	{
+		number = -number;
+		sign = minus;
+	}
+	else
+		sign = plus;
+
+	this->number = BigNatural(number);
+}
+
 
 //***************************************************************************************
 //Абсолютная величина числа, результат - натуральное

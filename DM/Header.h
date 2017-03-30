@@ -23,6 +23,7 @@ struct BigNatural //Натуральное длинное число
 	~BigNatural();
 	BigNatural operator=(BigNatural & bN);
 	BigNatural(const BigNatural & bN);
+	BigNatural(int number);
 };
 
 struct BigInteger	//Длинное целое число
@@ -34,6 +35,7 @@ struct BigInteger	//Длинное целое число
 	~BigInteger();
 	BigInteger(const BigInteger & bI);
 	BigInteger operator=(BigInteger & bI);
+	BigInteger(int number);
 };
 
 struct RationalFraction	//Рациональная дробь

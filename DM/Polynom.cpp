@@ -56,9 +56,10 @@ Polynom DER_P_P(Polynom polynom)
 
 	for (int i = 0; i < polynom.degree; i++)
 	{
-		result.coef[i].denominator = TRANS_N_Z(polynom.coef[i].denominator).number;
 
-		result.coef[i].numenator.number = MUL_ND_N(polynom.coef[i].numenator.number, polynom.degree - i);
+		result.coef[i].denominator = polynom.coef[i].denominator;
+		result.coef[i].numenator = MUL_ZZ_Z(polynom.coef[i].numenator, BigInteger(polynom.degree - i));
+
 		result.coef[i] = RED_Q_Q(result.coef[i]);
 	}
 
@@ -321,8 +322,11 @@ Polynom NMR_P_P(Polynom polynom)
 	Polynom nod;
 	Polynom der = DER_P_P(polynom);
 
-	nod = GCF_PP_P(der, polynom);
+	nod = GCF_PP_P(polynom, der);
 	result = DIV_PP_P(polynom, nod);
+
+	result = FAC_P_Q(result);
+
 	return result;
 }
 
@@ -333,7 +337,6 @@ Polynom NMR_P_P(Polynom polynom)
 Polynom GCF_PP_P(Polynom first, Polynom second)
 {
 	Polynom ost;
-
 
 	while (DEG_P_N(second) != 0 || NZER_N_B(TRANS_Z_N(second.coef[0].numenator)))
 	{

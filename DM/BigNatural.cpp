@@ -35,6 +35,18 @@ BigNatural BigNatural::operator=(BigNatural & bN)
 	return *this;
 }
 
+BigNatural::BigNatural(int number)
+{
+	size = 0;
+	while (number != 0)
+	{
+		coef = (short*)realloc(coef, (size + 1) * sizeof(short));
+		coef[size] = number % 10;
+		number /= 10;
+		size++;
+	}
+}
+
 //***************************************************************************************
 //Вычитание из первого большего натурального числа второго меньшего или равного
 //Васин А.М. 6307
