@@ -142,20 +142,23 @@ BigNatural TRANS_Z_N(BigInteger number)
 //***************************************************************************************
 //Частное от деления целого на натуральное
 //Медведев 6307
-BigInteger DIV_ZZ_Z(BigInteger first, BigNatural second)
+BigInteger DIV_ZZ_Z(BigInteger first, BigInteger second)
 {
 	BigInteger res;
-	if (second.coef[0] != 0 || second.size != 1) //Если знаментель не ноль, то делим
+	if (second.number.coef[0] != 0 || second.number.size != 1) //Если знаментель не ноль, то делим
 	{
-		res.sign = first.sign; //Частное наследует знак делимого
-		res.number = DIV_NN_N(ABS_Z_N(first), second); //Натуральные части делятся
+
+		res.number = DIV_NN_N(ABS_Z_N(first), ABS_Z_N(second)); //Натуральные части делятся
+
+		res.sign = first.sign == second.sign ? plus : minus;
+
 		if (POZ_Z_D(first) == 1)
 			res.number = ADD_1N_N(res.number); //Для того, чтобы остаток был положительным
 	}
 	else
 	{
 		printf("Знаменатель должен быть отличен от нуля");
-		res.number.size = -1;
+		res.number.size = 0;
 	}
 	return res;
 }
@@ -179,9 +182,9 @@ BigInteger MUL_ZZ_Z(BigInteger first, BigInteger second)
 //***************************************************************************************
 //Остаток от деления целого на натуральное
 //Медведев 6307
-BigInteger MOD_ZZ_Z(BigInteger first, BigNatural second)
+BigInteger MOD_ZZ_Z(BigInteger first, BigInteger second)
 {
-	return SUB_ZZ_Z(first, MUL_ZZ_Z(TRANS_N_Z(second), DIV_ZZ_Z(first, second)));
+	return SUB_ZZ_Z(first, MUL_ZZ_Z(second, DIV_ZZ_Z(first, second)));
 }
 
 

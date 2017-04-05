@@ -612,7 +612,7 @@ void integerMenu(BigInteger first, BigInteger second)
 			break;
 		case 3:
 
-			result = DIV_ZZ_Z(first, ABS_Z_N(second));
+			result = DIV_ZZ_Z(first, second);
 
 			if (resultStr)
 				free(resultStr);
@@ -622,7 +622,7 @@ void integerMenu(BigInteger first, BigInteger second)
 			break;
 		case 4:
 
-			result = MOD_ZZ_Z(first, ABS_Z_N(second));
+			result = MOD_ZZ_Z(first, second);
 
 			if (resultStr)
 				free(resultStr);
