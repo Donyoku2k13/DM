@@ -325,8 +325,11 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 	int current = 0;
 
 
-	if (!NZER_N_B)                                       //Если делитель равен нулю
+	if (!NZER_N_B(second))//Если делитель равен нулю
+	{
 		printf("Делитель должен быть больше нуля!");
+		return BigNatural();
+	}
 	else
 	{
 		if (COM_NN_D(first, second) == 0)                    //Если первое равно второму
