@@ -103,7 +103,7 @@ void naturalEnterMenu()
 
 	while (true)
 	{
-		switch (getMenu(enterMenu, "Целые числа"))
+		switch (getMenu(enterMenu, "Натуральные числа"))
 		{
 		case 0:
 
