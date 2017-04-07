@@ -59,7 +59,6 @@ Polynom DER_P_P(Polynom polynom)
 
 		result.coef[i].denominator = polynom.coef[i].denominator;
 		result.coef[i].numenator = MUL_ZZ_Z(polynom.coef[i].numenator, BigInteger(polynom.degree - i));
-
 		result.coef[i] = RED_Q_Q(result.coef[i]);
 	}
 

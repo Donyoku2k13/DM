@@ -253,6 +253,9 @@ BigNatural MUL_ND_N(BigNatural number, int factor)
 	BigNatural result;
 	int r = 0;
 
+	if (factor == 0)
+		return BigNatural();
+
 	short* resCoef = (short*)malloc(sizeof(short) * (number.size));
 
 	for (int j = 0; j < number.size; j++)
