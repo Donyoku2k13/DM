@@ -113,3 +113,18 @@ RationalFraction parseToRationalFraction(char* string)
 
 	return result;
 }
+
+
+Polynom parsePolynom(char* string)
+{
+	Polynom res;
+	char* obj = strtok(string, "x");
+	RationalFraction current;
+
+	if (obj[0] == '^');
+	//TODO
+	else
+		current = parseToRationalFraction(obj);
+
+	return res;
+}

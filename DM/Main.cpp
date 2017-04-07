@@ -10,7 +10,20 @@ int main(void)
 {
 	setlocale(LC_ALL, "Rus");
 
-	while (true)
+	char string[] = "1";
+	char* question = strtok(string, "x+");
+	printf("%s\n", question);
+	while (question != NULL)
+	{
+	
+		question = strtok(NULL, "x+");
+		printf("%s\n", question);
+
+	}
+
+	system("pause");
+
+	/*while (true)
 	{
 		switch (getMenu(mainMenu, ""))
 		{
@@ -33,7 +46,7 @@ int main(void)
 			return 0;
 
 		}
-	}
+	}*/
 }
 
 //************************************************************************

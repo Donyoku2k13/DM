@@ -12,4 +12,6 @@ BigInteger parseToBigInteger(char* string);
 
 RationalFraction parseToRationalFraction(char* string);
 
+Polynom parsePolynom(char* string);
+
 #endif
