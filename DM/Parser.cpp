@@ -123,7 +123,7 @@ Polynom parsePolynom(char* string)
 	RationalFraction* coef = nullptr;
 	Sign sign = plus;
 	int degree = 0, resDegree = 0;
-	subString = strdup(string);
+	subString = strdup(deleteSpace(string));
 	
 	
 	while (subString)
@@ -228,6 +228,23 @@ Polynom parsePolynom(char* string)
 	}
 
 	
+
+	return res;
+}
+
+
+char* deleteSpace(char* string)
+{
+	char* res = new char[strlen(string) + 1];
+	res[0] = '\0';
+	char* tokenizer = strdup(string);
+	res = strtok(tokenizer," ");
+	while (tokenizer)
+	{
+		tokenizer = strtok(nullptr, " ");
+		if (tokenizer)
+			res = strcat(res, tokenizer);
+	}
 
 	return res;
 }
