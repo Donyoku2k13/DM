@@ -3,15 +3,19 @@
 #include "stdio.h"
 
 
+RationalFraction getRationalFraction()
+{
+	return getRationalFraction("¬ведите рациональное число (a/b)", "ќшибка при вводе числа!");
+}
 
 BigNatural getBigNatural()
 {
-	return getBigNatural("¬ведите натуральное число", "ќшибка!");
+	return getBigNatural("¬ведите натуральное число", "ќшибка при вводе числа!");
 }
 
 BigInteger getBigInteger()
 {
-	return getBigInteger("¬ведите целое число", "ќшибка!");
+	return getBigInteger("¬ведите целое число", "ќшибка при вводе числа!");
 }
 
 BigNatural getBigNatural(char* message, char* errMessage)
@@ -63,17 +67,25 @@ BigInteger getBigInteger(char* message, char* errMessage)
 }
 
 
-RationalFraction getRationalFraction()
+RationalFraction getRationalFraction(char* message, char* errMessage)
 {
 	RationalFraction result;
-
-	result.numenator = getBigInteger("" , "„ислитель введен не верно");
-	result.denominator = getBigNatural("/", "«наменатель введен не верно");
-	while (!NZER_N_B(result.denominator))
+	char *string;
+	printf("%s\n", message);
+	do
 	{
-		printf("«наменатель не может быть равен нулю!!");
-		result.denominator = getBigNatural("", "«наменатель введен не верно");
-	}
+		string = getString();
+
+		result = parseToRationalFraction(string);
+
+		if (!NZER_N_B(result.denominator))
+			printf("«наменатель не может быть равен нулю!!\n");
+
+		if (result.numenator.number.size == 0 || result.denominator.size == 0)
+			printf("%s\n", errMessage);
+	} 
+	while (!NZER_N_B(result.denominator) || result.numenator.number.size == 0 || result.denominator.size == 0);
+
 	return result;
 }
 

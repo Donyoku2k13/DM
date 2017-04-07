@@ -162,11 +162,8 @@ void rFractionEnterMenu()
 		switch (getMenu(enterMenu, "Рациональные числа"))
 		{
 		case 0:
-
-			printf("Введите первое число:\n");
-			first = getRationalFraction();
-			printf("Введите второе число:\n");
-			second = getRationalFraction();
+			first = getRationalFraction("Введите первое число (a/b)", "Ошибка при вводе числа!");
+			second = getRationalFraction("Введите второе число (a/b)", "Ошибка при вводе числа!");
 			state = true;
 			break;
 

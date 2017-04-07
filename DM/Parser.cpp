@@ -85,7 +85,7 @@ BigInteger parseToBigInteger(char* string)
 	if (string[0] == '-')
 	{
 		result.sign = minus;
-		string = partArrayCopy(string, 1);
+		strcpy(string, string + 1);
 	}
 	else
 		result.sign = plus;
@@ -99,14 +99,17 @@ BigInteger parseToBigInteger(char* string)
 
 
 
-char* partArrayCopy(char* string, int index)
+RationalFraction parseToRationalFraction(char* string)
 {
-	char* res = (char*)malloc((strlen(string) - index + 1)*sizeof(char));
-	for (int i = index; string[i] != '\0'; i++)
-	{
-		res[i - index] = string[i];
-	}
+	RationalFraction result;
 
-	res[strlen(string) - index] = '\0';
-	return res;
+	char* numenator = strtok(string, "/");
+	char* denominator = strtok(NULL, "\n");
+
+	result.numenator = parseToBigInteger(numenator);
+
+	if (denominator != NULL)
+		result.denominator = parseToBigNatural(denominator);
+
+	return result;
 }
