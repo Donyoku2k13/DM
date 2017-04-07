@@ -149,6 +149,10 @@ Polynom parsePolynom(char* string)
 				memcpy(rFraction, subString, size);
 				rFraction[size] = '\0';
 				current = parseToRationalFraction(rFraction);
+				if (!NZER_N_B(current.denominator) || current.numenator.number.size == 0 || current.denominator.size == 0)
+				{
+					throw 1;
+				}
 			}
 			else
 				current = parseToRationalFraction("1");
@@ -171,6 +175,8 @@ Polynom parsePolynom(char* string)
 				{
 					sign = signPos[0] == '+' ? plus : minus;
 					size = signPos - degreePos;
+					if (size <= 0)
+						throw 1;
 				}
 				else
 					size = strlen(subString);
@@ -199,6 +205,10 @@ Polynom parsePolynom(char* string)
 			if (!coef)
 				coef = (RationalFraction*)malloc(sizeof(RationalFraction));
 			coef[0] = parseToRationalFraction(subString);
+			if (!NZER_N_B(coef[0].denominator) || coef[0].numenator.number.size == 0 || coef[0].denominator.size == 0)
+			{
+				throw 1;
+			}
 
 			if (coef[0].numenator.sign == plus)
 				coef[0].numenator.sign = sign;

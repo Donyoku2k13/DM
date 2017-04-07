@@ -96,8 +96,16 @@ Polynom getPolynom()
 
 	char* string = getString();
 
-	Polynom result = parsePolynom(string);
-
+	Polynom result;
+	try
+	{
+		result = parsePolynom(string);
+	}
+	catch (int a)
+	{
+		printf("Ошибка при вводе многочлена!\nПопробуйте еще раз\n");
+		return getPolynom();
+	}
 	return result;
 }
 
