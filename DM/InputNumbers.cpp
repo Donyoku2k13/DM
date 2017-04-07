@@ -92,33 +92,11 @@ RationalFraction getRationalFraction(char* message, char* errMessage)
 
 Polynom getPolynom()
 {
-	Polynom result;
-	RationalFraction current;
-	printf("Введите степень многочлена\n");
+	printf("Введите многочлен: x^n+...+m\n");
 
-	scanf("%d", &result.degree);
+	char* string = getString();
 
-	while (result.degree < 1)
-	{
-		printf("Степень многочлена не может быть меньше 1!!");
-		scanf("%d", &result.degree);
-	}
-	result.coef = (RationalFraction*)malloc(sizeof(RationalFraction)*(result.degree + 1));
-
-	for (int i = 0; i <= result.degree; i++)
-	{
-		printf("x^%d:\n",result.degree - i);
-		current = getRationalFraction();
-		if (i == 0)
-		{
-			while (!NZER_N_B(current.numenator.number))
-			{
-				printf("Старшая степень не может быть равна 0\n");
-				current = getRationalFraction();
-			}
-		}
-		result.coef[i] = current;
-	}
+	Polynom result = parsePolynom(string);
 
 	return result;
 }

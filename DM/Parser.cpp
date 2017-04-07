@@ -118,13 +118,106 @@ RationalFraction parseToRationalFraction(char* string)
 Polynom parsePolynom(char* string)
 {
 	Polynom res;
-	char* obj = strtok(string, "x");
+	char *subString, *xPos, *position, *rFraction, *degreePos, *signPos;
 	RationalFraction current;
+	RationalFraction* coef = nullptr;
+	Sign sign = plus;
+	int degree = 0, resDegree = 0;
+	subString = strdup(string);
+	
+	
+	while (subString)
+	{
 
-	if (obj[0] == '^');
-	//TODO
-	else
-		current = parseToRationalFraction(obj);
+		xPos = strchr(subString, 'x');
+
+		if (xPos != nullptr)
+		{
+			int size = xPos - subString;
+
+			if (size == 1 && subString[0] == '-')
+			{
+				sign = minus;
+				size = 0;
+				strcpy(subString, subString + 1);
+			}
+
+
+			if (size != 0)
+			{
+				rFraction = (char*)malloc((size + 1) * sizeof(int));
+				memcpy(rFraction, subString, size);
+				rFraction[size] = '\0';
+				current = parseToRationalFraction(rFraction);
+			}
+			else
+				current = parseToRationalFraction("1");
+
+			if (current.numenator.sign == plus)
+				current.numenator.sign = sign;
+
+
+			degreePos = strchr(subString, '^');
+			signPos = strpbrk(subString, "+-");
+
+			if (degreePos == nullptr)
+			{
+				degree = 1;
+			}
+			else
+			{
+				degreePos += 1;
+				if (signPos != nullptr)
+				{
+					sign = signPos[0] == '+' ? plus : minus;
+					size = signPos - degreePos;
+				}
+				else
+					size = strlen(subString);
+				
+				position = (char*)malloc((size + 1) * sizeof(int));
+				memcpy(position, degreePos, size);
+				position[size] = '\0';
+				degree = atoi(position);
+
+			}
+			if (resDegree < degree)
+			{
+				coef = (RationalFraction*)realloc(coef, (degree + 1) * sizeof(RationalFraction));
+				for (int i = 0; i <= degree; i++)
+					coef[i] = RationalFraction();
+				resDegree = degree;
+			}
+			coef[degree] = ADD_QQ_Q(coef[degree], current);
+
+
+		}
+		else
+		{
+			signPos = nullptr;
+			degreePos = nullptr;
+			if (!coef)
+				coef = (RationalFraction*)malloc(sizeof(RationalFraction));
+			coef[0] = parseToRationalFraction(subString);
+
+			if (coef[0].numenator.sign == plus)
+				coef[0].numenator.sign = sign;
+		}
+		if (signPos != nullptr)
+			subString = signPos + 1;
+		else 
+			subString = nullptr;
+	}
+
+
+	res.coef = (RationalFraction*)malloc(sizeof(RationalFraction) * (resDegree + 1));
+	res.degree = resDegree;
+	for (int i = 0; i <= resDegree; i++)
+	{
+		res.coef[i] = coef[resDegree - i];
+	}
+
+	
 
 	return res;
 }

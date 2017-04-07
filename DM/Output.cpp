@@ -109,7 +109,7 @@ char* polynomToString(Polynom polynom)
 		if (i == polynom.degree)
 			sprintf(result, "%s%s", result, rationalFractionToString(polynom.coef[i]));
 		else if (NZER_N_B(polynom.coef[i].numenator.number))
-			sprintf(result, "%s%s * x^%d%s", result, rationalFractionToString(polynom.coef[i]), polynom.degree - i, i == polynom.degree ? "" : " + ");
+			sprintf(result, "%s%sx^%d%s", result, rationalFractionToString(polynom.coef[i]), polynom.degree - i, i == polynom.degree ? "" : " + ");
 	}
 
 	return result;
