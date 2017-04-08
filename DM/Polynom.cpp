@@ -66,7 +66,7 @@ Polynom DER_P_P(Polynom polynom)
 
 
 	result.degree = polynom.degree - 1;
-	result.coef = (RationalFraction*)malloc(polynom.degree * sizeof(RationalFraction));
+	result.coef = new RationalFraction[polynom.degree];
 
 	for (int i = 0; i < polynom.degree; i++)
 	{

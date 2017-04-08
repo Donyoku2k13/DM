@@ -221,7 +221,6 @@ void polynomEnterMenu()
 		case 0:
 
 			first = getPolynom();
-			system("cls");
 			second = getPolynom();
 			state = true;
 			break;
@@ -229,9 +228,9 @@ void polynomEnterMenu()
 		case 1:
 
 			if (firstPol)
-				free(firstPol);
+				delete[] firstPol;
 			if (secondPol)
-				free(secondPol);
+				delete[] secondPol;
 
 			firstPol = polynomToString(first);
 			secondPol = polynomToString(second);
@@ -245,17 +244,15 @@ void polynomEnterMenu()
 
 		case 2:
 
-
 			polynomEMenu(first, second);
-
 
 			break;
 		case 3:
 
 			if (firstPol)
-				free(firstPol);
+				delete[] firstPol;
 			if (secondPol)
-				free(secondPol);
+				delete[] secondPol;
 			return;
 		}
 	}
@@ -291,7 +288,7 @@ void polynomEMenu(Polynom first, Polynom second)
 			result = ADD_PP_P(first,second);
 
 			if (resultPol)
-				free(resultPol);
+				delete[] resultPol;
 			resultPol = polynomToString(result);
 
 			printf("%s\n+\n%s\n=\n%s\n", firstPol, secondPol, resultPol);
@@ -301,7 +298,7 @@ void polynomEMenu(Polynom first, Polynom second)
 			result = SUB_PP_P(first, second);
 
 			if (resultPol)
-				free(resultPol);
+				delete[] resultPol;
 			resultPol = polynomToString(result);
 
 			printf("%s\n-\n%s\n=\n%s\n", firstPol, secondPol, resultPol);
@@ -311,7 +308,7 @@ void polynomEMenu(Polynom first, Polynom second)
 			result = FAC_P_Q(isFirst ? first : second);
 
 			if (resultPol)
-				free(resultPol);
+				delete[] resultPol;
 			resultPol = polynomToString(result);
 
 			printf("%s ==> %s\n", isFirst ? firstPol : secondPol, resultPol);
@@ -321,7 +318,7 @@ void polynomEMenu(Polynom first, Polynom second)
 			result = MUL_PP_P(first, second);
 
 			if (resultPol)
-				free(resultPol);
+				delete[] resultPol;
 			resultPol = polynomToString(result);
 
 			printf("%s\n*\n%s\n=\n%s\n", firstPol, secondPol, resultPol);
@@ -331,7 +328,7 @@ void polynomEMenu(Polynom first, Polynom second)
 			result = DIV_PP_P(first, second);
 
 			if (resultPol)
-				free(resultPol);
+				delete[] resultPol;
 			resultPol = polynomToString(result);
 
 			printf("%s\n/\n%s\n=\n%s\n", firstPol, secondPol, resultPol);
@@ -341,7 +338,7 @@ void polynomEMenu(Polynom first, Polynom second)
 			result = MOD_PP_P(first, second);
 
 			if (resultPol)
-				free(resultPol);
+				delete[] resultPol;
 			resultPol = polynomToString(result);
 
 			printf("%s\n%%\n%s\n=\n%s\n", firstPol, secondPol, resultPol);
@@ -351,7 +348,7 @@ void polynomEMenu(Polynom first, Polynom second)
 			result = GCF_PP_P(first, second);
 
 			if (resultPol)
-				free(resultPol);
+				delete[] resultPol;
 			resultPol = polynomToString(result);
 
 			printf("мнд( %s , %s ) = %s\n", firstPol, secondPol, resultPol);
@@ -361,7 +358,7 @@ void polynomEMenu(Polynom first, Polynom second)
 			result = DER_P_P(isFirst ? first : second);
 
 			if (resultPol)
-				free(resultPol);
+				delete[] resultPol;
 			resultPol = polynomToString(result);
 
 			printf("( %s )' = %s\n", isFirst ? firstPol : secondPol, resultPol);
@@ -371,17 +368,17 @@ void polynomEMenu(Polynom first, Polynom second)
 			result = NMR_P_P(isFirst ? first : second);
 
 			if (resultPol)
-				free(resultPol);
+				delete[] resultPol;
 			resultPol = polynomToString(result);
 
 			printf("%s ==> %s\n", isFirst ? firstPol : secondPol, resultPol);
 			break;
 		case 9:
 
-			free(firstPol);
-			free(secondPol);
+			delete[] firstPol;
+			delete[] secondPol;
 			if (resultPol)
-				free(resultPol);
+				delete[] resultPol;
 
 			return;
 		}

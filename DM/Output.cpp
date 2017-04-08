@@ -110,14 +110,19 @@ char* rationalFractionToString(RationalFraction number)
 
 char* polynomToString(Polynom polynom)
 {
-	char* result = (char*)malloc(1000 * sizeof(char));
+	char* result = new char[1024];
+	char* rFraction = nullptr;
 	result[0] = '\0';
 	for (int i = 0; i <= polynom.degree; i++)
 	{
+		rFraction = rationalFractionToString(polynom.coef[i]);
+
 		if (i == polynom.degree)
-			sprintf(result, "%s%s", result, rationalFractionToString(polynom.coef[i]));
+			sprintf(result, "%s%s", result, rFraction);
 		else if (NZER_N_B(polynom.coef[i].numenator.number))
-			sprintf(result, "%s%sx^%d%s", result, rationalFractionToString(polynom.coef[i]), polynom.degree - i, i == polynom.degree ? "" : " + ");
+			sprintf(result, "%s%sx^%d%s", result, rFraction, polynom.degree - i, i == polynom.degree ? "" : " + ");
+
+		delete[] rFraction;
 	}
 
 	return result;
