@@ -60,6 +60,7 @@ struct Polynom	//Многочлен
 
 	Polynom();
 	~Polynom();
+	Polynom(RationalFraction* coef, int degree);
 	Polynom(const Polynom & polynom);
 	Polynom operator=(Polynom & polynom);
 

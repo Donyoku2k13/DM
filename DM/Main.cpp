@@ -9,6 +9,7 @@
 
 int main(void)
 {
+	
 	setlocale(LC_ALL, "Rus");
 	while (true)
 	{

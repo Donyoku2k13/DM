@@ -138,136 +138,168 @@ RationalFraction parseToRationalFraction(char* string)
 Polynom parsePolynom(char* string)
 {
 	Polynom res;
-	char *xPos, *degreeStr, *rFraction, *degreePos, *signPos;
+	char *xPos = nullptr,
+		*degreeStr = nullptr,
+		*rFraction = nullptr,
+		*degreePos = nullptr,
+		*signPos = nullptr;
 	RationalFraction current;
-	RationalFraction* coef = nullptr;
+	RationalFraction* coef = nullptr,
+		*resCoef = nullptr;
 	Sign sign = plus;
-	int degree = 0, resDegree = 0, size = 0;
-	//string = strdup(deleteSpace(string))
-	string = deleteSpace(string);
-	
-	
-	while (string)
+	int degree = 0,
+		resDegree = 0,
+		size = 0;
+
+
+	deleteSpace(string);
+
+	try
 	{
-
-		xPos = strchr(string, 'x');
-
-		if (xPos != nullptr) //Парсинг значения при иксе и степени икса
+		while (string)
 		{
-			size = xPos - string; //Количество символов в значении при х
 
-			if (size == 1 && string[0] == '-')
+			xPos = strchr(string, 'x');
+
+			if (xPos != nullptr) //Парсинг значения при иксе и степени икса
 			{
-				sign = minus;
-				size = 0;
-				strcpy(string, string + 1);
-			}
+				size = xPos - string; //Количество символов в значении при х
 
-
-			if (size != 0)
-			{
-				rFraction = (char*)malloc((size + 1) * sizeof(int));
-				memcpy(rFraction, string, size);
-				rFraction[size] = '\0';
-				current = parseToRationalFraction(rFraction);
-				if (!NZER_N_B(current.denominator) || current.numenator.number.size == 0 || current.denominator.size == 0)
+				if (size == 1 && string[0] == '-')
 				{
-					throw 1;
+					sign = minus;
+					size = 0;
+					string += 1;
 				}
-			}
-			else
-				current = parseToRationalFraction("1");
 
-			if (current.numenator.sign == plus)
-				current.numenator.sign = sign;
 
-			//Нахождени степени при иксе
-			degreePos = strchr(string, '^');
-			signPos = strpbrk(string, "+-");
-
-			if (degreePos == nullptr)
-			{
-				degree = 1;
-			}
-			else
-			{
-				degreePos += 1;
-				if (signPos != nullptr)
+				if (size != 0)
 				{
-					sign = signPos[0] == '+' ? plus : minus;
-					size = signPos - degreePos;
-					if (size <= 0)
+					rFraction = new char[size + 1];
+					memcpy(rFraction, string, size);
+					rFraction[size] = '\0';
+
+					current = parseToRationalFraction(rFraction);
+
+					if (!NZER_N_B(current.denominator))
 						throw 1;
+
+					delete[] rFraction;
+					rFraction = nullptr;
 				}
 				else
-					size = strlen(string);
-				
-				degreeStr = (char*)malloc((size + 1) * sizeof(int));
-				memcpy(degreeStr, degreePos, size);
-				degreeStr[size] = '\0';
-				degree = atoi(degreeStr);
-				if (degree == 0 && degreeStr[0] != '0')
+					current = parseToRationalFraction("1");
+
+				if (current.numenator.sign == plus)
+					current.numenator.sign = sign;
+
+				//Нахождени степени при иксе
+				degreePos = strchr(string, '^');
+				signPos = strpbrk(string, "+-");
+
+				if (degreePos == nullptr)
+				{
+					degree = 1;
+				}
+				else
+				{
+					degreePos += 1;
+					if (signPos != nullptr)
+					{
+						sign = signPos[0] == '+' ? plus : minus;
+						size = signPos - degreePos;
+						if (size <= 0)
+						{
+							throw 1;
+						}
+					}
+					else
+						size = strlen(string);
+
+					degreeStr = new char[size + 1];
+					memcpy(degreeStr, degreePos, size);
+					degreeStr[size] = '\0';
+					degree = atoi(degreeStr);
+
+					if (degree == 0 && degreeStr[0] != '0')
+						throw 1;
+					
+
+					delete[] degreeStr;
+					degreeStr = nullptr;
+				}
+				if (resDegree < degree)
+				{
+					coef = new RationalFraction[degree + 1];
+					for (int i = 0; i <= degree; i++)
+						coef[i] = RationalFraction();
+					resDegree = degree;
+				}
+				coef[degree] = ADD_QQ_Q(coef[degree], current);
+
+
+			}
+			else //Парсинг свободного члена
+			{
+				signPos = nullptr;
+				degreePos = nullptr;
+
+				if (!coef)
+					coef = new RationalFraction[1];
+				coef[0] = parseToRationalFraction(string);
+				if (!NZER_N_B(coef[0].denominator) || coef[0].numenator.number.size == 0 || coef[0].denominator.size == 0)
 					throw 1;
 
+				if (coef[0].numenator.sign == plus)
+					coef[0].numenator.sign = sign;
 			}
-			if (resDegree < degree)
-			{
-				coef = (RationalFraction*)realloc(coef, (degree + 1) * sizeof(RationalFraction));
-				for (int i = 0; i <= degree; i++)
-					coef[i] = RationalFraction();
-				resDegree = degree;
-			}
-			coef[degree] = ADD_QQ_Q(coef[degree], current);
-
+			if (signPos != nullptr)
+				string = signPos + 1;
+			else
+				string = nullptr;
 
 		}
-		else //Парсинг свободного члена
-		{
-			signPos = nullptr;
-			degreePos = nullptr;
-			if (!coef)
-				coef = (RationalFraction*)malloc(sizeof(RationalFraction));
-			coef[0] = parseToRationalFraction(string);
-			if (!NZER_N_B(coef[0].denominator) || coef[0].numenator.number.size == 0 || coef[0].denominator.size == 0)
-			{
-				throw 1;
-			}
+	}
+	catch (int err)
+	{
+		if (rFraction)
+			delete[] rFraction;
 
-			if (coef[0].numenator.sign == plus)
-				coef[0].numenator.sign = sign;
-		}
-		if (signPos != nullptr)
-			string = signPos + 1;
-		else 
-			string = nullptr;
+		if (degreeStr)
+			delete[] degreeStr;
+
+		delete[] coef;
+
+		throw 1;
 	}
 
 
-	res.coef = (RationalFraction*)malloc(sizeof(RationalFraction) * (resDegree + 1));
-	res.degree = resDegree;
+	resCoef = new RationalFraction[resDegree + 1];
 	for (int i = 0; i <= resDegree; i++)
 	{
-		res.coef[i] = coef[resDegree - i];
+		resCoef[i] = coef[resDegree - i];
 	}
 
-	
+	res = Polynom(resCoef, resDegree);
+
+	delete[] coef;
+	delete[] resCoef;
 
 	return res;
 }
 
 
-char* deleteSpace(char* string)
+void deleteSpace(char* string)
 {
-	char* res = new char[strlen(string) + 1];
-	res[0] = '\0';
-	char* tokenizer = strdup(string);
-	res = strtok(tokenizer," ");
-	while (tokenizer)
-	{
-		tokenizer = strtok(nullptr, " ");
-		if (tokenizer)
-			res = strcat(res, tokenizer);
-	}
 
-	return res;
+	char* i = string;
+	char* j = string;
+	while (*j != 0)
+	{
+		*i = *j++;
+		if (*i != ' ')
+			i++;
+	}
+	*i = 0;
+
 }

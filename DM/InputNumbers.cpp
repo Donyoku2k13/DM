@@ -111,9 +111,13 @@ Polynom getPolynom()
 	}
 	catch (int a)
 	{
+		delete[] string;
 		printf("Ошибка при вводе многочлена!\nПопробуйте еще раз\n");
 		return getPolynom();
 	}
+
+	delete[] string;
+
 	return result;
 }
 

@@ -4,20 +4,21 @@
 
 Polynom::Polynom()
 {
-	coef = (RationalFraction*)malloc(sizeof(RationalFraction));
+	coef = new RationalFraction[1];
 	coef[0] = RationalFraction();
 	degree = 0;
 }
 
 Polynom::~Polynom()
 {
-	free(coef);
+	delete[] coef;
 }
 
 Polynom::Polynom(const Polynom & polynom)
 {
 	degree = polynom.degree;
-	coef = (RationalFraction*)malloc(sizeof(RationalFraction)*(degree + 1));
+	delete[] coef;
+	coef = new RationalFraction[degree + 1]; 
 	for (int i = 0; i <= degree; i++)
 	{
 		coef[i] = RationalFraction(polynom.coef[i]);
@@ -25,10 +26,20 @@ Polynom::Polynom(const Polynom & polynom)
 
 }
 
+
+Polynom::Polynom(RationalFraction* coef, int degree)
+{
+	this->degree = degree;
+	this->coef = new RationalFraction[degree + 1];
+	for (int i = 0; i <= degree; i++)
+		this->coef[i] = coef[i];
+}
+
 Polynom Polynom::operator=(Polynom & polynom)
 {
 	degree = polynom.degree;
-	coef = (RationalFraction*)malloc(sizeof(RationalFraction)*(degree + 1));
+	delete[] coef;
+	coef = new RationalFraction[degree + 1];
 	for (int i = 0; i <= degree; i++)
 	{
 		coef[i] = RationalFraction(polynom.coef[i]);
@@ -36,6 +47,9 @@ Polynom Polynom::operator=(Polynom & polynom)
 
 	return *this;
 }
+
+
+
 
 int DEG_P_N(Polynom polynom)
 {

@@ -14,6 +14,6 @@ RationalFraction parseToRationalFraction(char* string);
 
 Polynom parsePolynom(char* string);
 
-char* deleteSpace(char* string);
+void deleteSpace(char* string);
 
 #endif
