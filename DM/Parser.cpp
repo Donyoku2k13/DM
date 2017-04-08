@@ -103,6 +103,11 @@ RationalFraction parseToRationalFraction(char* string)
 {
 	RationalFraction result;
 
+	if (strlen(string) == 0)
+	{
+		result.numenator.number.size = 0;
+		return result;
+	}
 	char* numenator = strtok(string, "/");
 	char* denominator = strtok(NULL, "\n");
 
