@@ -89,8 +89,11 @@ char* rationalFractionToString(RationalFraction number)
 	result[0] = '\0';
 
 	if (INT_Q_B(number))
+	{
+		delete[] result;
 		return bigIntegerToString(TRANS_Q_Z(RED_Q_Q(number)));
-
+	}
+		
 	char* numenator = bigIntegerToString(number.numenator);
 	char* denominator = bigNaturalToString(number.denominator);
 

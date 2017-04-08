@@ -118,10 +118,18 @@ RationalFraction parseToRationalFraction(char* string)
 	char* numenator = strtok(string, "/");
 	char* denominator = strtok(NULL, "\n");
 
-	result.numenator = parseToBigInteger(numenator);
+	try
+	{
 
-	if (denominator != NULL)
-		result.denominator = parseToBigNatural(denominator);
+		result.numenator = parseToBigInteger(numenator);
+
+		if (denominator != NULL)
+			result.denominator = parseToBigNatural(denominator);
+	}
+	catch (int err)
+	{
+		throw err;
+	}
 
 	return result;
 }

@@ -73,21 +73,26 @@ RationalFraction getRationalFraction(char* message, char* errMessage)
 	RationalFraction result;
 	char *string;
 	printf("%s\n", message);
-	do
-	{
-		string = getString();
 
+	string = getString();
+
+	try
+	{
 		result = parseToRationalFraction(string);
 
 		if (!NZER_N_B(result.denominator))
-			printf("Знаменатель не может быть равен нулю!!\n");
-
-		if (result.numenator.number.size == 0 || result.denominator.size == 0)
-			printf("%s\n", errMessage);
-
+		{
+			throw 1;
+		}
+	}
+	catch (int err)
+	{
+		printf("%s\n", errMessage);
 		delete[] string;
-	} 
-	while (!NZER_N_B(result.denominator) || result.numenator.number.size == 0 || result.denominator.size == 0);
+		return getRationalFraction(message, errMessage);
+	}
+
+	delete[] string;
 
 	return result;
 }
