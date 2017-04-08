@@ -123,35 +123,36 @@ RationalFraction parseToRationalFraction(char* string)
 Polynom parsePolynom(char* string)
 {
 	Polynom res;
-	char *subString, *xPos, *position, *rFraction, *degreePos, *signPos;
+	char *xPos, *degreeStr, *rFraction, *degreePos, *signPos;
 	RationalFraction current;
 	RationalFraction* coef = nullptr;
 	Sign sign = plus;
-	int degree = 0, resDegree = 0;
-	subString = strdup(deleteSpace(string));
+	int degree = 0, resDegree = 0, size = 0;
+	//string = strdup(deleteSpace(string))
+	string = deleteSpace(string);
 	
 	
-	while (subString)
+	while (string)
 	{
 
-		xPos = strchr(subString, 'x');
+		xPos = strchr(string, 'x');
 
-		if (xPos != nullptr)
+		if (xPos != nullptr) //Парсинг значения при иксе и степени икса
 		{
-			int size = xPos - subString;
+			size = xPos - string; //Количество символов в значении при х
 
-			if (size == 1 && subString[0] == '-')
+			if (size == 1 && string[0] == '-')
 			{
 				sign = minus;
 				size = 0;
-				strcpy(subString, subString + 1);
+				strcpy(string, string + 1);
 			}
 
 
 			if (size != 0)
 			{
 				rFraction = (char*)malloc((size + 1) * sizeof(int));
-				memcpy(rFraction, subString, size);
+				memcpy(rFraction, string, size);
 				rFraction[size] = '\0';
 				current = parseToRationalFraction(rFraction);
 				if (!NZER_N_B(current.denominator) || current.numenator.number.size == 0 || current.denominator.size == 0)
@@ -165,9 +166,9 @@ Polynom parsePolynom(char* string)
 			if (current.numenator.sign == plus)
 				current.numenator.sign = sign;
 
-
-			degreePos = strchr(subString, '^');
-			signPos = strpbrk(subString, "+-");
+			//Нахождени степени при иксе
+			degreePos = strchr(string, '^');
+			signPos = strpbrk(string, "+-");
 
 			if (degreePos == nullptr)
 			{
@@ -184,12 +185,14 @@ Polynom parsePolynom(char* string)
 						throw 1;
 				}
 				else
-					size = strlen(subString);
+					size = strlen(string);
 				
-				position = (char*)malloc((size + 1) * sizeof(int));
-				memcpy(position, degreePos, size);
-				position[size] = '\0';
-				degree = atoi(position);
+				degreeStr = (char*)malloc((size + 1) * sizeof(int));
+				memcpy(degreeStr, degreePos, size);
+				degreeStr[size] = '\0';
+				degree = atoi(degreeStr);
+				if (degree == 0 && degreeStr[0] != '0')
+					throw 1;
 
 			}
 			if (resDegree < degree)
@@ -203,13 +206,13 @@ Polynom parsePolynom(char* string)
 
 
 		}
-		else
+		else //Парсинг свободного члена
 		{
 			signPos = nullptr;
 			degreePos = nullptr;
 			if (!coef)
 				coef = (RationalFraction*)malloc(sizeof(RationalFraction));
-			coef[0] = parseToRationalFraction(subString);
+			coef[0] = parseToRationalFraction(string);
 			if (!NZER_N_B(coef[0].denominator) || coef[0].numenator.number.size == 0 || coef[0].denominator.size == 0)
 			{
 				throw 1;
@@ -219,9 +222,9 @@ Polynom parsePolynom(char* string)
 				coef[0].numenator.sign = sign;
 		}
 		if (signPos != nullptr)
-			subString = signPos + 1;
+			string = signPos + 1;
 		else 
-			subString = nullptr;
+			string = nullptr;
 	}
 
 
