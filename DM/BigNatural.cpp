@@ -5,31 +5,40 @@
 //Конструктор - начальное значение - 0
 BigNatural::BigNatural()
 {
-
 	size = 1;
-	coef = (short*)malloc(sizeof(short));
+	coef = new short[1];
 	coef[0] = 0;
 
+}
+
+BigNatural::BigNatural(short* coef, int size)
+{
+	this->size = size;
+	this->coef = new short[size];
+	memcpy(this->coef, coef, size * sizeof(short) );
 }
 
 
 BigNatural::BigNatural(const BigNatural & bN)
 {
 	size = bN.size;
-	coef = (short*)malloc(sizeof(short) * size);
+	delete[] coef;
+	coef = new short[size];
 	memcpy(coef, bN.coef, size * sizeof(short));
+
 
 }
 
 BigNatural::~BigNatural()
 {
-	free(coef);
+	delete[] coef;
 }
 
 BigNatural BigNatural::operator=(BigNatural & bN)
 {
 	size = bN.size;
-	coef = (short*)malloc(sizeof(short) * size);
+	delete[] coef;
+	coef = new short[size];
 	memcpy(coef, bN.coef, size * sizeof(short));
 
 	return *this;
@@ -37,14 +46,19 @@ BigNatural BigNatural::operator=(BigNatural & bN)
 
 BigNatural::BigNatural(int number)
 {
+	short* tempCoef = nullptr;
 	size = 0;
 	while (number != 0)
 	{
-		coef = (short*)realloc(coef, (size + 1) * sizeof(short));
-		coef[size] = number % 10;
+		tempCoef = (short*)realloc(tempCoef, (size + 1) * sizeof(short));
+		tempCoef[size] = number % 10;
 		number /= 10;
 		size++;
 	}
+	coef = new short[size];
+
+	memcpy(coef, tempCoef, size * sizeof(short));
+	free(tempCoef);
 }
 
 //***************************************************************************************
@@ -65,7 +79,7 @@ BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 	short* b = second.coef; //Вычитаемое
 
 	//Результат не больше первого, а потом можно и уменьшить
-	short* resCoef = (short*)malloc(sizeof(short) * first.size);
+	short* resCoef = new short[first.size];
 
 
 	for (int i = 0; i < second.size; i++)
@@ -99,11 +113,12 @@ BigNatural SUB_NN_N(BigNatural first, BigNatural second)
 	//Вычисление реального размера числа
 	i = first.size - 1;
 	while ((i>0) && (resCoef[i] == 0)) i--;
-	resCoef = (short*)realloc(resCoef, sizeof(short) * (i + 1));
-	
+	resCoef = resize(resCoef,i + 1, first.size);
 
-	result.size = i + 1;
-	result.coef = resCoef;
+	result = BigNatural(resCoef, i + 1);
+
+
+	delete[] resCoef;
 
 	return result;
 }
@@ -143,9 +158,9 @@ BigNatural ADD_1N_N(BigNatural number)
 		}
 		if (counter == result.size) // Если все цифры равны 9, увеличиваем массив на единицу, первой цифре присваеваем 1
 		{
-			result.coef = (short*) realloc(result.coef, sizeof(short)* (result.size + 1));
+			result.coef = resize(result.coef, result.size + 1, result.size);
 			result.size++;
-			result.coef[result.size-1] = 1;
+			result.coef[result.size - 1] = 1;
 		}
 		else
 		{
@@ -182,14 +197,18 @@ BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
 	int r = 0;
 	int size = number.size + tenDegree;
 
-	short* resCoef = (short*)malloc(sizeof(short) * (size));
+	short* resCoef = new short[size];
+
 
 	for (int i = 0; i < tenDegree; i++)
 		resCoef[i] = 0;
 	for (int i = tenDegree; i < size; i++)
 		resCoef[i] = number.coef[i - tenDegree];
-	result.size = size;
-	result.coef = resCoef;
+
+	result = BigNatural(resCoef, size);
+
+	delete[] resCoef;
+
 	return result;
 }
 
@@ -218,7 +237,7 @@ BigNatural ADD_NN_N(BigNatural first, BigNatural second)
 	if (COM_NN_D(first, second) == 1)
 		return ADD_NN_N(second, first);
 
-	short* resCoef = (short*)malloc(sizeof(short) * (first.size));
+	short* resCoef = new short[first.size];
 
 	for (i = 0; i < second.size; i++)
 	{
@@ -234,13 +253,16 @@ BigNatural ADD_NN_N(BigNatural first, BigNatural second)
 
 	if (r)
 	{
-		resCoef = (short*)realloc(resCoef, sizeof(short) * (first.size + 1));
+		resCoef = resize(resCoef, first.size + 1, first.size);
 		result.size = first.size + 1;
 		resCoef[first.size] = r;
 	}
 	else
 		result.size = first.size;
-	result.coef = resCoef;
+	
+	result = BigNatural(resCoef, result.size);
+
+	delete [] resCoef;
 	return result;
 }
 
@@ -256,7 +278,7 @@ BigNatural MUL_ND_N(BigNatural number, int factor)
 	if (factor == 0)
 		return BigNatural();
 
-	short* resCoef = (short*)malloc(sizeof(short) * (number.size));
+	short* resCoef = new short[number.size];
 
 	for (int j = 0; j < number.size; j++)
 	{
@@ -266,11 +288,14 @@ BigNatural MUL_ND_N(BigNatural number, int factor)
 	result.size = number.size;
 	if (r) 
 	{
-		resCoef = (short*)realloc(resCoef, sizeof(short) * (number.size + 1));
+		resCoef = resize(resCoef, number.size + 1, number.size);
 		resCoef[result.size] = r;
 		result.size++;
 	}
-	result.coef = resCoef;
+	result = BigNatural(resCoef, result.size);
+
+	delete[] resCoef;
+
 	return result;
 }
 
@@ -324,7 +349,7 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 	int k = 0;
 
 	BigNatural res;//Результат
-	short* coefReverse = nullptr;
+	short* coefReverse = nullptr, *coef = nullptr;
 	int current = 0;
 
 
@@ -336,21 +361,18 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 	else
 	{
 		if (COM_NN_D(first, second) == 0)                    //Если первое равно второму
-		{
-			res.coef = (short*)malloc(sizeof(short));
-			res.coef[0] = 1;
-			res.size = 1;
-			return res;                                       //Возвращаем единицу
-		}
+			return BigNatural(1);                                  //Возвращаем единицу
+		
 		else
 			if (COM_NN_D(first, second) == 1)                 //Если второе больше первого
 			{
-				return res;                                     //Возвращаем нуль
+				return BigNatural();                   //Возвращаем нуль
 			}
 			else
+
 				for (k = first.size - second.size; k >= 0; k--)
 				{
-					coefReverse = (short*)realloc(coefReverse, sizeof(short) * (current + 1));
+					coefReverse = resize(coefReverse, current + 1, current);
 					coefReverse[current] = DIV_NN_Dk(first, second, k);
 
 					current++;
@@ -360,18 +382,23 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 				}
 	}
 	res.size = current;
-	res.coef = (short*)malloc(sizeof(short)*current);
+	coef = new short[res.size];
+
 	for (int i = 0; i < current; i++)
 	{
-		res.coef[i] = coefReverse[current - i - 1];
+		coef[i] = coefReverse[current - i - 1];
 	}
 
 	k = res.size - 1;
-	while ((k>0) && (res.coef[k] == 0)) k--;
-	res.coef = (short*)realloc(res.coef, sizeof(short) * (k + 1));
+	while ((k>0) && (coef[k] == 0)) k--;
+	
+	coef = resize(coef, k + 1, res.size);
 
 
-	res.size = k + 1;
+	res = BigNatural(coef, k + 1);
+
+	delete[] coef;
+	delete[] coefReverse;
 
 	return res;
 }
@@ -384,9 +411,7 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 BigNatural MOD_NN_N(BigNatural first, BigNatural second)
 {
 	BigNatural res;
-	BigNatural first_c;
 
-	first_c = first;
 	if (COM_NN_D(first, second) == 1)
 		return first;
 	else
@@ -398,7 +423,7 @@ BigNatural MOD_NN_N(BigNatural first, BigNatural second)
 
 
 //***************************************************************************************
-/*Сравнение натуральных чисел: 2 - если первое больше второго, 0, если равно, 1 иначе.*/
+//Сравнение натуральных чисел: 2 - если первое больше второго, 0, если равно, 1 иначе.
 //Лошаченко 6307
 int COM_NN_D(BigNatural first, BigNatural second)
 {
@@ -436,4 +461,16 @@ BigNatural MUL_NN_N(BigNatural first, BigNatural second)
 	}
 
 	return res;
+}
+
+
+short* resize(short* arr, int size, int oldSize)
+{
+	short* nArr = new short[size];
+	memcpy(nArr, arr, min(size, oldSize) * sizeof(short));
+
+	if (arr)
+		delete[] arr;
+
+	return nArr;
 }

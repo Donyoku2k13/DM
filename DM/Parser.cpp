@@ -17,7 +17,7 @@ BigNatural parseToBigNatural(char* string)
 
 	size = strlen(string);
 
-	short* coef = (short*)malloc(size * sizeof(coef));
+	short* coef = new short[size];
 
 	for (int i = 0; string[i] != '\0'; i++)
 	{
@@ -56,8 +56,8 @@ BigNatural parseToBigNatural(char* string)
 			currentNumber = 9;
 			break;
 		default:
-			result.size = 0;
-			return result;
+			delete[] coef;
+			throw 1;
 		}
 
 		if (j == 0 && currentNumber == 0 && size > 1)
@@ -68,10 +68,12 @@ BigNatural parseToBigNatural(char* string)
 			j++;
 		}
 	}
+	if (size != strlen(string))
+		coef = resize(coef, size, strlen(string));
 
-	coef = (short*)realloc(coef, size * sizeof(coef));
-	result.size = size;
-	result.coef = coef;
+	result = BigNatural(coef, size);
+
+	free(coef);
 
 	return result;
 }
@@ -87,11 +89,16 @@ BigInteger parseToBigInteger(char* string)
 		result.sign = minus;
 		strcpy(string, string + 1);
 	}
-	else
+	else 
 		result.sign = plus;
-
-	number = parseToBigNatural(string);
-
+	try
+	{
+		number = parseToBigNatural(string);
+	}
+	catch (int err)
+	{
+		throw err;
+	}
 	result.number = number;
 
 	return result;

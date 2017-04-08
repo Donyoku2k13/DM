@@ -25,18 +25,19 @@ BigNatural getBigNatural(char* message, char* errMessage)
 	printf("%s\n", message);
 
 	char* string = getString();
-
-	result = parseToBigNatural(string);
-
-	while  (result.size == 0)
+	try
 	{
-		printf("%s\n",errMessage);
-		char* string = getString();
-
 		result = parseToBigNatural(string);
 	}
+	catch (int err)
+	{
+		delete[] string;
+		printf("%s\n", errMessage);
+		return getBigNatural(message, errMessage);
+	}
 
-	free(string);
+	delete[] string;
+
 
 	return result;
 }
@@ -51,17 +52,17 @@ BigInteger getBigInteger(char* message, char* errMessage)
 
 	char* string = getString();
 
-	result = parseToBigInteger(string);
-
-	while (result.number.size == 0)
+	try
 	{
-		printf("%s\n", errMessage);
-		char* string = getString();
-
 		result = parseToBigInteger(string);
 	}
-
-	free(string);
+	catch (int err)
+	{
+		delete[] string;
+		printf("%s\n", errMessage);
+		return getBigInteger(message, errMessage);
+	}
+	delete[] string;
 
 	return result;
 }
@@ -83,6 +84,8 @@ RationalFraction getRationalFraction(char* message, char* errMessage)
 
 		if (result.numenator.number.size == 0 || result.denominator.size == 0)
 			printf("%s\n", errMessage);
+
+		delete[] string;
 	} 
 	while (!NZER_N_B(result.denominator) || result.numenator.number.size == 0 || result.denominator.size == 0);
 
@@ -121,7 +124,7 @@ char* getString()
 	if (buffer[0] == 10)
 		return getString();
 
-	string = (char*)malloc((strlen(buffer) + 1) * sizeof(char));
+	string = new char[strlen(buffer) + 1];
 	memcpy(string, buffer, strlen(buffer) + 1);
 	string[strlen(string) - 1] = '\0';
 	return string;

@@ -54,7 +54,7 @@ void infoView(char* message)
 
 char* bigNaturalToString(BigNatural number)
 {
-	char* result = (char*)malloc((number.size + 1) * sizeof(char));
+	char* result = new char[number.size + 1];
 	result[0] = '\0';
 	for (int i = number.size - 1; i >= 0; i--)
 		sprintf(result ,"%s%d",result , number.coef[i]);
@@ -65,15 +65,18 @@ char* bigNaturalToString(BigNatural number)
 
 char* bigIntegerToString(BigInteger number)
 {
-	char* result = (char*)malloc((number.number.size + 2) * sizeof(char));
+	char* result = new char[number.number.size + 2];
 	result[0] = '\0';
 	if (number.sign == minus)
 	{
-		result = (char*)malloc((number.number.size + 2) * sizeof(char));
 		result[0] = '-';
 		result[1] = '\0';
 	}
-	sprintf(result, "%s%s", result, bigNaturalToString(number.number));
+	char* natural = bigNaturalToString(number.number);
+
+	sprintf(result, "%s%s", result, natural);
+
+	delete[] natural;
 
 	return result;
 }
@@ -82,8 +85,7 @@ char* bigIntegerToString(BigInteger number)
 
 char* rationalFractionToString(RationalFraction number)
 {
-	bool isZero = false;
-	char* result = (char*)malloc(1000 * sizeof(char));
+	char* result = new char[number.numenator.number.size + number.denominator.size + 4];
 	result[0] = '\0';
 
 	if (INT_Q_B(number))
@@ -93,6 +95,9 @@ char* rationalFractionToString(RationalFraction number)
 	char* denominator = bigNaturalToString(number.denominator);
 
 	sprintf(result, "%s / %s", numenator, denominator);
+
+	delete[] numenator;
+	delete[] denominator;
 
 	return result;
 }

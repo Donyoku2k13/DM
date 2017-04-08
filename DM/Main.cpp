@@ -3,13 +3,13 @@
 #include "Output.h"
 #include "Locale.h"
 #include "Menu.h"
+#include "ParserHeader.h"
 
 
 
 int main(void)
 {
 	setlocale(LC_ALL, "Rus");
-
 	while (true)
 	{
 		switch (getMenu(mainMenu, ""))
@@ -60,9 +60,9 @@ void integerEnterMenu()
 		case 1:
 
 			if (firstNum)
-				free(firstNum);
+				delete[] firstNum;
 			if (secondNum)
-				free(secondNum);
+				delete[] secondNum;
 
 			firstNum = bigIntegerToString(first);
 			secondNum = bigIntegerToString(second);
@@ -82,9 +82,9 @@ void integerEnterMenu()
 
 		case 3:
 			if (firstNum)
-				free(firstNum);
+				delete[] firstNum;
 			if (secondNum)
-				free(secondNum);
+				delete[] secondNum;
 
 			return;
 		}
@@ -109,6 +109,7 @@ void naturalEnterMenu()
 
 			first = getBigNatural("Введите первое число", "Ошибка при вводе числа!");
 			second = getBigNatural("Введите второе число", "Ошибка при вводе числа!");
+
 			state = true;
 			break;
 
@@ -116,9 +117,9 @@ void naturalEnterMenu()
 
 
 			if (firstNum)
-				free(firstNum);
+				delete[] firstNum;
 			if (secondNum)
-				free(secondNum);
+				delete[] secondNum;
 
 			firstNum = bigNaturalToString(first);
 			secondNum = bigNaturalToString(second);
@@ -138,9 +139,9 @@ void naturalEnterMenu()
 
 		case 3:
 			if (firstNum)
-				free(firstNum);
+				delete[] firstNum;
 			if (secondNum)
-				free(secondNum);
+				delete[] secondNum;
 
 			return;
 		}
@@ -170,9 +171,9 @@ void rFractionEnterMenu()
 		case 1:
 
 			if (firstNum)
-				free(firstNum);
+				delete[] firstNum;
 			if (secondNum)
-				free(secondNum);
+				delete[] secondNum;
 
 			firstNum = rationalFractionToString(first);
 			secondNum = rationalFractionToString(second);
@@ -193,9 +194,9 @@ void rFractionEnterMenu()
 			break;
 		case 3:
 			if (firstNum)
-				free(firstNum);
+				delete[] firstNum;
 			if (secondNum)
-				free(secondNum);
+				delete[] secondNum;
 
 			return;
 		}
@@ -410,7 +411,7 @@ void rFractionMenu(RationalFraction first, RationalFraction second)
 			result = RED_Q_Q(isFirst ? first : second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = rationalFractionToString(result);
 
 			printf("%s = %s\n", isFirst ? firstStr : secondStr, resultStr);
@@ -420,7 +421,7 @@ void rFractionMenu(RationalFraction first, RationalFraction second)
 			result = ADD_QQ_Q(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = rationalFractionToString(result);
 
 			printf("%s + %s = %s\n", firstStr, secondStr, resultStr);
@@ -430,7 +431,7 @@ void rFractionMenu(RationalFraction first, RationalFraction second)
 			result = SUB_QQ_Q(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = rationalFractionToString(result);
 
 			printf("%s - %s = %s\n", firstStr, secondStr, resultStr);
@@ -440,7 +441,7 @@ void rFractionMenu(RationalFraction first, RationalFraction second)
 			result = MUL_QQ_Q(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = rationalFractionToString(result);
 
 			printf("%s * %s = %s\n", firstStr, secondStr, resultStr);
@@ -450,17 +451,17 @@ void rFractionMenu(RationalFraction first, RationalFraction second)
 			result = DIV_QQ_Q(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = rationalFractionToString(result);
 
 			printf("( %s ) / ( %s ) = %s\n", firstStr, secondStr, resultStr);
 			break;
 		case 5:
 
-			free(firstStr);
-			free(secondStr);
+			delete[] firstStr;
+			delete[] secondStr;
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 
 			return;
 		}
@@ -487,7 +488,7 @@ void naturalMenu(BigNatural first, BigNatural second)
 			result = ADD_NN_N(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = bigNaturalToString(result);
 
 			printf("%s + %s = %s\n", firstStr, secondStr, resultStr);
@@ -497,7 +498,7 @@ void naturalMenu(BigNatural first, BigNatural second)
 			result = SUB_NN_N(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = bigNaturalToString(result);
 
 			printf("|%s - %s| = %s\n", firstStr, secondStr, resultStr);
@@ -507,7 +508,7 @@ void naturalMenu(BigNatural first, BigNatural second)
 			result = MUL_NN_N(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = bigNaturalToString(result);
 
 			printf("%s * %s = %s\n", firstStr, secondStr, resultStr);
@@ -517,7 +518,7 @@ void naturalMenu(BigNatural first, BigNatural second)
 			result = DIV_NN_N(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = bigNaturalToString(result);
 
 			printf("%s / %s = %s\n", firstStr, secondStr, resultStr);
@@ -527,7 +528,7 @@ void naturalMenu(BigNatural first, BigNatural second)
 			result = MOD_NN_N(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = bigNaturalToString(result);
 
 			printf("%s %% %s = %s\n", firstStr, secondStr, resultStr);
@@ -537,7 +538,7 @@ void naturalMenu(BigNatural first, BigNatural second)
 			result = GCF_NN_N(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = bigNaturalToString(result);
 
 			printf("НОД( %s , %s ) = %s\n", firstStr, secondStr, resultStr);
@@ -547,7 +548,7 @@ void naturalMenu(BigNatural first, BigNatural second)
 			result = LCM_NN_N(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = bigNaturalToString(result);
 
 			printf("НОК( %s , %s ) = %s\n", firstStr, secondStr, resultStr);
@@ -556,7 +557,7 @@ void naturalMenu(BigNatural first, BigNatural second)
 			free(firstStr);
 			free(secondStr);
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			return;
 		}
 		system("pause");
@@ -582,7 +583,7 @@ void integerMenu(BigInteger first, BigInteger second)
 			result = ADD_ZZ_Z(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = bigIntegerToString(result);
 
 			printf("%s + %s = %s\n", firstStr, secondStr, resultStr);
@@ -592,7 +593,7 @@ void integerMenu(BigInteger first, BigInteger second)
 			result = SUB_ZZ_Z(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = bigIntegerToString(result);
 
 			printf("%s - %s = %s\n", firstStr, secondStr, resultStr);
@@ -602,7 +603,7 @@ void integerMenu(BigInteger first, BigInteger second)
 			result = MUL_ZZ_Z(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = bigIntegerToString(result);
 
 			printf("%s * %s = %s\n", firstStr, secondStr, resultStr);
@@ -612,7 +613,7 @@ void integerMenu(BigInteger first, BigInteger second)
 			result = DIV_ZZ_Z(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = bigIntegerToString(result);
 
 			printf("%s / %s = %s\n", firstStr, secondStr, resultStr);
@@ -622,7 +623,7 @@ void integerMenu(BigInteger first, BigInteger second)
 			result = MOD_ZZ_Z(first, second);
 
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 			resultStr = bigIntegerToString(result);
 
 			printf("%s %% %s = %s\n", firstStr, secondStr, resultStr);
@@ -631,7 +632,7 @@ void integerMenu(BigInteger first, BigInteger second)
 			free(firstStr);
 			free(secondStr);
 			if (resultStr)
-				free(resultStr);
+				delete[] resultStr;
 
 			return;
 		}

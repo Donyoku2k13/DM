@@ -4,6 +4,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
+#include "vld.h"
 
  
 enum Sign //Знак целого числа
@@ -18,12 +19,14 @@ struct BigNatural //Натуральное длинное число
 	short *coef = nullptr;	//Массив коэффициентов
 	int size;		//Размер массива (номер старшей позиции)
 	int BASE = 10;
+	static int count;
 
 	BigNatural();
 	~BigNatural();
 	BigNatural operator=(BigNatural & bN);
 	BigNatural(const BigNatural & bN);
 	BigNatural(int number);
+	BigNatural(short* coef, int size);
 };
 
 struct BigInteger	//Длинное целое число
@@ -220,4 +223,6 @@ Polynom DER_P_P(Polynom polynom);
 Polynom NMR_P_P(Polynom polynom);
 
 
+
+short* resize(short* arr, int size, int oldSize);
 #endif
