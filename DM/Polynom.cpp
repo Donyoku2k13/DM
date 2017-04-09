@@ -42,9 +42,7 @@ Polynom Polynom::operator=(Polynom & polynom)
 	delete[] coef;
 	coef = new RationalFraction[degree + 1];
 	for (int i = 0; i <= degree; i++)
-	{
 		coef[i] = RationalFraction(polynom.coef[i]);
-	}
 
 	return *this;
 }
@@ -101,15 +99,9 @@ Polynom MUL_Pxk_P(Polynom polynom, int xDegree)
 	int i, j;
 	RationalFraction* coef = new RationalFraction[polynom.degree + xDegree + 1];
 
-	for (i = 0; i <= polynom.degree + xDegree; ++i)
-	{
-		if (i > polynom.degree)
-			coef[i] = RationalFraction();
-
-		else
-			coef[i] = polynom.coef[i];
-	}
-
+	for (i = 0; i <= polynom.degree; ++i)
+		coef[i] = polynom.coef[i];
+	
 	result = Polynom(coef, polynom.degree + xDegree);
 
 	delete[] coef;
@@ -140,9 +132,6 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 
 
 	coef = new RationalFraction[first.degree + 1];
-
-	for (i = 0; i <= first.degree; i++)
-		coef[i] = RationalFraction();
 
 	result.degree = first.degree;
 
@@ -195,9 +184,6 @@ Polynom ADD_PP_P(Polynom first, Polynom second)
 	
 
 	coef = new RationalFraction[first.degree + 1];
-
-	for (i = 0; i <= first.degree; i++)
-		coef[i] = RationalFraction();
 
 	result.degree = first.degree;
 
@@ -281,8 +267,6 @@ Polynom DIV_PP_P(Polynom polynom1, Polynom polynom2)
 			prom = MUL_Pxk_P(prom, i);
 			if (prom.degree <= polynom1.degree)
 				polynom1 = SUB_PP_P(polynom1, prom);
-			else
-				coef[j] = RationalFraction();
 
 			j++;
 		}
@@ -410,10 +394,8 @@ RationalFraction* resize(RationalFraction* arr, int size, int oldSize)
 	RationalFraction* nArr = new RationalFraction[max(size, 1)];
 
 	for (int i = 0 ; i < min(size, oldSize); i++)
-	{
 		nArr[i] = arr[i];
-	}
-
+	
 	if (arr)
 		delete[] arr;
 
