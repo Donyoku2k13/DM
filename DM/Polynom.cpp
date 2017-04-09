@@ -127,42 +127,35 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 	Polynom result;
 	RationalFraction current;
 	RationalFraction* coef;
-	if (first.degree >= second.degree)
+
+	if (first.degree < second.degree)
 	{
-		coef = new RationalFraction[first.degree + 1];
+		result = SUB_PP_P(second, first);
 
-		for (i = 0; i <= first.degree; i++)
-			coef[i] = RationalFraction();
+		for (int i = 0; i <= result.degree; i++)
+			result.coef[i].numenator = MUL_ZM_Z(result.coef[i].numenator);
 
-		result.degree = first.degree;
-
-		deg = first.degree - second.degree;
-		for (i = 0; i<deg; ++i)
-			coef[i] = first.coef[i];
-
-		for (i = deg; i <= first.degree; i++) 
-			coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i - deg]);
-
+		return result;
 	}
-	else
+
+
+	coef = new RationalFraction[first.degree + 1];
+
+	for (i = 0; i <= first.degree; i++)
+		coef[i] = RationalFraction();
+
+	result.degree = first.degree;
+
+	deg = first.degree - second.degree;
+	for (i = 0; i<deg; ++i)
+		coef[i] = first.coef[i];
+
+	for (i = deg; i <= first.degree; i++)
 	{
-		coef = new RationalFraction[second.degree + 1];
-
-		for (i = 0; i <= second.degree; i++)
-			coef[i] = RationalFraction();
-
-		result.degree = second.degree;
-
-		deg = second.degree - first.degree;
-		for (i = 0; i<deg; ++i)
-		{
-			coef[i] = second.coef[i];
-			coef[i].numenator = MUL_ZM_Z(coef[i].numenator);
-		}
-
-		for (i = deg; i <= first.degree; ++i)
-			coef[i] = SUB_QQ_Q(first.coef[i - deg], second.coef[i]);
+		coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i - deg]);
+		//printf(rationalFractionToString(coef[i]));
 	}
+
 
 	i = 0;
 	while (i < result.degree  && !NZER_N_B(coef[i].numenator.number))

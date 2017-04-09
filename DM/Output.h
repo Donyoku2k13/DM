@@ -22,8 +22,9 @@ char* rationalFractionToString(RationalFraction number);
 
 char* polynomToString(Polynom polynom);
 
-
 void polynomEMenu(Polynom first, Polynom second);
 
-
 void help();
+
+char* resize(char* arr, int size);
+

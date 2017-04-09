@@ -85,19 +85,18 @@ char* bigIntegerToString(BigInteger number)
 
 char* rationalFractionToString(RationalFraction number)
 {
-	char* result = new char[number.numenator.number.size + number.denominator.size + 4];
-	result[0] = '\0';
-
+	//Если представимо в виде целого, то представляем
 	if (INT_Q_B(number))
-	{
-		delete[] result;
 		return bigIntegerToString(TRANS_Q_Z(RED_Q_Q(number)));
-	}
-		
+
+
 	char* numenator = bigIntegerToString(number.numenator);
 	char* denominator = bigNaturalToString(number.denominator);
 
-	sprintf(result, "%s / %s", numenator, denominator);
+	char* result = new char[strlen(numenator) + strlen(denominator) + 2];
+	result[0] = '\0';
+
+	sprintf(result, "%s/%s", numenator, denominator);
 
 	delete[] numenator;
 	delete[] denominator;
@@ -110,20 +109,72 @@ char* rationalFractionToString(RationalFraction number)
 
 char* polynomToString(Polynom polynom)
 {
-	char* result = new char[1024];
+	char* result = nullptr;
 	char* rFraction = nullptr;
-	result[0] = '\0';
+	char* temp = nullptr;
+	bool one = false;
+	bool sign = true;
+	int resSize = 0;
+
+
 	for (int i = 0; i <= polynom.degree; i++)
 	{
 		rFraction = rationalFractionToString(polynom.coef[i]);
 
-		if (i == polynom.degree)
-			sprintf(result, "%s%s", result, rFraction);
-		else if (NZER_N_B(polynom.coef[i].numenator.number))
-			sprintf(result, "%s%sx^%d%s", result, rFraction, polynom.degree - i, i == polynom.degree ? "" : " + ");
+		//Выясняем знак числа
+		sign = rFraction[0] != '-';
+		if (!sign)
+			rFraction[0] = ' ';
+
+		if (strcmp(rFraction, "0") != 0)
+		{
+			if (result)
+				resSize = strlen(result);
+
+			//Свободный член печатаем без икса
+			if (i == polynom.degree)
+			{
+				result = resize(result, strlen(rFraction) + resSize + 4);
+				sprintf(result, "%s%s%s", result, sign ? " + " : " - ", rFraction);
+			}
+			//Икс без степени
+			else if (i + 1 == polynom.degree)
+			{
+				//Не ставим начальную единицу
+				one = strcmp(rFraction, "1") != 0;
+				result = resize(result, strlen(rFraction) + resSize + 5);
+				sprintf(result, "%s%s%sx", result, sign ? (i == 0 ? "" : " + ") : " -", one ? rFraction : "");
+			}
+			//Вывод всех остальных иксов
+			else
+			{
+				//Не ставим начальную единицу
+				one = strcmp(rFraction, "1") != 0;
+				result = resize(result, strlen(rFraction) + resSize + 9);
+				sprintf(result, "%s%s%sx^%d", result, sign ? (i == 0 ? "" : " + ") : " -", one ? rFraction : "", polynom.degree - i);
+			}
+		}
 
 		delete[] rFraction;
 	}
 
 	return result;
+}
+
+
+char* resize(char* arr, int size)
+{
+	char* nArr = new char[size + 1];
+	if (arr)
+	{
+		strcpy(nArr, arr);
+
+		delete[] arr;
+	}
+	else
+	{
+		nArr[0] = '\0';
+	}
+
+	return nArr;
 }
