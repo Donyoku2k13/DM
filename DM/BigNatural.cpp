@@ -195,6 +195,9 @@ BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
 	int r = 0;
 	int size = number.size + tenDegree;
 
+	if (!NZER_N_B(number))
+		return BigNatural();
+
 	short* resCoef = new short[size];
 
 
@@ -347,7 +350,7 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 	int k = 0;
 
 	BigNatural res;//Результат
-	short* coefReverse = nullptr, *coef = nullptr;
+	BigNatural temp;
 	int current = 0;
 
 
@@ -360,46 +363,30 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 	{
 		if (COM_NN_D(first, second) == 0)                    //Если первое равно второму
 			return BigNatural(1);                                  //Возвращаем единицу
-		
+
 		else
 			if (COM_NN_D(first, second) == 1)                 //Если второе больше первого
-			{
 				return BigNatural();                   //Возвращаем нуль
-			}
 			else
-
-				for (k = first.size - second.size; k >= 0; k--)
+				while (COM_NN_D(first, second) != 1)
 				{
-					coefReverse = resize(coefReverse, current + 1, current);
-					coefReverse[current] = DIV_NN_Dk(first, second, k);
+					temp = BigNatural(1);
+					temp = MUL_Nk_N(MUL_ND_N(temp, DIV_NN_Dk(first, second, first.size - second.size)), first.size - second.size);
+					if (!NZER_N_B(temp))
+					{
+						temp = BigNatural(1);
+						temp = MUL_Nk_N(MUL_ND_N(temp, DIV_NN_Dk(first, second, first.size - second.size - 1)), first.size - second.size - 1);
+					}
+					res = ADD_NN_N(res, temp);
 
-					current++;
-
-					first = SUB_NDN_N(first, MUL_Nk_N(second, k), coefReverse[current - 1]);
-
+					first = SUB_NN_N(first, MUL_NN_N(temp, second));
 				}
 	}
-	res.size = current;
-	coef = new short[res.size];
-
-	for (int i = 0; i < current; i++)
-	{
-		coef[i] = coefReverse[current - i - 1];
-	}
-
-	k = res.size - 1;
-	while ((k>0) && (coef[k] == 0)) k--;
-	
-	coef = resize(coef, k + 1, res.size);
-
-
-	res = BigNatural(coef, k + 1);
-
-	delete[] coef;
-	delete[] coefReverse;
-
+				
 	return res;
 }
+
+
 
 
 
