@@ -18,6 +18,7 @@ BigInteger BigInteger::operator=(BigInteger & bI)
 {
 	sign = bI.sign;
 	number = BigNatural(bI.number);
+
 	return *this;
 }
 

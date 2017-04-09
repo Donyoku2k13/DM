@@ -17,7 +17,8 @@ Polynom::~Polynom()
 Polynom::Polynom(const Polynom & polynom)
 {
 	degree = polynom.degree;
-	delete[] coef;
+	if (coef)
+		delete[] coef;
 	coef = new RationalFraction[degree + 1]; 
 	for (int i = 0; i <= degree; i++)
 	{
@@ -63,18 +64,20 @@ int DEG_P_N(Polynom polynom)
 Polynom DER_P_P(Polynom polynom)
 {
 	Polynom result;
-
-
-	result.degree = polynom.degree - 1;
-	result.coef = new RationalFraction[polynom.degree];
+	RationalFraction* coef = new RationalFraction[polynom.degree];
 
 	for (int i = 0; i < polynom.degree; i++)
 	{
 
-		result.coef[i].denominator = polynom.coef[i].denominator;
-		result.coef[i].numenator = MUL_ZZ_Z(polynom.coef[i].numenator, BigInteger(polynom.degree - i));
-		result.coef[i] = RED_Q_Q(result.coef[i]);
+		coef[i].denominator = polynom.coef[i].denominator;
+		coef[i].numenator = MUL_ZZ_Z(polynom.coef[i].numenator, BigInteger(polynom.degree - i));
+		coef[i] = RED_Q_Q(coef[i]);
 	}
+
+	result = Polynom(coef, polynom.degree - 1);
+
+
+	delete[] coef;
 
 	return result;
 }
@@ -96,18 +99,20 @@ Polynom MUL_Pxk_P(Polynom polynom, int xDegree)
 {
 	Polynom result;
 	int i, j;
-	result.coef = (RationalFraction*)malloc((polynom.degree + xDegree + 1) * sizeof(RationalFraction));
+	RationalFraction* coef = new RationalFraction[polynom.degree + xDegree + 1];
 
 	for (i = 0; i <= polynom.degree + xDegree; ++i)
 	{
 		if (i > polynom.degree)
-			result.coef[i] = RationalFraction();
+			coef[i] = RationalFraction();
 
 		else
-			result.coef[i] = polynom.coef[i];
+			coef[i] = polynom.coef[i];
 	}
 
-	result.degree = polynom.degree + xDegree;
+	result = Polynom(coef, polynom.degree + xDegree);
+
+	delete[] coef;
 
 	return result;
 }
@@ -121,43 +126,46 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 	int i, deg;
 	Polynom result;
 	RationalFraction current;
+	RationalFraction* coef;
 	if (first.degree >= second.degree)
 	{
-		result.coef = (RationalFraction*)malloc((first.degree + 1) * sizeof(RationalFraction));
+		coef = new RationalFraction[first.degree + 1];
+
 		for (i = 0; i <= first.degree; i++)
-			result.coef[i] = RationalFraction();
+			coef[i] = RationalFraction();
 
 		result.degree = first.degree;
 
 		deg = first.degree - second.degree;
 		for (i = 0; i<deg; ++i)
-			result.coef[i] = first.coef[i];
+			coef[i] = first.coef[i];
 
 		for (i = deg; i <= first.degree; i++) 
-			result.coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i - deg]);
+			coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i - deg]);
 
 	}
 	else
 	{
-		result.coef = (RationalFraction*)malloc((second.degree + 1) * sizeof(RationalFraction));
+		coef = new RationalFraction[second.degree + 1];
+
 		for (i = 0; i <= second.degree; i++)
-			result.coef[i] = RationalFraction();
+			coef[i] = RationalFraction();
 
 		result.degree = second.degree;
 
 		deg = second.degree - first.degree;
 		for (i = 0; i<deg; ++i)
 		{
-			result.coef[i] = second.coef[i];
-			result.coef[i].numenator = MUL_ZM_Z(result.coef[i].numenator);
+			coef[i] = second.coef[i];
+			coef[i].numenator = MUL_ZM_Z(coef[i].numenator);
 		}
 
 		for (i = deg; i <= first.degree; ++i)
-			result.coef[i] = SUB_QQ_Q(first.coef[i - deg], second.coef[i]);
+			coef[i] = SUB_QQ_Q(first.coef[i - deg], second.coef[i]);
 	}
 
 	i = 0;
-	while (i < result.degree  && !NZER_N_B(result.coef[i].numenator.number))
+	while (i < result.degree  && !NZER_N_B(coef[i].numenator.number))
 	{
 		i++;
 	}
@@ -166,12 +174,18 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 	{
 		for (int j = 0; j <= result.degree - i; j++)
 		{
-			result.coef[j] = result.coef[j + i];
+			coef[j] = coef[j + i];
 		}
 
-		result.coef = (RationalFraction*)realloc(result.coef, (result.degree + 1 - i) * sizeof(RationalFraction));
+		coef = resize(coef, result.degree + 1 - i, result.degree + 1);
+
 		result.degree -= i;
 	}
+
+	result = Polynom(coef, result.degree);
+
+
+	delete[] coef;
 
 	return result;
 }
@@ -246,14 +260,18 @@ Polynom ADD_PP_P(Polynom first, Polynom second)
 //Тихов 6307
 Polynom MUL_PQ_P(Polynom polynom, RationalFraction factor)
 {
-	int i, j;
+	int i;
 	Polynom result;
-	result.coef = (RationalFraction*)malloc((polynom.degree + 1) * sizeof(RationalFraction));
+
+	RationalFraction* coef = new RationalFraction[polynom.degree + 1];
 	for (i = polynom.degree; i >= 0; --i)
 	{
-		result.coef[i] = MUL_QQ_Q(polynom.coef[i], factor);
+		coef[i] = MUL_QQ_Q(polynom.coef[i], factor);
 	}
-	result.degree = polynom.degree;
+	result = Polynom(coef, polynom.degree + 1);
+
+	delete[] coef;
+
 	return result;
 }
 
@@ -269,10 +287,8 @@ Polynom DIV_PP_P(Polynom polynom1, Polynom polynom2)
 	int j = 0 , i = 0;
 
 	if (polynom1.degree < polynom2.degree)
-	{
-		result = Polynom();
-		return result;
-	}
+		return Polynom();
+	
 
 	else
 	{
@@ -421,4 +437,20 @@ Polynom FAC_P_Q(Polynom polynom)
 	NN.denominator = NOD;
 
 	return MUL_PQ_P(polynom, NN);
+}
+
+
+RationalFraction* resize(RationalFraction* arr, int size, int oldSize)
+{
+	RationalFraction* nArr = new RationalFraction[size];
+
+	for (int i = 0 ; i < min(size, oldSize); i++)
+	{
+		nArr[i] = arr[i];
+	}
+
+	if (arr)
+		delete[] arr;
+
+	return nArr;
 }

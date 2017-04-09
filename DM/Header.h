@@ -226,4 +226,6 @@ Polynom NMR_P_P(Polynom polynom);
 
 
 short* resize(short* arr, int size, int oldSize);
+
+RationalFraction* resize(RationalFraction* arr, int size, int oldSize);
 #endif
