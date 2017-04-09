@@ -153,6 +153,10 @@ char* polynomToString(Polynom polynom)
 				sprintf(result, "%s%s%sx^%d", result, sign ? (i == 0 ? "" : " + ") : (i == 0 ? "- " : " - "), one ? rFraction : "", polynom.degree - i);
 			}
 		}
+		else if (polynom.degree == 0)
+		{
+			return rFraction;
+		}
 
 		delete[] rFraction;
 	}

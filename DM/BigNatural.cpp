@@ -25,8 +25,6 @@ BigNatural::BigNatural(const BigNatural & bN)
 	delete[] coef;
 	coef = new short[size];
 	memcpy(coef, bN.coef, size * sizeof(short));
-
-
 }
 
 BigNatural::~BigNatural()

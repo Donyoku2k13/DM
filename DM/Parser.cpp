@@ -206,7 +206,6 @@ Polynom parsePolynom(char* string)
 					degreePos += 1;
 					if (signPos != nullptr)
 					{
-						sign = signPos[0] == '+' ? plus : minus;
 						size = signPos - degreePos;
 						if (size <= 0)
 						{
@@ -256,7 +255,10 @@ Polynom parsePolynom(char* string)
 
 			//Переход к следующей части строки
 			if (signPos != nullptr)
+			{
 				string = signPos + 1;
+				sign = signPos[0] == '+' ? plus : minus;
+			}
 			else
 				string = nullptr;
 
