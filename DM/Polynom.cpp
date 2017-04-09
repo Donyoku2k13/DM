@@ -257,42 +257,16 @@ Polynom DIV_PP_P(Polynom polynom1, Polynom polynom2)
 		return Polynom();
 	else
 	{
-		result.degree = polynom1.degree - polynom2.degree;
-		coef = new RationalFraction[result.degree + 1];
-
-		for (i = result.degree; i >= 0; i--)
+		while (DEG_P_N(polynom1) >= DEG_P_N(polynom2))
 		{
-			coef[j] = DIV_QQ_Q(LED_P_Q(polynom1), LED_P_Q(polynom2));
-			prom = MUL_PQ_P(polynom2, coef[j]);
-			prom = MUL_Pxk_P(prom, i);
-			if (prom.degree <= polynom1.degree)
-				polynom1 = SUB_PP_P(polynom1, prom);
+			prom = Polynom();
+			prom.coef[0] = DIV_QQ_Q(LED_P_Q(polynom1), LED_P_Q(polynom2));
+			prom = MUL_Pxk_P(prom, DEG_P_N(polynom1) - DEG_P_N(polynom2));
+			result = ADD_PP_P(result, prom);
 
-			j++;
+			polynom1 = SUB_PP_P(polynom1, MUL_PP_P(prom, polynom2));
 		}
 	}
-
-	//Убираем ведущие нули
-	i = 0;
-	while (i < result.degree && !NZER_N_B(coef[i].numenator.number))
-	{
-		i++;
-	}
-
-	if (i != 0)
-	{
-		for (int j = 0; j <= result.degree - i; j++)
-		{
-			coef[j] = coef[j + i];
-		}
-
-		coef = resize(result.coef, result.degree + 1 - i, result.degree + 1);
-		result.degree -= i;
-	}
-
-	result = Polynom(coef, result.degree);
-
-	delete[] coef;
 
 	return result;
 }
