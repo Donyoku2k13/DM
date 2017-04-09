@@ -253,6 +253,8 @@ Polynom parsePolynom(char* string)
 				if (coef[0].numenator.sign == plus)
 					coef[0].numenator.sign = sign;
 			}
+
+			//Переход к следующей части строки
 			if (signPos != nullptr)
 				string = signPos + 1;
 			else
@@ -264,10 +266,8 @@ Polynom parsePolynom(char* string)
 	{
 		if (rFraction)
 			delete[] rFraction;
-
 		if (degreeStr)
 			delete[] degreeStr;
-
 		delete[] coef;
 
 		throw 1;

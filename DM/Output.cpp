@@ -111,7 +111,6 @@ char* polynomToString(Polynom polynom)
 {
 	char* result = nullptr;
 	char* rFraction = nullptr;
-	char* temp = nullptr;
 	bool one = false;
 	bool sign = true;
 	int resSize = 0;
@@ -124,7 +123,11 @@ char* polynomToString(Polynom polynom)
 		//Выясняем знак числа
 		sign = rFraction[0] != '-';
 		if (!sign)
-			rFraction[0] = ' ';
+			strcpy(rFraction, rFraction + 1);
+
+		one = strcmp(rFraction, "1") != 0;
+		
+
 
 		if (strcmp(rFraction, "0") != 0)
 		{
@@ -137,21 +140,17 @@ char* polynomToString(Polynom polynom)
 				result = resize(result, strlen(rFraction) + resSize + 4);
 				sprintf(result, "%s%s%s", result, sign ? " + " : " - ", rFraction);
 			}
-			//Икс без степени
+			//x^1
 			else if (i + 1 == polynom.degree)
 			{
-				//Не ставим начальную единицу
-				one = strcmp(rFraction, "1") != 0;
 				result = resize(result, strlen(rFraction) + resSize + 5);
-				sprintf(result, "%s%s%sx", result, sign ? (i == 0 ? "" : " + ") : " -", one ? rFraction : "");
+				sprintf(result, "%s%s%sx", result, sign ? (i == 0 ? "" : " + ") : (i == 0 ? "- " : " - "), one ? rFraction : "");
 			}
 			//Вывод всех остальных иксов
 			else
 			{
-				//Не ставим начальную единицу
-				one = strcmp(rFraction, "1") != 0;
 				result = resize(result, strlen(rFraction) + resSize + 9);
-				sprintf(result, "%s%s%sx^%d", result, sign ? (i == 0 ? "" : " + ") : " -", one ? rFraction : "", polynom.degree - i);
+				sprintf(result, "%s%s%sx^%d", result, sign ? (i == 0 ? "" : " + ") : (i == 0 ? "- " : " - "), one ? rFraction : "", polynom.degree - i);
 			}
 		}
 
@@ -168,13 +167,11 @@ char* resize(char* arr, int size)
 	if (arr)
 	{
 		strcpy(nArr, arr);
-
 		delete[] arr;
 	}
 	else
-	{
 		nArr[0] = '\0';
-	}
+	
 
 	return nArr;
 }
