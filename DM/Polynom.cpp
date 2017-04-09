@@ -151,12 +151,9 @@ Polynom SUB_PP_P(Polynom first, Polynom second)
 		coef[i] = first.coef[i];
 
 	for (i = deg; i <= first.degree; i++)
-	{
 		coef[i] = SUB_QQ_Q(first.coef[i], second.coef[i - deg]);
-		//printf(rationalFractionToString(coef[i]));
-	}
 
-
+	//Убираем ведущие нули
 	i = 0;
 	while (i < result.degree  && !NZER_N_B(coef[i].numenator.number))
 	{
@@ -192,43 +189,29 @@ Polynom ADD_PP_P(Polynom first, Polynom second)
 	int i, deg;
 	Polynom result;
 	RationalFraction current;
-	if (first.degree >= second.degree)
-	{
-		result.coef = (RationalFraction*)malloc((first.degree + 1) * sizeof(RationalFraction));
-		for (i = 0; i <= first.degree; i++)
-			result.coef[i] = RationalFraction();
+	RationalFraction* coef;
 
-		result.degree = first.degree;
+	if (first.degree < second.degree)
+		return ADD_PP_P(second, first);;
+	
 
-		deg = first.degree - second.degree;
-		for (i = 0; i<deg; ++i)
-			result.coef[i] = first.coef[i];
+	coef = new RationalFraction[first.degree + 1];
 
-		for (i = deg; i <= first.degree; i++)
-			result.coef[i] = ADD_QQ_Q(first.coef[i], second.coef[i - deg]);
+	for (i = 0; i <= first.degree; i++)
+		coef[i] = RationalFraction();
 
-	}
-	else
-	{
-		result.coef = (RationalFraction*)malloc((second.degree + 1) * sizeof(RationalFraction));
-		for (i = 0; i <= second.degree; i++)
-			result.coef[i] = RationalFraction();
+	result.degree = first.degree;
 
-		result.degree = second.degree;
+	deg = first.degree - second.degree;
+	for (i = 0; i<deg; ++i)
+		coef[i] = first.coef[i];
 
-		deg = second.degree - first.degree;
-		for (i = 0; i<deg; ++i)
-		{
-			result.coef[i] = second.coef[i];
-			result.coef[i].numenator = MUL_ZM_Z(result.coef[i].numenator);
-		}
+	for (i = deg; i <= first.degree; i++)
+		coef[i] = ADD_QQ_Q(first.coef[i], second.coef[i - deg]);
 
-		for (i = deg; i <= first.degree; ++i)
-			result.coef[i] = ADD_QQ_Q(first.coef[i - deg], second.coef[i]);
-	}
-
+	//Убираем ведущие нули
 	i = 0;
-	while (i < result.degree && !NZER_N_B(result.coef[i].numenator.number))
+	while (i < result.degree && !NZER_N_B(coef[i].numenator.number))
 	{
 		i++;
 	}
@@ -237,12 +220,18 @@ Polynom ADD_PP_P(Polynom first, Polynom second)
 	{
 		for (int j = 0; j <= result.degree - i; j++)
 		{
-			result.coef[j] = result.coef[j + i];
+			coef[j] = coef[j + i];
 		}
 
-		result.coef = (RationalFraction*)realloc(result.coef, (result.degree + 1 - i) * sizeof(RationalFraction));
+		coef = resize(coef, result.degree + 1 - i, result.degree + 1);
+
 		result.degree -= i;
 	}
+
+	result = Polynom(coef, result.degree);
+
+
+	delete[] coef;
 
 	return result;
 }
