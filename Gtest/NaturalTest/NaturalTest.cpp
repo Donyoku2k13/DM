@@ -368,7 +368,17 @@ TEST(NaturalMod, longNumShortMod)
 
 //***************************************************************************************
 
+TEST(NaturalDivFirstNum, simple1)
+{
+	BigNatural one = BigNatural(3);
+	BigNatural two = BigNatural(2);
 
+	EXPECT_TRUE(naturalMatch(BigNatural(1), MOD_NN_N(one, two)));
+
+
+	EXPECT_TRUE(naturalMatch(BigNatural(3), one));
+	EXPECT_TRUE(naturalMatch(BigNatural(2), two));
+}
 
 
 

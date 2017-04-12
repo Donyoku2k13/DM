@@ -328,22 +328,33 @@ int DIV_NN_Dk(BigNatural & first, BigNatural & second, int tenDegree)
 	int i = 0;
 	BigNatural dSecond = MUL_Nk_N(second, tenDegree);
 
-	if (COM_NN_D(first, dSecond) == 1)
+	if (COM_NN_D(dSecond, first) == 2)
 		return 0;
 
 	if (COM_NN_D(first, dSecond) == 0)
 		return 1;
 
-	BigNatural res = first;
 
-	do
+	int r = 10;
+	int l = 1;
+
+	int mid = (r + l) / 2;
+
+	while (r - l != 1)
 	{
-		res = SUB_NN_N(res, dSecond);
-		i++;
-	}
-	while (COM_NN_D(res, dSecond) != 1);
+		int com = COM_NN_D(first, MUL_ND_N(dSecond, mid));
 
-	return i;
+		if (com == 2)
+			l = mid;
+		else if (com == 1)
+			r = mid;
+		else
+			return mid;
+
+		mid = (r + l) / 2;
+	}
+
+	return l;
 }
 
 
