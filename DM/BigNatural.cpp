@@ -80,7 +80,7 @@ BigNatural::BigNatural(char* number)
 //***************************************************************************************
 //Вычитание из первого большего натурального числа второго меньшего или равного
 //Васин А.М. 6307
-BigNatural SUB_NN_N(BigNatural first, BigNatural second)
+BigNatural SUB_NN_N(BigNatural & first, BigNatural & second)
 {
 	//Если второе меньше первого, то вызываем наоборот
 	if (COM_NN_D(first, second) == 1)
@@ -247,7 +247,7 @@ BigNatural SUB_NDN_N(BigNatural first, BigNatural second, int factor)
 //***************************************************************************************
 /*Сложение натуральных чисел*/
 //Пякшина 6307
-BigNatural ADD_NN_N(BigNatural first, BigNatural second)
+BigNatural ADD_NN_N(BigNatural & first, BigNatural & second)
 {
 	BigNatural result;
 	int i;
@@ -323,22 +323,23 @@ BigNatural MUL_ND_N(BigNatural number, int factor)
 /*Вычисление первой цифры деления большего натурального на меньшее,
 домноженное на 10 ^ k, где k - номер позиции этой цифры(номер считается с нуля)*/
 //Медведев Е.Р. 6307
-int DIV_NN_Dk(BigNatural first, BigNatural second, int tenDegree)
+int DIV_NN_Dk(BigNatural & first, BigNatural & second, int tenDegree)
 {
 	int i = 0;
-	second = MUL_Nk_N(second, tenDegree);
-	if (COM_NN_D(first, second) == 1)
+	BigNatural temp = MUL_Nk_N(second, tenDegree);
+	BigNatural temp2;
+	if (COM_NN_D(first, temp) == 1)
 		return 0;
 
-	if (COM_NN_D(first, second) == 0)
+	if (COM_NN_D(first, temp) == 0)
 		return 1;
 
 	do
 	{
-		first = SUB_NN_N(first, second);
+		temp2 = SUB_NN_N(first, temp);
 		i++;
 	}
-	while (COM_NN_D(first, second) != 1);
+	while (COM_NN_D(temp2, temp) != 1);
 
 	return i;
 }
@@ -363,7 +364,7 @@ BigNatural LCM_NN_N(BigNatural first, BigNatural second)
 //***************************************************************************************
 //Деление с остатком
 //Парфенов Д.Д. 6307
-BigNatural DIV_NN_N(BigNatural first, BigNatural second)
+BigNatural DIV_NN_N(BigNatural & first, BigNatural & second)
 {
 	int k = 0;
 
@@ -374,8 +375,7 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 
 	if (!NZER_N_B(second))//Если делитель равен нулю
 	{
-		printf("Делитель должен быть больше нуля!\n");
-		return BigNatural();
+		throw 1;
 	}
 	else
 	{
@@ -386,7 +386,9 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 			if (COM_NN_D(first, second) == 1)                 //Если второе больше первого
 				return BigNatural();                   //Возвращаем нуль
 			else
-				while (COM_NN_D(first, second) != 1)
+			{
+				temp = first;
+				while (COM_NN_D(temp, second) != 1)
 				{
 					temp = BigNatural(1);
 					temp = MUL_Nk_N(MUL_ND_N(temp, DIV_NN_Dk(first, second, first.size - second.size)), first.size - second.size);
@@ -397,8 +399,9 @@ BigNatural DIV_NN_N(BigNatural first, BigNatural second)
 					}
 					res = ADD_NN_N(res, temp);
 
-					first = SUB_NN_N(first, MUL_NN_N(temp, second));
+					temp = SUB_NN_N(first, MUL_NN_N(temp, second));
 				}
+			}
 	}
 				
 	return res;
@@ -428,7 +431,7 @@ BigNatural MOD_NN_N(BigNatural first, BigNatural second)
 //***************************************************************************************
 //Сравнение натуральных чисел: 2 - если первое больше второго, 0, если равно, 1 иначе.
 //Лошаченко 6307
-int COM_NN_D(BigNatural first, BigNatural second)
+int COM_NN_D(BigNatural & first, BigNatural & second)
 {
 	if (first.size > second.size)
 		return 2;
