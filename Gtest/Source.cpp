@@ -12,11 +12,4 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-TEST(BigNaturalTest, adding)
-{
-	BigNatural one = BigNatural(12);
-	BigNatural two = BigNatural(12);
-
-	EXPECT_TRUE(naturalMatch(BigNatural(24), ADD_NN_N(one, two)));
-}
 

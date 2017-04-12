@@ -25,6 +25,7 @@ struct BigNatural //Натуральное длинное число
 	BigNatural operator=(BigNatural & bN);
 	BigNatural(const BigNatural & bN);
 	BigNatural(int number);
+	BigNatural(char* number);
 	BigNatural(short* coef, int size);
 };
 

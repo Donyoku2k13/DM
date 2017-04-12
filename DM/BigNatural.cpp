@@ -1,5 +1,6 @@
 #include "Header.h"
 #include "Output.h"
+#include "ParserHeader.h"
 //В этом файле должны быть ТОЛЬКО реализации методов для работы с натуральными числами
 
 //Конструктор - начальное значение - 0
@@ -11,6 +12,8 @@ BigNatural::BigNatural()
 
 }
 
+//***************************************************************************************
+
 BigNatural::BigNatural(short* coef, int size)
 {
 	this->size = size;
@@ -18,6 +21,7 @@ BigNatural::BigNatural(short* coef, int size)
 	memcpy(this->coef, coef, size * sizeof(short) );
 }
 
+//***************************************************************************************
 
 BigNatural::BigNatural(const BigNatural & bN)
 {
@@ -27,10 +31,15 @@ BigNatural::BigNatural(const BigNatural & bN)
 	memcpy(coef, bN.coef, size * sizeof(short));
 }
 
+//***************************************************************************************
+
 BigNatural::~BigNatural()
 {
 	delete[] coef;
 }
+
+
+//***************************************************************************************
 
 BigNatural BigNatural::operator=(BigNatural & bN)
 {
@@ -41,6 +50,8 @@ BigNatural BigNatural::operator=(BigNatural & bN)
 
 	return *this;
 }
+
+//***************************************************************************************
 
 BigNatural::BigNatural(int number)
 {
@@ -57,6 +68,13 @@ BigNatural::BigNatural(int number)
 
 	memcpy(coef, tempCoef, size * sizeof(short));
 	free(tempCoef);
+}
+
+//***************************************************************************************
+
+BigNatural::BigNatural(char* number)
+{
+	*this = parseToBigNatural(number);
 }
 
 //***************************************************************************************

@@ -147,7 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="NaturalTest.cpp" />
+    <ClCompile Include="NaturalTest\NaturalTest.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TestMethods.cpp" />
   </ItemGroup>
