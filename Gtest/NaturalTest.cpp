@@ -1,4 +1,4 @@
-#include "../Main.h"
+#include "Main.h"
 
 
 
@@ -166,6 +166,13 @@ TEST(NaturalDiv, longN)
 	BigNatural two = BigNatural("999347892657005623478");
 
 	EXPECT_TRUE(naturalMatch(BigNatural("5646936765724710346765354105282115601580392966454306025003439601568983107160357473047041278182670944053"), DIV_NN_N(one, two)));
+}
+
+TEST(NaturalDiv, divByZero)
+{
+	BigNatural one = BigNatural(6534);
+
+	EXPECT_ANY_THROW(DIV_NN_N(one, BigNatural()));
 }
 
 
@@ -368,17 +375,53 @@ TEST(NaturalMod, longNumShortMod)
 
 //***************************************************************************************
 
-TEST(NaturalDivFirstNum, simple1)
+
+TEST(NaturalGcf, simple1)
 {
-	BigNatural one = BigNatural(3);
-	BigNatural two = BigNatural(2);
+	BigNatural one = BigNatural(20);
+	BigNatural two = BigNatural(8);
 
-	EXPECT_TRUE(naturalMatch(BigNatural(1), MOD_NN_N(one, two)));
+	EXPECT_TRUE(naturalMatch(BigNatural(4), GCF_NN_N(one, two)));
 
 
-	EXPECT_TRUE(naturalMatch(BigNatural(3), one));
-	EXPECT_TRUE(naturalMatch(BigNatural(2), two));
+	EXPECT_TRUE(naturalMatch(BigNatural(20), one));
+	EXPECT_TRUE(naturalMatch(BigNatural(8), two));
 }
 
+TEST(NaturalGcf, simple2)
+{
+	BigNatural one = BigNatural(31);
+	BigNatural two = BigNatural(654634);
+
+	EXPECT_TRUE(naturalMatch(BigNatural(1), GCF_NN_N(one, two)));
+
+
+	EXPECT_TRUE(naturalMatch(BigNatural(31), one));
+	EXPECT_TRUE(naturalMatch(BigNatural(654634), two));
+}
+
+TEST(NaturalGcf, simple3)
+{
+	BigNatural one = BigNatural(49);
+	BigNatural two = BigNatural(21);
+
+	EXPECT_TRUE(naturalMatch(BigNatural(7), GCF_NN_N(one, two)));
+
+
+	EXPECT_TRUE(naturalMatch(BigNatural(49), one));
+	EXPECT_TRUE(naturalMatch(BigNatural(21), two));
+}
+
+TEST(NaturalGcf, longNum)
+{
+	BigNatural one = BigNatural("546239569782346503492685412378453217592158758644");
+	BigNatural two = BigNatural("6523643278965437852789347285693478265478956");
+
+	EXPECT_TRUE(naturalMatch(BigNatural(4), GCF_NN_N(one, two)));
+
+
+	EXPECT_TRUE(naturalMatch(BigNatural("546239569782346503492685412378453217592158758644"), one));
+	EXPECT_TRUE(naturalMatch(BigNatural("6523643278965437852789347285693478265478956"), two));
+}
 
 

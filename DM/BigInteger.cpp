@@ -157,10 +157,8 @@ BigInteger DIV_ZZ_Z(BigInteger first, BigInteger second)
 			res.number = ADD_1N_N(res.number); //Для того, чтобы остаток был положительным
 	}
 	else
-	{
-		printf("Знаменатель должен быть отличен от нуля");
-		res.number.size = 0;
-	}
+		throw 1;
+	
 	return res;
 }
 

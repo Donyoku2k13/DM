@@ -21,7 +21,10 @@
     <ClCompile Include="TestMethods.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NaturalTest\NaturalTest.cpp">
+    <ClCompile Include="IntegerTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NaturalTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -189,9 +189,10 @@ BigNatural ADD_1N_N(BigNatural & number)
 //Зимаков Н.С. 6307
 //НОД натуральных чисел
 //Инкина В.А. 6307
-BigNatural GCF_NN_N(BigNatural first, BigNatural second)
+BigNatural GCF_NN_N(BigNatural  first, BigNatural  second)
 {
 	BigNatural ost;
+
 	while (NZER_N_B(second))
 	{
 		ost = MOD_NN_N(first, second);
