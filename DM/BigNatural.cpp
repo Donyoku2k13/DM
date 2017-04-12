@@ -216,6 +216,7 @@ BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
 	if (!NZER_N_B(number))
 		return BigNatural();
 
+
 	short* resCoef = new short[size];
 
 
@@ -369,8 +370,10 @@ BigNatural DIV_NN_N(BigNatural & first, BigNatural & second)
 	int k = 0;
 
 	BigNatural res;//Результат
-	BigNatural temp;
+	short *coef = nullptr;
 	int current = 0;
+	int size = first.size - second.size;
+
 
 
 	if (!NZER_N_B(second))//Если делитель равен нулю
@@ -384,30 +387,29 @@ BigNatural DIV_NN_N(BigNatural & first, BigNatural & second)
 
 		else
 			if (COM_NN_D(first, second) == 1)                 //Если второе больше первого
-				return BigNatural();                   //Возвращаем нуль
-			else
 			{
-				temp = first;
-				while (COM_NN_D(temp, second) != 1)
-				{
-					temp = BigNatural(1);
-					temp = MUL_Nk_N(MUL_ND_N(temp, DIV_NN_Dk(first, second, first.size - second.size)), first.size - second.size);
-					if (!NZER_N_B(temp))
-					{
-						temp = BigNatural(1);
-						temp = MUL_Nk_N(MUL_ND_N(temp, DIV_NN_Dk(first, second, first.size - second.size - 1)), first.size - second.size - 1);
-					}
-					res = ADD_NN_N(res, temp);
-
-					temp = SUB_NN_N(first, MUL_NN_N(temp, second));
-				}
+				return BigNatural();                   //Возвращаем нуль
 			}
+			else
+				coef = new short[size + 1];
+				for (k = size; k >= 0; k--)
+				{
+					coef[k] = DIV_NN_Dk(first, second, k);
+					first = SUB_NDN_N(first, MUL_Nk_N(second, k), coef[k]);
+				}
 	}
-				
+
+
+	k = size;
+
+	while ((k>0) && (coef[k] == 0)) k--;
+
+	res = BigNatural(coef, k + 1);
+
+	delete[] coef;
+
 	return res;
 }
-
-
 
 
 
