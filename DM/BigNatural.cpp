@@ -195,6 +195,10 @@ BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
 	int r = 0;
 	int size = number.size + tenDegree;
 
+	if (!NZER_N_B(number))
+		return BigNatural();
+
+
 	short* resCoef = new short[size];
 
 
