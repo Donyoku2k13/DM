@@ -1,22 +1,22 @@
-#include "gtest/gtest.h"
-#include "d:\Projects\DM\DM\Header.h"
-#include "d:\Projects\DM\DM\Menu.h"
 
+#include "Main.h"
 
-struct BigNaturalTest : public ::testing::Test
-{
-
-};
 
 int main(int argc, char *argv[])
 {
-	//::testing::InitGoogleTest(&argc, argv);
-	//int a = RUN_ALL_TESTS();
+	::testing::InitGoogleTest(&argc, argv);
+	int a = RUN_ALL_TESTS();
+
+	system("pause");
 
 	return 0;
 }
 
-TEST_F(BigNaturalTest, adding)
+TEST(BigNaturalTest, adding)
 {
+	BigNatural one = BigNatural(12);
+	BigNatural two = BigNatural(12);
 
+	EXPECT_TRUE(naturalMatch(BigNatural(24), ADD_NN_N(one, two)));
 }
+
