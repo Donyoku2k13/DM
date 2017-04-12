@@ -73,10 +73,10 @@ struct Polynom	//Многочлен
 int COM_NN_D(BigNatural & first, BigNatural & second); 
 
 /*Проверка на ноль: если число не равно нулю, то «да» иначе «нет»*/
-bool NZER_N_B(BigNatural number);
+bool NZER_N_B(BigNatural & number);
 
 /*Добавление 1 к натуральному числу*/
-BigNatural ADD_1N_N(BigNatural number);
+BigNatural ADD_1N_N(BigNatural & number);
 
 /*Сложение натуральных чисел*/
 BigNatural ADD_NN_N(BigNatural & first, BigNatural & second);
@@ -95,16 +95,16 @@ BigNatural MUL_Nk_N(BigNatural & number, int tenDegree);
 BigNatural MUL_NN_N(BigNatural & first, BigNatural & second);
 
 /*Вычитание из натурального другого натурального, умноженного на цифру для случая с неотрицательным результатом*/
-BigNatural SUB_NDN_N(BigNatural first, BigNatural second, int factor);
+BigNatural SUB_NDN_N(BigNatural & first, BigNatural & second, int factor);
 
 /*Вычисление первой цифры деления большего натурального на меньшее, домноженное на 10^k, где k - номер позиции этой цифры (номер считается с нуля)*/
-int DIV_NN_Dk(BigNatural first, BigNatural second, int tenDegree);
+int DIV_NN_Dk(BigNatural & first, BigNatural & second, int tenDegree);
 
 /*Частное от деления большего натурального числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)*/
 BigNatural DIV_NN_N(BigNatural & first, BigNatural & second);
 
 /*Остаток от деления большего натурального числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)*/
-BigNatural MOD_NN_N(BigNatural first, BigNatural second);
+BigNatural MOD_NN_N(BigNatural & first, BigNatural & second);
 
 /*НОД натуральных чисел*/
 BigNatural GCF_NN_N(BigNatural first, BigNatural second);

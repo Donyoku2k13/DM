@@ -141,7 +141,7 @@ BigNatural SUB_NN_N(BigNatural & first, BigNatural & second)
 //***************************************************************************************
 //Проверка на ноль
 //Зимаков Н.С. 6307
-bool NZER_N_B(BigNatural number)
+bool NZER_N_B(BigNatural & number)
 {
 	if (number.coef[0] == 0 && number.size == 1) // Если первый разряд равен нулю и размер равен единице возвращаем false
 	{
@@ -154,7 +154,7 @@ bool NZER_N_B(BigNatural number)
 //***************************************************************************************
 //Добавление единицы к длинному числу
 //Зимаков Н.С. 6307
-BigNatural ADD_1N_N(BigNatural number)
+BigNatural ADD_1N_N(BigNatural & number)
 {
 	int counter = 1;
 	BigNatural result;
@@ -165,6 +165,7 @@ BigNatural ADD_1N_N(BigNatural number)
 	}
 	else
 	{
+		result.coef[0] = 0;
 		while (counter != result.size && result.coef[counter] == 9) // Если последняя цифра не равна 9, то ищем первую цифру не равную 9, прибавляем к ней единицу, и всем предыдущем присваиваем 0
 		{
 			result.coef[counter] = 0;
@@ -234,7 +235,7 @@ BigNatural MUL_Nk_N(BigNatural & number, int tenDegree)
 //***************************************************************************************
 /*Вычитание из натурального другого натурального, умноженного на цифру для случая с неотрицательным результатом*/
 //Пякшина 6307
-BigNatural SUB_NDN_N(BigNatural first, BigNatural second, int factor)
+BigNatural SUB_NDN_N(BigNatural & first, BigNatural & second, int factor)
 {
 	if (COM_NN_D(first, second) == 1)
 		return first;
@@ -322,23 +323,25 @@ BigNatural MUL_ND_N(BigNatural & number, int factor)
 /*Вычисление первой цифры деления большего натурального на меньшее,
 домноженное на 10 ^ k, где k - номер позиции этой цифры(номер считается с нуля)*/
 //Медведев Е.Р. 6307
-int DIV_NN_Dk(BigNatural first, BigNatural second, int tenDegree)
+int DIV_NN_Dk(BigNatural & first, BigNatural & second, int tenDegree)
 {
 	int i = 0;
-	second = MUL_Nk_N(second, tenDegree);
+	BigNatural dSecond = MUL_Nk_N(second, tenDegree);
 
-	if (COM_NN_D(first, second) == 1)
+	if (COM_NN_D(first, dSecond) == 1)
 		return 0;
 
-	if (COM_NN_D(first, second) == 0)
+	if (COM_NN_D(first, dSecond) == 0)
 		return 1;
+
+	BigNatural res = first;
 
 	do
 	{
-		first = SUB_NN_N(first, second);
+		res = SUB_NN_N(res, dSecond);
 		i++;
 	}
-	while (COM_NN_D(first, second) != 1);
+	while (COM_NN_D(res, dSecond) != 1);
 
 	return i;
 }
@@ -375,27 +378,23 @@ BigNatural DIV_NN_N(BigNatural & first, BigNatural & second)
 
 
 	if (!NZER_N_B(second))//Если делитель равен нулю
-	{
 		throw 1;
-	}
-	else
-	{
-		if (COM_NN_D(first, second) == 0)                    //Если первое равно второму
-			return BigNatural(1);                                  //Возвращаем единицу
 
-		else
-			if (COM_NN_D(first, second) == 1)                 //Если второе больше первого
-			{
-				return BigNatural();                   //Возвращаем нуль
-			}
-			else
-				coef = new short[size + 1];
-				for (k = size; k >= 0; k--)
-				{
-					coef[k] = DIV_NN_Dk(first, second, k);
-					first = SUB_NDN_N(first, MUL_Nk_N(second, k), coef[k]);
-				}
+	if (COM_NN_D(first, second) == 0)                    //Если первое равно второму
+		return BigNatural(1);                                  //Возвращаем единицу
+
+	if (COM_NN_D(first, second) == 1)                 //Если второе больше первого
+		return BigNatural();                   //Возвращаем нуль
+
+
+	coef = new short[size + 1];
+	res = first;
+	for (k = size; k >= 0; k--)
+	{
+		coef[k] = DIV_NN_Dk(res, second, k);
+		res = SUB_NDN_N(res, MUL_Nk_N(second, k), coef[k]);
 	}
+	
 
 
 	k = size;
@@ -414,7 +413,7 @@ BigNatural DIV_NN_N(BigNatural & first, BigNatural & second)
 //***************************************************************************************
 //Остаток от деления
 //Парфенов Д.Д. 6307
-BigNatural MOD_NN_N(BigNatural first, BigNatural second)
+BigNatural MOD_NN_N(BigNatural & first, BigNatural & second)
 {
 	BigNatural res;
 
@@ -422,7 +421,7 @@ BigNatural MOD_NN_N(BigNatural first, BigNatural second)
 		return first;
 	else
 	{
-		res = SUB_NN_N(first, MUL_NN_N( DIV_NN_N(first, second), second));
+		res = SUB_NN_N(first, MUL_NN_N(DIV_NN_N(first, second), second));
 		return res;
 	}
 }
