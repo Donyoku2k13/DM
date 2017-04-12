@@ -324,23 +324,23 @@ BigNatural MUL_ND_N(BigNatural number, int factor)
 /*Вычисление первой цифры деления большего натурального на меньшее,
 домноженное на 10 ^ k, где k - номер позиции этой цифры(номер считается с нуля)*/
 //Медведев Е.Р. 6307
-int DIV_NN_Dk(BigNatural & first, BigNatural & second, int tenDegree)
+int DIV_NN_Dk(BigNatural first, BigNatural second, int tenDegree)
 {
 	int i = 0;
-	BigNatural temp = MUL_Nk_N(second, tenDegree);
-	BigNatural temp2;
-	if (COM_NN_D(first, temp) == 1)
+	second = MUL_Nk_N(second, tenDegree);
+
+	if (COM_NN_D(first, second) == 1)
 		return 0;
 
-	if (COM_NN_D(first, temp) == 0)
+	if (COM_NN_D(first, second) == 0)
 		return 1;
 
 	do
 	{
-		temp2 = SUB_NN_N(first, temp);
+		first = SUB_NN_N(first, second);
 		i++;
 	}
-	while (COM_NN_D(temp2, temp) != 1);
+	while (COM_NN_D(first, second) != 1);
 
 	return i;
 }

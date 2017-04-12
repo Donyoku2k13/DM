@@ -98,7 +98,7 @@ BigNatural MUL_NN_N(BigNatural first, BigNatural second);
 BigNatural SUB_NDN_N(BigNatural first, BigNatural second, int factor);
 
 /*¬ычисление первой цифры делени€ большего натурального на меньшее, домноженное на 10^k, где k - номер позиции этой цифры (номер считаетс€ с нул€)*/
-int DIV_NN_Dk(BigNatural & first, BigNatural & second, int tenDegree);
+int DIV_NN_Dk(BigNatural first, BigNatural second, int tenDegree);
 
 /*„астное от делени€ большего натурального числа на меньшее или равное натуральное с остатком (делитель отличен от нул€)*/
 BigNatural DIV_NN_N(BigNatural & first, BigNatural & second);

@@ -101,6 +101,14 @@ TEST(NaturalDiv, simple4)
 	EXPECT_TRUE(naturalMatch(BigNatural(), DIV_NN_N(one, two)));
 }
 
+TEST(NaturalDiv, simple5)
+{
+	BigNatural one = BigNatural(111);
+	BigNatural two = BigNatural(9);
+
+	EXPECT_TRUE(naturalMatch(BigNatural(12), DIV_NN_N(one, two)));
+}
+
 TEST(NaturalDiv, sameNum)
 {
 	BigNatural one = BigNatural(6534);
@@ -111,11 +119,11 @@ TEST(NaturalDiv, sameNum)
 
 TEST(NaturalDiv, longN)
 {
-	//541 мс, долго
+	//541 мс, долго, теперь 50 - 101 мс
 	BigNatural one = BigNatural("5643254356794356347856349785634757346250000793456934563475643927532479853247659000002347865893465734265000003427535732453425");
 	BigNatural two = BigNatural("999347892657005623478");
 
-	//EXPECT_TRUE(naturalMatch(BigNatural("5646936765724710346765354105282115601580392966454306025003439601568983107160357473047041278182670944053"), DIV_NN_N(one, two)));
+	EXPECT_TRUE(naturalMatch(BigNatural("5646936765724710346765354105282115601580392966454306025003439601568983107160357473047041278182670944053"), DIV_NN_N(one, two)));
 }
 
 
