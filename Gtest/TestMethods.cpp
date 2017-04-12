@@ -5,11 +5,11 @@
 	const BigNatural & actual)
 {
 	if (expected.size != actual.size)
-		return ::testing::AssertionFailure() << "size don't match";
+		return ::testing::AssertionFailure() << bigNaturalToString(expected) << "!=" << bigNaturalToString(actual);
 
 	for (int i = 0; i < expected.size; ++i) {
 		if (expected.coef[i] != actual.coef[i]) {
-			return ::testing::AssertionFailure() << "numbers dont't match";
+			return ::testing::AssertionFailure() << bigNaturalToString(expected) << "!=" << bigNaturalToString(actual);
 		}
 	}
 
@@ -21,7 +21,7 @@
 	const BigInteger & actual)
 {
 	if (expected.sign != actual.sign)
-		return ::testing::AssertionFailure() << "sign don't match";
+		return ::testing::AssertionFailure() << bigIntegerToString(expected) << "!=" << bigIntegerToString(actual);
 
 	return naturalMatch(expected.number, actual.number);
 }

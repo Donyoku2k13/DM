@@ -129,10 +129,8 @@ BigNatural SUB_NN_N(BigNatural & first, BigNatural & second)
 	//Вычисление реального размера числа
 	i = first.size - 1;
 	while ((i>0) && (resCoef[i] == 0)) i--;
-	resCoef = resize(resCoef,i + 1, first.size);
 
 	result = BigNatural(resCoef, i + 1);
-
 
 	delete[] resCoef;
 
@@ -207,7 +205,7 @@ BigNatural GCF_NN_N(BigNatural first, BigNatural second)
 //***************************************************************************************
 //Умножение натурального числа на 10^k 
 //Баруткина К.И. 6307
-BigNatural MUL_Nk_N(BigNatural number, int tenDegree)
+BigNatural MUL_Nk_N(BigNatural & number, int tenDegree)
 {
 	BigNatural result;
 	int r = 0;
@@ -290,7 +288,7 @@ BigNatural ADD_NN_N(BigNatural & first, BigNatural & second)
 //***************************************************************************************
 /*Умножение натурального числа на цифру*/
 //Пякшина 6307
-BigNatural MUL_ND_N(BigNatural number, int factor)
+BigNatural MUL_ND_N(BigNatural & number, int factor)
 {
 	BigNatural result;
 	int r = 0;
@@ -424,7 +422,7 @@ BigNatural MOD_NN_N(BigNatural first, BigNatural second)
 		return first;
 	else
 	{
-		res = SUB_NN_N(first, (MUL_NN_N((DIV_NN_N(first, second)), second)));
+		res = SUB_NN_N(first, MUL_NN_N( DIV_NN_N(first, second), second));
 		return res;
 	}
 }
@@ -456,7 +454,7 @@ int COM_NN_D(BigNatural & first, BigNatural & second)
 //***************************************************************************************
 /*Умножение натуральных чисел*/
 //Баруткина 6307
-BigNatural MUL_NN_N(BigNatural first, BigNatural second)
+BigNatural MUL_NN_N(BigNatural & first, BigNatural & second)
 {
 	BigNatural res;
 
@@ -464,9 +462,8 @@ BigNatural MUL_NN_N(BigNatural first, BigNatural second)
 		return MUL_NN_N(second, first);
 
 	for (int i = 0; i < second.size; i++)
-	{
 		res = ADD_NN_N(res, MUL_Nk_N(MUL_ND_N(first, second.coef[i]), i));
-	}
+	
 
 	return res;
 }

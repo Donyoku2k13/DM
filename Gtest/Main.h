@@ -3,6 +3,7 @@
 
 #include "Header.h"
 #include "gtest/gtest.h"
+#include "Output.h"
 
 
 ::testing::AssertionResult naturalMatch(const BigNatural & expected,

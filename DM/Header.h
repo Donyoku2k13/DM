@@ -85,14 +85,14 @@ BigNatural ADD_NN_N(BigNatural & first, BigNatural & second);
 BigNatural SUB_NN_N(BigNatural & first, BigNatural & second);
 
 /*Умножение натурального числа на цифру*/
-BigNatural MUL_ND_N(BigNatural number, int factor);
+BigNatural MUL_ND_N(BigNatural & number, int factor);
 
 /*	
 Умножение натурального числа на 10^k*/
-BigNatural MUL_Nk_N(BigNatural number, int tenDegree);
+BigNatural MUL_Nk_N(BigNatural & number, int tenDegree);
 
 /*Умножение натуральных чисел*/
-BigNatural MUL_NN_N(BigNatural first, BigNatural second);
+BigNatural MUL_NN_N(BigNatural & first, BigNatural & second);
 
 /*Вычитание из натурального другого натурального, умноженного на цифру для случая с неотрицательным результатом*/
 BigNatural SUB_NDN_N(BigNatural first, BigNatural second, int factor);
