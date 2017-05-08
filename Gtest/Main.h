@@ -4,6 +4,7 @@
 #include "Header.h"
 #include "gtest/gtest.h"
 #include "Output.h"
+#include "ParserHeader.h"
 
 
 ::testing::AssertionResult naturalMatch(const BigNatural & expected,

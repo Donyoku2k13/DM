@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="IntegerTest.cpp" />
     <ClCompile Include="NaturalTest.cpp" />
+    <ClCompile Include="polynomTest.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="TestMethods.cpp" />
   </ItemGroup>
