@@ -111,6 +111,13 @@ BigNatural GCF_NN_N(BigNatural first, BigNatural second);
 /*НОК натуральных чисел*/
 BigNatural LCM_NN_N(BigNatural first, BigNatural second);
 
+/*Факториал натуральных чисел*/
+BigNatural FAC_NN_N(BigNatural first, BigNatural second);
+
+/*Бинарное возведение в степень натуральных чисел*/
+BigNatural POW_NN_N(BigNatural number, BigNatural power);
+
+
 
 //***********************************************************************************************
 //Методы для работы с целыми числами
@@ -148,6 +155,9 @@ BigInteger DIV_ZZ_Z(BigInteger first, BigInteger second);
 равное натуральное с остатком (делитель отличен от нуля)*/
 BigInteger MOD_ZZ_Z(BigInteger first, BigInteger second);
 
+/*Возведение в степень целых чисел*/
+BigInteger POW_ZN_Z(BigInteger number, BigNatural power);
+
 
 //***********************************************************************************************
 //Методы для работы с рациональными числами
@@ -178,6 +188,15 @@ RationalFraction MUL_QQ_Q(RationalFraction first, RationalFraction second);
 
 /*Деление дробей (делитель отличен от нуля)*/
 RationalFraction DIV_QQ_Q(RationalFraction first, RationalFraction second);
+
+/*Деление дробей (делитель отличен от нуля)*/
+RationalFraction POW_QZ_Q(RationalFraction number, BigInteger power);
+
+//Разложение дроби в цепную
+BigNatural* CF_Q(RationalFraction number);
+
+//Переворот дроби
+RationalFraction DIV_1Q_Q(RationalFraction number);
 
 
 //***********************************************************************************************
