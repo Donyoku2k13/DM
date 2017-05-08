@@ -117,8 +117,6 @@ BigNatural FAC_NN_N(BigNatural first, BigNatural second);
 /*Ѕинарное возведение в степень натуральных чисел*/
 BigNatural POW_NN_N(BigNatural number, BigNatural power);
 
-
-
 //***********************************************************************************************
 //ћетоды дл€ работы с целыми числами
 
@@ -157,6 +155,7 @@ BigInteger MOD_ZZ_Z(BigInteger first, BigInteger second);
 
 /*¬озведение в степень целых чисел*/
 BigInteger POW_ZN_Z(BigInteger number, BigNatural power);
+
 
 
 //***********************************************************************************************
