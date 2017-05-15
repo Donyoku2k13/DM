@@ -112,7 +112,7 @@ BigNatural GCF_NN_N(BigNatural first, BigNatural second);
 BigNatural LCM_NN_N(BigNatural first, BigNatural second);
 
 /*Факториал натуральных чисел*/
-BigNatural FAC_NN_N(BigNatural first, BigNatural second);
+BigNatural FAC_NN_N(BigNatural number);
 
 /*Бинарное возведение в степень натуральных чисел*/
 BigNatural POW_NN_N(BigNatural number, BigNatural power);
