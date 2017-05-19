@@ -207,10 +207,10 @@ int POZ_Z_D(BigInteger number)
 //***************************************************************************************
 //Бинарное возведение в степень целого числа
 //Башилов 6307
-BigInteger POW_ZN_Z(BigInteger number, BigInteger power)
+BigInteger POW_ZN_Z(BigInteger number, BigNatural power)
 {
 	BigInteger result;
-	if ((number.sign == minus) && (POZ_Z_D(MOD_ZZ_Z(power, 2)) != 0))
+	if ((number.sign == minus) && !NZER_N_B(MOD_NN_N(power, 2)))
 		result.sign = minus;
 	else
 		result.sign = plus;
