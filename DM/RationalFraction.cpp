@@ -154,3 +154,16 @@ RationalFraction RED_Q_Q(RationalFraction number)
 	result.numenator.sign = number.numenator.sign;
 	return result;
 }
+
+//***************************************************************************************
+//Бинарное возведение в степень дробей
+//Башилов 6307
+RationalFraction POW_QZ_Q(RationalFraction number, BigInteger power)
+{
+	RationalFraction result;
+	result.numenator = POW_ZN_Z(result.numenator, power);
+	result.denominator = POW_NN_N(result.denominator, power);
+	if (power.sign == minus)
+		result = DIV_1Q_Q(result);
+	return result;
+}
